@@ -15,8 +15,8 @@ while($row=$post->fetch_assoc()){
   
                 <div class="tweetEntry-content">
     
-                  <a class="tweetEntry-account-group" href="../'.$username.'">
-                      <img class="tweetEntry-avatar" src="avatar.png">
+                  <a class="tweetEntry-account-group" href="./">
+                      <img class="tweetEntry-avatar" src="./Avatars/'.$username.'.png">
                       
                       <strong class="tweetEntry-fullname">
                       '.$Fname.' '.$Lname.'
@@ -46,7 +46,7 @@ while($row=$post->fetch_assoc()){
                 //if there is an image included
                 if(!empty ($row['img'])){echo'
                 <div class="optionalMedia text-center mr-5">
-                  <img class="optionalMedia-img" src="'.$row['img'].'">
+                  <img class="optionalMedia-img" src="../sharedPics/'.$row['img'].'">
                 </div>';}
 
               //check if is already liked poste

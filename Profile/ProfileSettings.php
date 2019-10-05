@@ -403,7 +403,7 @@ echo'
         </a>
     </li>
     <li class="has-subnav">
-        <a href="./'.$username.'">
+        <a href="./">
            <i class="fa fa-user fa-2x"></i>
             <span class="nav-text">
                 Profile
@@ -450,7 +450,7 @@ echo'
 </nav>
 <nav class="navbar navbar-expand-sm navbar-dark text-light fixed-bottom" style="z-index:0; background: #212121;">
         <ul class="navbar-nav mx-auto mb-n4">
-        <p> <a href="https://www.fb.com/SparoXUB" target="_blank" class="text-danger nav-link d-inline"> <span style="font-size:18px;font-family:Awsome;" >C-Network</span></a><span class="nav-link d-inline">©2019 All Rights Reserved</span> </p>
+        <p> <a href="https://www.fb.com/SparoXUB" target="_blank" class="text-danger nav-link d-inline"> <span style="font-size:18px;font-family:Awsome;" ><span class="letter" style="font-size: 18px;">Code</span>Network</span></a><span class="nav-link d-inline">©2019 All Rights Reserved</span> </p>
         </ul>
     </nav>
 </body>

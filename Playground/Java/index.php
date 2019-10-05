@@ -17,8 +17,8 @@ if( isset($_SESSION['User']) ){
 <link rel="stylesheet" href="../../css/font-awesome.min.css">
 <link rel="stylesheet" href="../../css/solid.min.css">
 <link rel="stylesheet" href="../../css/bootstrap.css">
-<link rel="stylesheet" href="../../Profiles/includes/css/profile.css">
-<link rel="stylesheet" href="../../Profiles/includes/css/profile-sidebar.css">
+<link rel="stylesheet" href="../../Profile/includes/css/profile.css">
+<link rel="stylesheet" href="../../Profile/includes/css/profile-sidebar.css">
 <script src="../../js/jquery.js"></script>
 <script src="../../js/bootstrap.js"></script>
 <script>function startTime(){
@@ -156,7 +156,7 @@ $(document).ready(function(){
         </a>
     </li>
     <li class="has-subnav">
-        <?php echo '<a href="../../Profiles/'.$username.'">' ?>;
+        <?php echo '<a href="../../Profile/">' ?>;
            <i class="fa fa-user fa-2x"></i>
             <span class="nav-text">
                 Profile
@@ -173,7 +173,7 @@ $(document).ready(function(){
         </a>
     </li>
     <li>
-       <a href="../../Profiles/ProfileSettings.php">
+       <a href="../../Profile/ProfileSettings.php">
             <i class="fa fa-edit fa-2x"></i>
             <span class="nav-text">
                 Account Settings
@@ -181,7 +181,7 @@ $(document).ready(function(){
         </a>
     </li>
     <li>
-        <a href="../../Profiles/Report.php">
+        <a href="../../Profile/Report.php">
            <i class="fa fa-info fa-2x"></i>
             <span class="nav-text">
                 Troubles/Report ?
@@ -192,7 +192,7 @@ $(document).ready(function(){
 
 <ul class="logout">
     <li>
-       <a href="../../Profiles/logout.php">
+       <a href="../../Profile/logout.php">
              <i class="fa fa-power-off fa-2x"></i>
             <span class="nav-text">
                 Logout
@@ -203,7 +203,7 @@ $(document).ready(function(){
 </nav>
 <nav class="navbar navbar-expand-sm navbar-dark text-light fixed-bottom" style="z-index:0; background: #212121;">
         <ul class="navbar-nav mx-auto mb-n4">
-        <p> <a href="https://www.fb.com/SparoXUB" target="_blank" class="text-danger nav-link d-inline"> <span style="font-size:18px;font-family:Awsome;" >C-Network</span></a><span class="nav-link d-inline">©2019 All Rights Reserved</span> </p>
+        <p> <a href="https://www.fb.com/SparoXUB" target="_blank" class="text-danger nav-link d-inline"> <span style="font-size:18px;font-family:Awsome;" ><span class="letter" style="font-size: 18px;">Code</span>Network</span></a><span class="nav-link d-inline">©2019 All Rights Reserved</span> </p>
         </ul>
     </nav>
 </body>

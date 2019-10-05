@@ -1,6 +1,6 @@
 <?php
 session_start();
-include "../../includes/config.php";
+include "../includes/config.php";
 $username=$_SESSION['User'];
 $email=$_SESSION['Uemail'];
 $getdescription=$mysqli->query("SELECT Description FROM description WHERE username='$username';");
@@ -13,16 +13,16 @@ echo'
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>'.$username.' Profile</title>
-<link rel="shortcut icon" href="../../favicon.ico" type="image/x-icon">
-<link rel="stylesheet" href="../../css/style.css">
-<link rel="stylesheet" href="../../css/font-awesome.min.css">
-<link rel="stylesheet" href="../../css/solid.min.css">
-<link rel="stylesheet" href="../../css/regular.min.css">
-<link rel="stylesheet" href="../../css/bootstrap.css">
-<link rel="stylesheet" href="../includes/css/profile.css">
-<link rel="stylesheet" href="../includes/css/profile-sidebar.css">
-<script src="../../js/jquery.js"></script>
-<script src="../../js/bootstrap.js"></script>
+<link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/font-awesome.min.css">
+<link rel="stylesheet" href="../css/solid.min.css">
+<link rel="stylesheet" href="../css/regular.min.css">
+<link rel="stylesheet" href="../css/bootstrap.css">
+<link rel="stylesheet" href="./includes/css/profile.css">
+<link rel="stylesheet" href="./includes/css/profile-sidebar.css">
+<script src="../js/jquery.js"></script>
+<script src="../js/bootstrap.js"></script>
 </head>
 
 
@@ -37,21 +37,21 @@ echo'
         </li>
         </ul>
 </nav>
-<div class="area" style="background-image:url(..);">
+<div class="area">
 
 <!-- page content here -->
         <div class="container mb-5">
             
             <div class="jumbotron mt-n2 pb-1 mb-1 border border-light">
-                <div class="text-center mx-auto avatar"> <img src="./avatar.png" class="mx-auto" alt=""> </div>
+                <div class="text-center mx-auto avatar"> <img src="./Avatars/'.$username.'.png" class="mx-auto" alt=""> </div>
                 <h1 class="display-4 text-center my-1" id="Ful"></h1>
                 <hr class="my-2">
                 <p class="lead text-center">'.$description.'</p>
             </div>';
             
             unset($description,$getdescription);
-            include "../New-Post.php";
-            include "../includes/ProfilePosts.php";
+            include "./New-Post.php";
+            include "./includes/ProfilePosts.php";
 
 
             /// Ajax Syncing Likes with database
@@ -68,7 +68,7 @@ echo'
 
             function Like(postid){
             $.ajax({
-              url:'../LikesManager.php',
+              url:'./LikesManager.php',
               method:'POST',
               data:{
                 pid: postid,
@@ -122,7 +122,7 @@ echo'
         </a>
     </li>
     <li>
-        <a href="../../Playground">
+        <a href="../Playground">
             <i class="fa fa-code fa-2x"></i>
             <span class="nav-text">
                Code PlayGround
@@ -147,7 +147,7 @@ echo'
         </a>
     </li>
     <li>
-       <a href="../ProfileSettings.php">
+       <a href="./ProfileSettings.php">
             <i class="fa fa-edit fa-2x"></i>
             <span class="nav-text">
                 Account Settings
@@ -155,7 +155,7 @@ echo'
         </a>
     </li>
     <li>
-        <a href="../Report.php">
+        <a href="./Report.php">
            <i class="fa fa-info fa-2x"></i>
             <span class="nav-text">
                 Troubles/Report ?
@@ -166,7 +166,7 @@ echo'
 
 <ul class="logout">
     <li>
-       <a href="../logout.php">
+       <a href="./logout.php">
              <i class="fa fa-power-off fa-2x"></i>
             <span class="nav-text">
                 Logout
@@ -177,7 +177,7 @@ echo'
 </nav>
 <nav class="navbar navbar-expand-sm navbar-dark text-light fixed-bottom" style="z-index:0; background: #212121;">
         <ul class="navbar-nav mx-auto mb-n4">
-        <p> <a href="https://www.fb.com/SparoXUB" target="_blank" class="text-danger nav-link d-inline"> <span style="font-size:18px;font-family:Awsome;" >C-Network</span></a><span class="nav-link d-inline">©2019 All Rights Reserved</span> </p>
+        <p> <a href="https://www.fb.com/SparoXUB" target="_blank" class="text-danger nav-link d-inline"> <span style="font-size:18px;font-family:Awsome;" ><span class="letter" style="font-size: 18px;">Code</span>Network</span></a><span class="nav-link d-inline">©2019 All Rights Reserved</span> </p>
         </ul>
     </nav>
 </body>
