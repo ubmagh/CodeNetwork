@@ -1,0 +1,39 @@
+.letter {
+  font-family: Source Sans Pro;
+  font-weight: bolder;
+}
+
+
+.form_effect {
+  font-family: Source Sans Pro;
+  opacity: 0.7;
+}
+
+.form_effect :focus {
+  opacity: 1;
+}
+
+.form_effect :hover {
+  opacity: 1;
+}
+
+.nav-pilloss .nav-link {
+  border-radius: 0.25rem;
+}
+
+/*my own Pills YEAH :D*/
+
+.nav-pilloss .nav-link.active,
+.nav-pilloss .show>.nav-link {
+  color: #fff;
+  background-color: #404850;
+}
+
+.noresised {
+  resize: none;
+}
+
+/*dark color into rgb */
+.half-opacity {
+  background-color: rgba(52, 58, 64, 0.8);
+}

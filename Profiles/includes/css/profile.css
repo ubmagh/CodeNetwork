@@ -1,0 +1,108 @@
+body {
+  font-family: Arial, sans-serif;
+  color: #292f33;
+}
+
+/* This element would be replaced by where you want the templates. */
+.tweetEntry-tweetHolder {
+  width: 70%;
+  margin: auto;
+  border-radius: 5px;
+}
+
+/* The action list is optional. */
+.tweetEntry-action-list {
+  display: block;
+  line-height: 18px;
+  margin-left: 58px;
+  margin-top: 10px;
+  color: #292f33;
+}
+
+.fa-comment:hover {
+  color: #80bfe9;
+}
+
+.fa-share:hover {
+  color: #5cd65c;
+}
+
+.fa-heart {
+  color: grey;
+}
+
+.fa-heart:hover {
+  color: #ff3333;
+}
+
+/************************/
+
+.tweetEntry {
+  border-bottom: 1px solid #e1e8ed;
+  cursor: pointer;
+  min-height: 51px;
+  padding: 9px 12px;
+}
+
+.tweetEntry-content {
+  display: block;
+  font-size: 14px;
+  margin-left: 58px;
+  font-size: 14px;
+}
+
+.tweetEntry-account-group {
+  color: #8899a6;
+  padding: 0px;
+  text-decoration: none;
+  line-height: 20px;
+}
+
+.tweetEntry-avatar {
+  float: left;
+  height: 48px;
+  width: 48px;
+  margin-left: -58px;
+  border-radius: 5px;
+}
+
+.tweetEntry-fullname {
+  font-weight: bold;
+  font-size: 14px;
+  color: #292f33;
+  padding: 0px;
+}
+
+.tweetEntry-username {
+  font-weight: bold;
+  font-size: 14px;
+  color: #b1bbc3;
+  padding: 0px;
+}
+
+.tweetEntry-timestamp {
+  font-size: 14px;
+  color: #b1bbc3;
+  padding: 0px;
+}
+
+.tweetEntry-text-container {
+  font-size: 14px;
+  color: #292f33;
+  line-height: 18px;
+}
+
+.optionalMedia {
+  margin-left: 58px;
+  margin-top: 10px;
+}
+
+.optionalMedia-img {
+  border-radius: 5px;
+  max-width: 506px;
+  max-height: 506px;
+}
+
+#liked :focus {
+  outline: none;
+}
