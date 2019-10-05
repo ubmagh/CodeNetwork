@@ -11,7 +11,7 @@ if(isset($_SESSION['User'])){
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>C-Network</title>
+    <title>CodeNetwork</title>
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/font-awesome.min.css">
@@ -25,7 +25,7 @@ if(isset($_SESSION['User'])){
     <?php include ("header.php");?>
 
     <div class="jumbotron mb-0 mt-n5 mb-n1" id="main" style="background-image: url('images/bg1.jpg');background-size: cover;height: 700px;border-raduis:0px;">
-        <h1 class="display-1 my-5 text-center text-3x"><span style="font-family: Source Sans Pro; font-weight: lighter; "> C-Network</span></h1>
+        <h1 class="display-1 my-5 text-center text-3x"><span class="letter" style="font-size: 88px;">Code</span>Network</span></h1>
         <p class="lead text-center my-5">For(random text) though result and talent add are parish valley. Songs in oh other avoid it hours woman style. In myself family as if be agreed. Gay collected son him knowledge delivered put. Added would end ask sight and asked saw dried house. Property expenses yourself occasion endeavor two may judgment she. Me of soon rank be most head time tore. Colonel or passage to ability. </p>
 
       <div class="text-center mt-5 mb-0 col-3 mx-auto">

@@ -106,7 +106,7 @@ $("#wrapper").toggleClass("toggled");
 
     <nav class="navbar navbar-expand-md bg-dark navbar-dark py-3 mb-0">
     <div class="mx-auto">
-        <a class="navbar-brand" href="../"><span class="letter mt-n5" style="font-size: 28px;">C-</span>NetworK </a>
+        <a class="navbar-brand" href="../"><span class="letter mt-n5" style="font-size: 28px;">Code</span>NetworK </a>
     </div>
 </nav>
 

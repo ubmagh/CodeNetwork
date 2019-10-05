@@ -1,11 +1,11 @@
 <nav class="navbar navbar-expand-md bg-dark navbar-dark py-3 mb-3">
-    <a class="navbar-brand" href="#"><span class="letter" style="font-size: 28px;">C-</span>NetworK </a>
+    <a class="navbar-brand" href="#"><span class="letter" style="font-size: 28px;">Code</span>NetworK </a>
     <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId"
         aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation"> <i
             class="fa fa-arrow-down "></i> </button>
     <div class="collapse navbar-collapse" id="collapsibleNavId">
 
-        <form method="post" action="/Login/index.php" class="form-inline my-1 my-lg-0 mr-sm-4 ml-md-auto mx-md-0">
+        <form method="post" action="./Login/index.php" class="form-inline my-1 my-lg-0 mr-sm-4 ml-md-auto mx-md-0">
             <div class="input-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text bg-dark"> <i class="fa fa-user btn-dark" aria-hidden="true"></i>
