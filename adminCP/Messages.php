@@ -45,7 +45,7 @@ if(isset($_SESSION['id'])){
     if(isset($_GET['Zfux'])){
         $Cid=$_GET['Zfux'];
         $mysqli->query("DELETE FROM `contact` WHERE `contact`.`id` ='$Cid';");
-        echo'<script>window.location.replace("http://'.$_SERVER['SERVER_NAME'].'/admincp/Messages.php");</script>';
+        echo'<script>window.location.replace("http://'.$_SERVER['SERVER_NAME'].'/CodeNet/admincp/Messages.php");</script>';
         unset($Cid);
      }
 

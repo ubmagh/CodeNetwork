@@ -1,6 +1,8 @@
 <?php
 session_start();
-if( isset($_SESSION['username']) ){
+if( ! isset($_SESSION['username']) ){
+    header('location:../../Profile/');
+}
     include "../../includes/config.php";
     $username=$_SESSION['username'];
     $email=$_SESSION['email'];
@@ -239,13 +241,3 @@ $("#save").click(
 </body>
 </html>
 
-
-
-
-
-<?php
-}else{
-    header('location:../../Login');
-}
-
-?>

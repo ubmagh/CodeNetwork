@@ -48,7 +48,7 @@ $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
         if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
             echo "The file ". basename( $_FILES["fileToUpload"]["name"]). ' has been uploaded You can choose it from the last page 
                         <script>
-                       setTimeout(function(){window.location.replace("http://'.$_SERVER['SERVER_NAME'].'/admincp/admin-Profile.php");},3000);
+                       setTimeout(function(){window.location.replace("http://'.$_SERVER['SERVER_NAME'].'/CodeNet/admincp/admin-Profile.php");},3000);
                         </script>
             ';
             $lastnumqu=mysqli_query($mysqli,"SELECT LastAvaNum FROM admin WHERE id=10;");
@@ -60,14 +60,14 @@ $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
         } else {
             echo 'Sorry, there was an error uploading your file.
             <script>
-              setTimeout(function(){window.location.replace("http://'.$_SERVER['SERVER_NAME'].'/admincp/admin-Profile.php");},3000);
+              setTimeout(function(){window.location.replace("http://'.$_SERVER['SERVER_NAME'].'/CodeNet/admincp/admin-Profile.php");},3000);
             </script>';
                 } 
         }
         
 }else{echo'
     <script>
-   setTimeout(function(){window.location.replace("http://'.$_SERVER['SERVER_NAME'].'/admincp");},10);
+   setTimeout(function(){window.location.replace("http://'.$_SERVER['SERVER_NAME'].'/CodeNet/admincp");},10);
       </script>';
 }
 ?>

@@ -36,7 +36,11 @@ if(isset($_SESSION['id'])){
       <th scope="col">Email</th>
       <th scope="col">Log time</th>
       <th scope="col">Log IP address</th>
-      <th scope="col">  </th>
+      <th scope="col">
+          <a href="./UsersLOg.php?Zfux=all">
+             <i class="fas fa-trash-alt text-danger"></i>
+          </a> 
+      </th>
     </tr>
   </thead>
   <tbody>
@@ -45,8 +49,10 @@ if(isset($_SESSION['id'])){
     // delete
     if(isset($_GET['Zfux'])){
         $Cid=$_GET['Zfux'];
+        if($Cid=="all")
+          $mysqli->query("DELETE FROM `userlog`");
         $mysqli->query("DELETE FROM `userlog` WHERE `userlog`.`id` ='$Cid';");
-        echo'<script>window.location.replace("http://'.$_SERVER['SERVER_NAME'].'/admincp/UsersLOg.php");</script>';
+        echo'<script>window.location.replace("http://'.$_SERVER['SERVER_NAME'].'/CodeNet/admincp/UsersLOg.php");</script>';
         unset($Cid);
      }
 

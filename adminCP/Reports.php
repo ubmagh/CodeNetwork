@@ -46,7 +46,7 @@ if(isset($_SESSION['id'])){
     if(isset($_GET['XuytA'])){
         $Cid=$_GET['XuytA'];
         $mysqli->query("DELETE FROM `reports` WHERE `reports`.`id` ='$Cid';");
-        echo'<script>window.location.replace("http://'.$_SERVER['SERVER_NAME'].'/admincp/Reports.php");</script>';
+        echo'<script>window.location.replace("http://'.$_SERVER['SERVER_NAME'].'/CodeNet/admincp/Reports.php");</script>';
         unset($Cid);
      }
 
