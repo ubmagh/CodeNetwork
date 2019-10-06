@@ -30,6 +30,7 @@ echo'
 <link rel="stylesheet" href="./includes/css/profile-sidebar.css">
 <script src="../js/jquery.js"></script>
 <script src="../js/bootstrap.js"></script>
+
 </head>
 
 
@@ -55,6 +56,22 @@ echo'
                 <hr class="my-2">
                 <p class="lead text-center">'.$description.'</p>
             </div>';
+
+            //the image zoom trigger
+            echo'<!-- The Modal -->
+            <div id="ImgModal" class="modal">
+            
+              <!-- The Close Button -->
+              <span class="close text-light" style="font-size:60px;" id="closeTri">&times;</span>
+            
+              <!-- Modal Content (The Image) -->
+              <img class="modal-content" id="img01">
+            
+              <!-- Modal Caption (Image Text) -->
+              <div id="text-img" class="text-img"></div>
+            </div>';
+            //end of image zoom trigger
+
             
             unset($description,$getdescription);
             include "./New-Post.php";
@@ -182,6 +199,7 @@ echo'
     </li>  
 </ul>
 </nav>
+<script src="../js/ImgTrigger.js"></script>
 <nav class="navbar navbar-expand-sm navbar-dark text-light fixed-bottom" style="z-index:0; background: #212121;">
         <ul class="navbar-nav mx-auto mb-n4">
         <p> <a href="https://www.fb.com/SparoXUB" target="_blank" class="text-danger nav-link d-inline"> <span style="font-size:18px;font-family:Awsome;" ><span class="letter" style="font-size: 18px;">Code</span>Network</span></a><span class="nav-link d-inline">©2019 All Rights Reserved</span> </p>

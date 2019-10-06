@@ -37,9 +37,10 @@ while($row=$post->fetch_assoc()){
                 </div>
                 ';
                 //if there is an image included
+                $imgid=explode('.',$row['img']);
                 if(!empty ($row['img'])){echo'
                 <div class="optionalMedia text-center mr-5">
-                  <img class="optionalMedia-img" src="../sharedPics/'.$row['img'].'">
+                  <img id="img'.$imgid[0].'" onclick="imgTrigger('."'img".$imgid[0]."'".')" class="optionalMedia-img myImg" src="../sharedPics/'.$row['img'].'">
                 </div>';}
 
               //check if is already liked poste
