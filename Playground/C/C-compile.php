@@ -14,6 +14,10 @@
 	$command=$CC." -lm ".$filename_code;	
 	$command_error=$command." 2>".$filename_error;
 
+	if( empty($code) ){
+		echo "no code to compile ! ";
+		return ;
+	}
 	
 	$file_code=fopen($filename_code,"w+");
 	fwrite($file_code,$code);

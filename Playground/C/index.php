@@ -73,9 +73,16 @@ function checkTime(i){if (i<10){i="0" + i;}return i;}</script>
         </div>
     </div>
 
-    <div class="row container-fluid mt-2 mb-n2">
-        <div class="col-2 mx-auto d-block">
-            <button name="submit" value="Compile" type="submit" id="st" class="btn btn-success btn-outline-light mx-auto px-4"><i class="fas fa-cogs dis px-1 ml-n2 mr-n1"></i> Run Code !</button>
+    <div class="row container col-10 ml-auto mt-2 mb-n2">
+        <div class="col d-block">
+            <div class="col-5 mx-auto">
+                <button name="submit" value="Compile" type="submit" id="st" class="btn btn-success btn-outline-light mx-auto px-4"><i class="fas fa-cogs dis px-1 ml-n2 mr-n1"></i> Run Code !</button>
+            </div>
+        </div>
+        <div class="col d-block">
+            <div class="col-5 mr-auto">
+                <button id="save" class="btn btn-info btn-outline-light mx-auto px-4"><i class="fas fa-save"></i> Save Code!</button>
+            </div>
         </div>
     </div>
     </form>
@@ -114,7 +121,29 @@ $(document).ready(function(){
         });
     });
 });
+   
+
+
+$("#save").click(
+        function(){
+        var name=prompt("Enter code name : (could be erased if existed) \n");
+        var lang="c";
+        var code=$("#Code-input").val().toString();
+        $.ajax({
+            type: "POST", //type of submit
+            cache: false, //important or else you might get wrong data returned to you
+            url: "../../codes/save.php", //destination
+            data: {lang: lang ,name: name,code: code }, //target your form's data and serialize for a POST
+            success: function() { // data is the var which holds the output of your process.php
+                // locate the div with #result and fill it with returned data from process.php
+                alert("saved successfully");
+            }
+        });
+        }
+    )
+
 </script>
+
 
     <div class="row container-fluid mt-2 mb-3">
         <div class="col-10 mx-auto pl-5 pr-0">
