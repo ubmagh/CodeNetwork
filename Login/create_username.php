@@ -6,6 +6,9 @@ if(empty($_SESSION['email'])){
 }
 else{
 
+    if(isset($_SESSION['username'])){
+        header("location:../Profile/");  
+    }
 
     if(isset($_POST['Ubtn'])){
         $choosen=$_POST['Username'];
@@ -23,12 +26,9 @@ else{
             //check invalide usernames
             if( preg_match("/^[a-zA-Z]*$/",$choosen)){
             $Insert=$mysqli->query("INSERT INTO profiles VALUES ('$eMail','$choosen');");
-            mkdir("../Profiles/".$choosen);
-            mkdir("../Profiles/".$choosen."/uploads");
-            $profileIndex=fopen("../Profiles/".$choosen."/index.php","w");
-            fclose($profileIndex);
-            copy("../Profiles/Default-Avatar.png","../Profiles/".$choosen."/avatar.png");
-            header("location:../Profiles/".$choosen);
+            copy("../Profile/Avatars/Default-Avatar.png","../Profile/Avatars/".$choosen.".png");
+            $_SESSION['username']=$choosen;
+            header("location:../Profile/");
             $mysqli->query("INSERT INTO description VALUES ('','$choosen','little description');");
         
         }
@@ -61,7 +61,7 @@ else{
 <body>
 <nav class="navbar navbar-expand-md bg-dark navbar-dark py-3 mb-0">
     <div class="mx-auto">
-        <a class="navbar-brand" href="../"><span class="letter" style="font-size: 28px;">C-</span>NetworK </a>
+        <a class="navbar-brand" href="../"><span class="letter mt-n5" style="font-size: 28px;">Code</span>NetworK </a>
     </div>
 </nav>
 
@@ -153,7 +153,7 @@ else{
     echo'
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark text-light py-0">
         <ul class="navbar-nav mx-auto mt-3">
-        <p> <a href="https://www.fb.com/SparoXUB" target="_blank" class="text-danger nav-link d-inline"> <span style="font-size:18px;font-family:Awsome;" >Ayoub Maghdaoui</span></a><span class="nav-link d-inline">©2019 All Rights Reserved</span> </p>
+        <p> <a href="https://www.fb.com/SparoXUB" target="_blank" class="text-danger nav-link d-inline"> <span class="letter" style="font-size: 18px;">Code</span></a><span class="nav-link d-inline">©2019 All Rights Reserved</span> </p>
         </ul>
 </nav>
     ';

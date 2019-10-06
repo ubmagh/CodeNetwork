@@ -116,13 +116,13 @@ if( isset($_POST['loginbtn']) )
             $username=$Profiled['username'];
             if( empty($username)){
                 $_SESSION['email']=$uemail;
-                header("location:./create_profile.php");
+                header("location:./create_username.php");
             }
             else{
             if($log)    {
-                            $_SESSION['Uemail']=$uemail;
-                            $_SESSION['User']=$username;
-                            header("location:../Profiles/".$username."/");           
+                            $_SESSION['email']=$uemail;
+                            $_SESSION['username']=$username;
+                            header("location:../Profile/");           
                     }else{
                         echo'<script>alert("Login Error!");</script>';
                     }

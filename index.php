@@ -120,7 +120,7 @@ if(isset($_SESSION['User'])){
         </div>
   <!-- modals end --->
 
-            <form action="/Register/" method="post">
+            <form action="./Register/" method="post">
                 <div class="form-group mx-auto col-8 ">
                     <input type="text"
                         class="form-control form_effect bg-dark text-center text-white border-top-0 border-left-0 border-right-0 "

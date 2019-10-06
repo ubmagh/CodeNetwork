@@ -53,7 +53,8 @@ if(isset($_SESSION['id'])){
         else 
             {$newStat="1";}
         $mysqli->query("UPDATE users SET Activated= '".$newStat."' WHERE id='$Cid';");
-        echo'<script>window.location.replace("http://'.$_SERVER['SERVER_NAME'].'/admincp/Accounts.php");</script>';
+        echo'<script>window.location.replace("http://'.$_SERVER['SERVER_NAME'].'/CodeNet/admincp/Accounts.php");</script>';
+        // location.reload(); on the up line causes a loop 
         unset($Cid,$acchang,$newStat);
      }
 

@@ -1,8 +1,8 @@
 <?php
 session_start();
 include "../includes/config.php";
-$username=$_SESSION['User'];
-$email=$_SESSION['Uemail'];
+$username=$_SESSION['username'];
+$email=$_SESSION['email'];
 $getdescription=$mysqli->query("SELECT Description FROM description WHERE username='$username';");
 $getdescription=$getdescription->fetch_assoc();
 $description=$getdescription['Description'];
@@ -37,7 +37,7 @@ echo'
         </li>
         </ul>
 </nav>
-<div class="area">
+<div class="area min-vh-100">
 
 <!-- page content here -->
         <div class="container mb-5">
