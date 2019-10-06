@@ -1,9 +1,5 @@
 <?php
-$getter=$mysqli->query("SELECT Lname, Fname FROM users WHERE Email='$email';");
-$getter=$getter->fetch_assoc();
-$Fname=$getter['Fname'];
-$Lname=$getter['Lname'];
-unset($getter);
+
 
 $post=$mysqli->query("SELECT * FROM posts WHERE username='$username' ORDER BY postingDate;");
 while($row=$post->fetch_assoc()){
@@ -21,9 +17,6 @@ while($row=$post->fetch_assoc()){
                       <strong class="tweetEntry-fullname">
                       '.$Fname.' '.$Lname.'
                       </strong>
-                      <script>
-                      document.getElementById("Ful").innerHTML = " '.$Fname.' '.$Lname.' ";
-                      </script>
                       
                       <span class="tweetEntry-username">
                         @<b>'.$username.'</b>

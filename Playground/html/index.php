@@ -1,9 +1,9 @@
 <?php
 session_start();
-if( isset($_SESSION['User']) ){
+if( isset($_SESSION['username']) ){
     include "../../includes/config.php";
-    $username=$_SESSION['User'];
-    $email=$_SESSION['Uemail'];
+    $username=$_SESSION['username'];
+    $email=$_SESSION['email'];
 ?>
 
 <!DOCTYPE html>
@@ -52,7 +52,7 @@ function checkTime(i){if (i<10){i="0" + i;}return i;}</script>
 <!-- page content here -->
 <div class="row  ml-2 mb-0 mt-n3">
         <div class="jumbotron col-7 mx-auto bg-transparent mt-n3 mb-n5">
-            <h1 class="display-4 text-center text-light ml-n1">WEB-Design</h1>
+            <h1 class="display-4 text-center text-light ml-n1"><span class="letter" style="font-size: 58px;">WEB-Design</span></h1>
             <hr class="mt-n2 mb-3 bg-light mb-0">  
         </div>
 </div>

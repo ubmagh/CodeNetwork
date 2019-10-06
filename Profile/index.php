@@ -6,6 +6,13 @@ $email=$_SESSION['email'];
 $getdescription=$mysqli->query("SELECT Description FROM description WHERE username='$username';");
 $getdescription=$getdescription->fetch_assoc();
 $description=$getdescription['Description'];
+
+$getter=$mysqli->query("SELECT Lname, Fname FROM users WHERE Email='$email';");
+$getter=$getter->fetch_assoc();
+$Fname=$getter['Fname'];
+$Lname=$getter['Lname'];
+unset($getter);
+
 echo'
 <!DOCTYPE html>
 <html lang="en">
@@ -44,7 +51,7 @@ echo'
             
             <div class="jumbotron mt-n2 pb-1 mb-1 border border-light">
                 <div class="text-center mx-auto avatar"> <img src="./Avatars/'.$username.'.png" class="mx-auto" alt=""> </div>
-                <h1 class="display-4 text-center my-1" id="Ful"></h1>
+                <h1 class="display-4 text-center my-1" id="Ful">'.$Fname.' '.$Lname.'</h1>
                 <hr class="my-2">
                 <p class="lead text-center">'.$description.'</p>
             </div>';

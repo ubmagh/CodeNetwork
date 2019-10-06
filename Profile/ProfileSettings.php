@@ -1,9 +1,9 @@
 <?php
 session_start();
-if( isset($_SESSION['User']) ){
+if( isset($_SESSION['username']) ){
     include "../includes/config.php";
-    $username=$_SESSION['User'];
-    $email=$_SESSION['Uemail'];/////this email could get changed so update profiles and users tables
+    $username=$_SESSION['username'];
+    $email=$_SESSION['email'];/////this email could get changed so update profiles and users tables
 
     $getter=$mysqli->query("SELECT * FROM users WHERE  Email='$email' ;");
     $getter=$getter->fetch_assoc();

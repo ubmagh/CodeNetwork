@@ -2,7 +2,7 @@
 session_start();
 
 
-unset($_SESSION['Uemail']);
-unset($_SESSION['User']);
+unset($_SESSION['email']);
+unset($_SESSION['username']);
 header("location:../");
 ?>
