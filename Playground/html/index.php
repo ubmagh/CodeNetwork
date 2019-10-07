@@ -47,7 +47,7 @@ function checkTime(i){if (i<10){i="0" + i;}return i;}</script>
         </li>
         </ul>
 </nav>
-<div class="area mb-0 pb-3" style="background-image: url('../includes/bg1.jpg') !important;background-size: 100% 100% !important;background-repeat:none;height:990px; ">
+<div class="area mb-0 pb-3" style="background-image: url('../includes/bg1.jpg') !important;background-size: 100% 100% !important;background-repeat:none;height:1290px; ">
 
 <!-- page content here -->
 <div class="row  ml-2 mb-0 mt-n3">
@@ -63,7 +63,18 @@ function checkTime(i){if (i<10){i="0" + i;}return i;}</script>
     <div class="row container-fluid mt-n5 mb-0 py-0">
         <div class="form-group col-10 mx-auto pl-5 pr-0">
             <label for="Code-input" class="text-secondary text-center bg-light mb-0">Code source input : </label>
-            <textarea name="input" class="form-control text-dark bg-light btn-outline-dark px-4 py-2" id="Code-input" cols="30" rows="10" style="resize:none;font-family:Courier New;"></textarea>
+            <textarea name="input" class="form-control text-dark bg-light btn-outline-dark px-4 py-2" id="Code-input" cols="30" rows="10" style="resize:none;font-family:Courier New;">
+            <html>
+                <head>
+                    <style>#p{color:red;}</style>
+                    <script>function Func(){alert("Hello World!");}   </script>
+                </head>
+                <body>
+                    <h1 id="p">Hello World !</h1>
+                    <button id="Btn" onclick="Func()">click!</button>
+                </body>
+            </html>
+            </textarea>
         </div>
     </div>
 
@@ -111,7 +122,14 @@ $(document).ready(function(){
             data: $('form').serialize(), //target your form's data and serialize for a POST
             success: function(result) { // data is the var which holds the output of your process.php
                 // locate the div with #result and fill it with returned data from process.php
-                $('#div').html(result);
+                $('#framy').attr("src",'./'+result);
+
+                //an other ajax query to delete html file that is just compiled 
+                $.ajax({ 
+                    type: "POST",
+                    url: "delete-html.php",
+                    data:{ "F": result }
+                });
             }
         });
     });
@@ -121,7 +139,7 @@ $(document).ready(function(){
 $("#save").click(
         function(){
         var name=prompt("Enter code name : (could be erased if existed) \n");
-        var lang="c";
+        var lang="html";
         var code=$("#Code-input").val().toString();
         $.ajax({
             type: "POST", //type of submit
@@ -137,10 +155,10 @@ $("#save").click(
     )
 </script>
 
-    <div class="row container-fluid mt-2 mb-3">
+    <div class="row container-fluid mt-4 mb-3">
         <div class="col-10 mx-auto pl-5 pr-0">
-        <label for="args" class="text-white text-secondary bg-light mb-0">OutPut :</label>
-            <textarea class="form-control text-dark bg-light btn-outline-dark px-5 pt-2 pb-0" name="div" id="div" cols="30" rows="10" readonly style="resize:none;"></textarea>
+            <label for="framy" class="text-secondary text-center bg-light mb-0 mt-0">Output : </label>
+            <iframe id="framy" src=" " width="100%" height="650px" class="p-3 ​card bg-light border border-light rounded" scrolling="no" style="overflow: hidden;"></iframe>
         </div>
     </div>
 

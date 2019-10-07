@@ -26,13 +26,14 @@ case "cpp":
     break;
 case "html":
     $lang="html";
-    $ex=".txt";
+    $ex=".html";
     break;  
 }
 $savedFile=fopen("./".$username."/".$lang."/".$filename.$ex,"w+");
 fwrite($savedFile,$code);
 fclose($savedFile);
 
+if($lang != "html")
 exec("./@uncrustify/uncrustify.exe -c ./cfg/defaults.cfg -f ".$filename.$ex." -o ".$filename.$ex."");// format the code file
 
 

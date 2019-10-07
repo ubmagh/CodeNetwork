@@ -1,3 +1,11 @@
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* horizental scroll prevent up */
+
 .letter {
   font-family: Source Sans Pro;
   font-weight: bolder;

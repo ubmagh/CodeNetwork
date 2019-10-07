@@ -64,7 +64,13 @@ function checkTime(i){if (i<10){i="0" + i;}return i;}</script>
     <div class="row container-fluid mt-n5 mb-0 py-0">
         <div class="form-group col-10 mx-auto pl-5 pr-0">
             <label for="Code-input" class="text-secondary text-center bg-light mb-0">Code source input : </label>
-            <textarea name="input" class="form-control text-dark bg-light btn-outline-dark px-4 py-2" id="Code-input" cols="30" rows="10" style="resize:none;font-family:Courier New;"></textarea>
+            <textarea name="input" class="form-control text-dark bg-light btn-outline-dark px-4 py-2" id="Code-input" cols="30" rows="10" style="resize:none;font-family:Courier New;">
+            #include <stdio.h>
+                int main(){
+                    printf("\n\t Hello World !");   
+                    return 0;
+                }
+            </textarea>
         </div>
     </div>
 
