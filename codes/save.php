@@ -33,11 +33,11 @@ $savedFile=fopen("./".$username."/".$lang."/".$filename.$ex,"w+");
 fwrite($savedFile,$code);
 fclose($savedFile);
 
-if($lang != "html")
+
 exec("./@uncrustify/uncrustify.exe -c ./cfg/defaults.cfg -f ".$filename.$ex." -o ".$filename.$ex."");// format the code file
 
 
 $date=date("Y-m-d h:i:s");
-$mysqli->query("INSERT into codes VALUES ('','$username','$lang','$filename','$date'");
+$mysqli->query("INSERT into codes VALUES ('','$username','$lang','$filename','$date') ");
 $mysqli->close();
 ?>
