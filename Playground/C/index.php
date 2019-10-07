@@ -64,14 +64,14 @@ function checkTime(i){if (i<10){i="0" + i;}return i;}</script>
     <div class="row container-fluid mt-n5 mb-0 py-0">
         <div class="form-group col-10 mx-auto pl-5 pr-0">
             <label for="Code-input" class="text-secondary text-center bg-light mb-0">Code source input : </label>
-            <textarea name="input" class="form-control text-dark bg-light btn-outline-dark px-4 py-2" id="Code-input" cols="30" rows="10" style="resize:none;"></textarea>
+            <textarea name="input" class="form-control text-dark bg-light btn-outline-dark px-4 py-2" id="Code-input" cols="30" rows="10" style="resize:none;font-family:Courier New;"></textarea>
         </div>
     </div>
 
     <div class="row container-fluid mt-n2 mb-0">
         <div class="col-10 mx-auto pl-5 pr-0">
         <label for="args" class="text-secondary text-center bg-light mb-0">Parameters Input :</label>
-            <textarea class="form-control text-dark bg-light btn-outline-dark  px-5 pt-2 pb-0" name="Args" id="args" cols="30" rows="1" style="resize:none;"></textarea>
+            <textarea class="form-control text-dark bg-light btn-outline-dark  px-5 pt-2 pb-0" name="Args" id="args" cols="30" rows="1" style="resize:none;font-family:Courier New;"></textarea>
         </div>
     </div>
 
@@ -150,7 +150,7 @@ $("#save").click(
     <div class="row container-fluid mt-2 mb-3">
         <div class="col-10 mx-auto pl-5 pr-0">
         <label for="args" class="text-white text-secondary bg-light mb-0">OutPut :</label>
-            <textarea class="form-control text-dark bg-light btn-outline-dark px-5 pt-2 pb-0" name="div" id="div" cols="30" rows="10" readonly style="resize:none;"></textarea>
+            <textarea class="form-control text-dark bg-light btn-outline-dark px-5 pt-2 pb-0" name="div" id="div" cols="30" rows="10" readonly style="resize:none;font-family:Courier New;"></textarea>
         </div>
     </div>
 

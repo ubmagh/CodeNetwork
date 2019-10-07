@@ -4,10 +4,19 @@
 
     putenv("PATH=C:\Program Files\Java\jdk-12.0.2\bin");
 	$CC="javac";
-	$out="java Main";
+	$out="java ";//it was out="java Main";
 	$code=$_POST["input"];
 	$input=$_POST["Args"];
-	$filename_code="Main.java";
+
+	//for getting the class name to create java file with the same name
+	$string= explode(" ",strstr($code,"class"));
+	$filename_code= preg_replace("/[{]/", "", $string[1]);
+	$filename_code=preg_replace("/[\r\n]*/","",$filename_code);
+	$out=$out.$filename_code;
+	$filename_code=$filename_code.".java";
+	
+	// echo $filename_code; // maintenenace
+
 	$filename_in="input.txt";
 	$filename_error="error.txt";
 	$runtime_file="runtime.txt";
@@ -16,6 +25,7 @@
 	$command_error=$command." 2>".$filename_error;
 	$runtime_error_command=$out." 2>".$runtime_file;
 
+	
 	//if(trim($code)=="")
 	//die("The code area is empty");
 	
