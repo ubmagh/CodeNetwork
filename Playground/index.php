@@ -84,7 +84,7 @@ if( isset($_SESSION['username']) ){
       
     </li>
     <li>
-        <a href="#">
+        <a href="../codes/">
             <i class="fa fa-list-alt fa-2x"></i>
             <span class="nav-text">
                 Your Codes

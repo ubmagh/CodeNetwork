@@ -36,6 +36,10 @@ fclose($savedFile);
 
 exec("./@uncrustify/uncrustify.exe -c ./cfg/defaults.cfg -f ".$filename.$ex." -o ".$filename.$ex."");// format the code file
 
+//if the user has saved a code twice in the same language with the same name Filecode will be erased but in database 
+//it will be saved twice So we should Delete the old one 
+
+$mysqli->query("DELETE FROM codes WHERE username='$username' and langType='$lang' and name='$filename' ");
 
 $date=date("Y-m-d h:i:s");
 $mysqli->query("INSERT into codes VALUES ('','$username','$lang','$filename','$date') ");

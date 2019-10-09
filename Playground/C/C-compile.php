@@ -25,8 +25,8 @@
 	$file_in=fopen($filename_in,"w+");
 	fwrite($file_in,$input);
 	fclose($file_in);
-	exec("cacls  $executable /g everyone:f"); 
-	exec("cacls  $filename_error /g everyone:f");	
+	exec("cacls  $executable /g everyone:f"); // modifies discretionary access control lists  on specified files. to give file permission to run 
+	exec("cacls  $filename_error /g everyone:f");	// or modify by any user(every one)
 
 	shell_exec($command_error);
 	$error=file_get_contents($filename_error);

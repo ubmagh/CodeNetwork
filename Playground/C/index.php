@@ -65,11 +65,48 @@ function checkTime(i){if (i<10){i="0" + i;}return i;}</script>
         <div class="form-group col-10 mx-auto pl-5 pr-0">
             <label for="Code-input" class="text-secondary text-center bg-light mb-0">Code source input : </label>
             <textarea name="input" class="form-control text-dark bg-light btn-outline-dark px-4 py-2" id="Code-input" cols="30" rows="10" style="resize:none;font-family:Courier New;">
-            #include <stdio.h>
-                int main(){
-                    printf("\n\t Hello World !");   
-                    return 0;
-                }
+                <?php 
+        if(isset($_GET['id'])){
+
+            $id=$_GET['id'];
+            $Code=$mysqli->query("select * From codes where id='$id'");
+            $Code=$Code->fetch_assoc();
+            if( empty($Code['id']) ){echo 'File Not Found !! ';}
+            
+            else{
+            
+            $file_path="../../codes/".$username."/c/".$Code['name'].".c";
+            
+
+            $file = fopen($file_path,"r");
+            
+            function RespectHTML($Str){
+                $Str=str_replace("&","&#38;",$Str);
+                $Str=str_replace("<","&lt;",$Str);
+                $Str=str_replace(">","&gt;",$Str);
+                return $Str;
+            }
+
+            $To_Insert="";
+            while(! feof($file))
+            {
+            $To_Insert=fgets($file);
+            $To_Insert=RespectHTML($To_Insert);
+            echo $To_Insert;
+            }
+            fclose($file);
+            
+
+        }}
+        else echo' #include <stdio.h>
+                        int main(){
+                            printf("\n\t Hello World !");   
+                            return 0;
+                        }
+                ';
+                ?>
+
+
             </textarea>
         </div>
     </div>
@@ -135,6 +172,10 @@ $(document).ready(function(){
 $("#save").click(
         function(){
         var name=prompt("Enter code name : (could be erased if existed) \n");
+        while(name==""){
+            name=prompt("Enter code name : (could be erased if existed) \n");
+        }
+        if(name){
         var lang="c";
         var code=$("#Code-input").val().toString();
         $.ajax({
@@ -147,6 +188,8 @@ $("#save").click(
                 alert("saved successfully");
             }
         });
+        }
+        else{alert("Code Not Saved !");}
         }
     )
 
@@ -178,7 +221,7 @@ $("#save").click(
       
     </li>
     <li>
-        <a href="#">
+        <a href="../../codes/">
             <i class="fa fa-list-alt fa-2x"></i>
             <span class="nav-text">
                 Your Codes
@@ -244,6 +287,10 @@ $("#save").click(
         <p> <a href="https://www.fb.com/SparoXUB" target="_blank" class="text-danger nav-link d-inline"> <span style="font-size:18px;font-family:Awsome;" ><span class="letter" style="font-size: 18px;">Code</span>Network</span></a><span class="nav-link d-inline">©2019 All Rights Reserved</span> </p>
         </ul>
     </nav>
+
+
 </body>
 </html>
+
+
 

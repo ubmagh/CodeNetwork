@@ -2,6 +2,7 @@
 session_start();
 if( ! isset($_SESSION['username']))
 header("location:../Login");
+$username=$_SESSION['username'];
 include "../includes/config.php";
 ?>
 
@@ -68,7 +69,7 @@ include "../includes/config.php";
                                 <th scope="row">'.$num.'</th>
                                 <td>'.$getCppS_Row['name'].'</td>
                                 <td>'.$getCppS_Row['date'].'</td>
-                                <td> <a href="#"> <i class="fas fa-eye "></i></a>  <span onclick="del('."'".$getCppS_Row['id']."','".$getCppS_Row['langType']."'".')"> <i class="fas fa-trash-alt ml-4 text-danger"></i> </span> </td>
+                                <td> <a href="../Playground/Cpp/index.php?id='.$getCppS_Row['id'].'"> <i class="fas fa-eye "></i></a>  <span style="cursor:pointer;" onclick="del('."'".$getCppS_Row['id']."','".$getCppS_Row['langType']."'".')"> <i class="fas fa-trash-alt ml-4 text-danger"></i> </span> </td>
                             </tr>
                             ';
 
@@ -94,12 +95,23 @@ include "../includes/config.php";
                             </tr>
                         </thead>
                         <tbody>
+                        <?php 
+                        $getCppS_Query=$mysqli->query("select * From codes where langType='c' order by date;");
+                        $num=1;
+                        while( $getCppS_Row=$getCppS_Query->fetch_assoc() ){
+                            echo'
                             <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
+                                <th scope="row">'.$num.'</th>
+                                <td>'.$getCppS_Row['name'].'</td>
+                                <td>'.$getCppS_Row['date'].'</td>
+                                <td> <a href="../Playground/C/index.php?id='.$getCppS_Row['id'].'"> <i class="fas fa-eye "></i></a>  <span style="cursor:pointer;" onclick="del('."'".$getCppS_Row['id']."','".$getCppS_Row['langType']."'".')"> <i class="fas fa-trash-alt ml-4 text-danger"></i> </span> </td>
                             </tr>
+                            ';
+
+                            //using one ajax function to check on username to delete a codeFile in certain language  DONE !!
+                            $num++;
+                        }
+                        ?>
                         </tbody>
                     </table>
                 </div>
@@ -118,12 +130,23 @@ include "../includes/config.php";
                             </tr>
                         </thead>
                         <tbody>
+                        <?php 
+                        $getCppS_Query=$mysqli->query("select * From codes where langType='java' order by date;");
+                        $num=1;
+                        while( $getCppS_Row=$getCppS_Query->fetch_assoc() ){
+                            echo'
                             <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
+                                <th scope="row">'.$num.'</th>
+                                <td>'.$getCppS_Row['name'].'</td>
+                                <td>'.$getCppS_Row['date'].'</td>
+                                <td> <a href="../Playground/Java/index.php?id='.$getCppS_Row['id'].'"> <i class="fas fa-eye "></i></a>  <span style="cursor:pointer;" onclick="del('."'".$getCppS_Row['id']."','".$getCppS_Row['langType']."'".')"> <i class="fas fa-trash-alt ml-4 text-danger"></i> </span> </td>
                             </tr>
+                            ';
+
+                            //using one ajax function to check on username to delete a codeFile in certain language 
+                            $num++;
+                        }
+                        ?>
                         </tbody>
                     </table>               
                 </div>
@@ -140,12 +163,23 @@ include "../includes/config.php";
                             </tr>
                         </thead>
                         <tbody>
+                        <?php 
+                        $getCppS_Query=$mysqli->query("select * From codes where langType='html' order by date;");
+                        $num=1;
+                        while( $getCppS_Row=$getCppS_Query->fetch_assoc() ){
+                            echo'
                             <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
+                                <th scope="row">'.$num.'</th>
+                                <td>'.$getCppS_Row['name'].'</td>
+                                <td>'.$getCppS_Row['date'].'</td>
+                                <td> <a href="../Playground/html/index.php?id='.$getCppS_Row['id'].'"> <i class="fas fa-eye "></i></a>  <span style="cursor:pointer;" onclick="del('."'".$getCppS_Row['id']."','".$getCppS_Row['langType']."'".')"> <i class="fas fa-trash-alt ml-4 text-danger"></i> </span> </td>
                             </tr>
+                            ';
+
+                            //using one ajax function to check on username to delete a codeFile in certain language 
+                            $num++;
+                        }
+                        ?>
                         </tbody>
                     </table> 
                 </div>
@@ -154,12 +188,35 @@ include "../includes/config.php";
             <div class="row mt-4 w-25 mx-auto ">
                 <div class="col card mr-1 pt-1 pb-0 shadow" style="background:rgba(102,204,153,0.7);">
                     <h5 class="text-center text-warning border border-top-0 border-left-0 border-right-0 border-danger shadow">Total number :</h5>
-                    <h4 class="text-center"> <span class="badge badge-info px-3">  0  </span>  </h4>
+                    <h4 class="text-center"> <span class="badge badge-info px-3"> 
+                     <?php 
+                    $num=$mysqli->query("SELECT count(*) AS nm FROM codes WHERE username='$username'");
+                    $num=$num->fetch_assoc();
+                    echo $num['nm'];
+                    ?>  
+                    </span>  </h4>
                 </div>
             </div>
 
         </div>
     </div>
+
+    <script>
+    
+    function del(id,lang){
+        $.ajax({
+
+            type: "POST", //type of submit
+            url: "./del.php", //destination
+            data: { id : id , lang : lang } , //target your form's data and serialize for a POST
+            success: function() { // data is the var which holds the output of your process.php
+                // locate the div with #result and fill it with returned data from process.php
+                location.reload();
+            }
+        });
+        }
+    
+    </script>
 
 </div>
 <nav class="main-menu border-0 navbar-fixed-left">
@@ -182,7 +239,7 @@ include "../includes/config.php";
         </a>
     </li>
     <li>
-        <a href="./">
+        <a href="../Playground/">
             <i class="fa fa-code fa-2x"></i>
             <span class="nav-text">
                Code PlayGround
