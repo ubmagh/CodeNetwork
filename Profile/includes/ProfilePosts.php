@@ -24,7 +24,11 @@ while($row=$post->fetch_assoc()){
 
                   
                   <span style="cursor:pointer;left:78%;position:sticky;" onclick="del('."'".$row['id']."'".')"> <i class="fas fa-trash-alt ml-4 text-danger"></i> </span>
+<<<<<<< HEAD
                   <span style="cursor:pointer;left:38%;position:relative;top:15%;"> <a href="./PostEdit.php?post='.$row['id'].'"> <i class="fas fa-pen ml-4 text-info"></i> </a></span>
+=======
+                  
+>>>>>>> b574ce7fba86298a032549b6cd232b12b1567c76
 
                   <div class="tweetEntry-text-container mt-2">
                   '.$row['Post'].'  
