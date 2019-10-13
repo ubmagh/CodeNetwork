@@ -70,7 +70,10 @@ function checkTime(i){if (i<10){i="0" + i;}return i;}</script>
             $id=$_GET['id'];
             $Code=$mysqli->query("select * From codes where id='$id'");
             $Code=$Code->fetch_assoc();
-            if( empty($Code['id']) ){echo 'File Not Found !! ';}
+            if($Code['langType']!='html'){
+                header("location:../".$Code['langType'].'/index.php?id='.$id);
+            }   
+            if( empty($Code['id']) ){echo 'File Not Found/DELETED !! ';}
             
             else{
             

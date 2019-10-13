@@ -109,7 +109,7 @@ if(isset($_SESSION['id'])){
                         <div class="form-group mx-auto col-11 " >
                         <input type="file" accept=".png"
                             class="form-control form_effect bg-dark text-center text-white border-top-0 border-left-0 border-right-0 py-4 h-25 mt-4"
-                            name="fileToUpload" id="username" aria-describedby="helpId" >
+                            name="fileToUpload" aria-describedby="helpId" >
                         </div>
                         <p class="mx-auto col-md-8 mt-n3">.png avatar 128x128 px and less than 500kb.</p>
                         <div class="form-group mx-auto col-8 mt-3" id="pispis">

@@ -1,18 +1,16 @@
 <?php
-
-
-$post=$mysqli->query("SELECT * FROM posts WHERE username='$username' ORDER BY postingDate;");
+$post=$mysqli->query("SELECT * FROM posts WHERE username='$username' ORDER BY postingDate desc;");
 while($row=$post->fetch_assoc()){
         if(empty($row['postType'])){//posttype empty means displaying post for his owner 
                    
             echo'
-            <div class="tweetEntry-tweetHolder bg-light text-dark border border-secondary mb-2">
+            <div class="tweetEntry-tweetHolder bg-light text-dark border border-secondary mb-2" id="p'.$row['id'].'">
               <div class="tweetEntry ">
   
                 <div class="tweetEntry-content">
     
                   <a class="tweetEntry-account-group" href="./">
-                      <img class="tweetEntry-avatar" src="./Avatars/'.$username.'.png">
+                      <img class="tweetEntry-avatar" src="./Avatars/'.$username.'.'.$EXT.'">
                       
                       <strong class="tweetEntry-fullname">
                       '.$Fname.' '.$Lname.'
@@ -21,16 +19,27 @@ while($row=$post->fetch_assoc()){
                       <span class="tweetEntry-username">
                         @<b>'.$username.'</b>
                       </span>
-                        <span class="tweetEntry-timestamp ml-5"> '.$row['postingDate'].'</span>
+                        <span class="tweetEntry-timestamp ml-1"> '.$row['postingDate'].'</span>
                   </a>
-    
+
+                  
+                  <span style="cursor:pointer;left:78%;position:sticky;" onclick="del('."'".$row['id']."'".')"> <i class="fas fa-trash-alt ml-4 text-danger"></i> </span>
+                  
+
                   <div class="tweetEntry-text-container mt-2">
                   '.$row['Post'].'  
                   </div>
                   ';
-                  if(!empty ($row['codeID'])){echo'
+                  if(!empty ($row['codeID'])){
+                    $CODEID=$row['codeID'];
+                    $getCodeInfos=$mysqli->query("SELECT * From codes WHERE id='$CODEID';");
+                    $getCodeInfos=$getCodeInfos->fetch_assoc();
+                    $codeURL="../Playground/".$getCodeInfos['langType']."/index.php?id=".$CODEID;
+                    
+                    if(!empty($getCodeInfos['id']))
+                    echo'
                     <div class="text-center"> 
-                    <p><i class="fa fa-code d-inline-block text-success pt-2" aria-hidden="true"></i> <span>'.$row['codeID'].'</span> <i class="fa fa-code d-inline-block text-success pt-2" aria-hidden="true"></i></p>
+                    <p><i class="fa fa-code d-inline-block text-success pt-2" aria-hidden="true"></i> <a href="'.$codeURL.'" target="_blank"> <span>'.$getCodeInfos['name'].'</span></a> <i class="fa fa-code d-inline-block text-success pt-2" aria-hidden="true"></i></p>
                     </div>
                     ';}
                     echo'
@@ -44,7 +53,7 @@ while($row=$post->fetch_assoc()){
                 </div>';}
 
               //check if is already liked poste
-              $PID=$row['postID'];
+              $PID=$row['id'];
               $liked=$mysqli->query("SELECT username FROM likes WHERE PostID='$PID';");
               $liked=$liked->fetch_assoc();
               $liked=$liked['username'];
