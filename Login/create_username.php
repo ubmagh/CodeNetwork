@@ -29,7 +29,7 @@ else{
             copy("../Profile/Avatars/Default-Avatar.png","../Profile/Avatars/".$choosen.".png");
             $_SESSION['username']=$choosen;
             header("location:../Profile/");
-            $mysqli->query("INSERT INTO description VALUES ('','$choosen','little description');");
+            $mysqli->query("INSERT INTO description VALUES ('','$choosen','Hello World !');");
         
         }
             else{$alreadyExisted=2;}

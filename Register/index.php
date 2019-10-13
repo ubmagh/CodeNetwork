@@ -369,7 +369,7 @@ include '../includes/config.php';
             $city=htmlspecialchars(strip_tags($city));
             $Country=htmlspecialchars(strip_tags($Country));
 
-            $register_query="INSERT INTO users  VALUES ('','$fname','$lname','$email','$pwd','$age','$city','$Country','false')";
+            $register_query="INSERT INTO users  VALUES ('','$fname','$lname','$email','$pwd','$age','$city','$Country','png','false')";
             if( mysqli_query($mysqli, $register_query) ) { 
                 //or using $mysqli->query($register_query);
                 $registred=true;

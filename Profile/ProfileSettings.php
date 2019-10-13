@@ -15,7 +15,10 @@ if( isset($_SESSION['username']) ){
     $pwd=$getter['password'];
     $Country=$getter['Country'];
     $Uid=$getter['id'];
-    
+
+    $getter=$mysqli->query("SELECT * FROM description WHERE  username='$username' ;");
+    $getter=$getter->fetch_assoc();
+    $description=$getter['Description'];
 
     if( isset($_POST['Changeinfos'])  ){
         $error=false;
@@ -92,6 +95,14 @@ if( isset($_SESSION['username']) ){
         }
     }
 
+    if( $_POST['description'] != $description ){
+        $description=$_POST['description'];
+        if( !preg_match("/^[a-z A-Z!?#@.+-]*$/",$description) ){
+            $DescErr=1;
+            $error=true;
+        }else{$CDesc=true;}
+    }
+
     if( empty($_POST['oldpassword'])){
             $error=true;
             $OldPwdERR=1;
@@ -105,6 +116,52 @@ if( isset($_SESSION['username']) ){
             $OldPwdERR=2;
         }
     }
+
+    if(isset($_FILES["AVA"])) {
+        $target_dir = "./Avatars/";
+        $target_file = $target_dir . basename($_FILES["AVA"]["name"]);
+        $uploadOk = 1;
+        $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+
+        // Check if image file is a actual image or fake image
+    $check = getimagesize($_FILES["AVA"]["tmp_name"]);
+    if($check !== false) {
+        $uploadOk = 1;
+    } else {
+        $uploadOk = 2;
+    }
+
+    // Check file size 500kb
+    if ($_FILES["AVA"]["size"] > 500000) {
+        $uploadOk = 3;
+    }
+
+    // Allow certain file formats
+    if( ($imageFileType != "png") && ($imageFileType !="bmp") && ($imageFileType !="jpg") && ($imageFileType !="jpeg")&& ($imageFileType !="gif") ) {
+        $uploadOk = 4;
+    }
+
+    //check image dimensions
+    // Get Image Dimension
+    $width = $check[0];
+    $height = $check[1];
+    if($width>256 || $height >256){
+        $uploadOk=5;
+    }
+
+    if($uploadOk==1){
+        $EXT=$mysqli->query("SELECT avatarEXT FROM users WHERE id='$Uid'");
+        $EXT=$EXT->fetch_assoc();
+        move_uploaded_file($_FILES["AVA"]["tmp_name"], $target_file);
+        unlink($target_dir.$username.".".$EXT['avatarEXT']);
+        rename($target_file,$target_dir.$username.'.'.$imageFileType);
+        $mysqli->query("UPDATE users SET avatarEXT='$imageFileType' WHERE id='$Uid'");
+    }else{
+        $error=true;
+    }
+
+    }
+
 
     if(!$error){
         $updatequery="Update users Set ";
@@ -123,7 +180,13 @@ if( isset($_SESSION['username']) ){
         $_SESSION['Uemail']=$email;
         $mysqli->query("update profiles set Email='$email' where username='$username';");
         }
+        
+        if(isset($CDesc)){//update description if changed
+            $mysqli->query("UPDATE description SET Description='$description' where username='$username';");
+        }
 
+            
+  
 
     }
 
@@ -190,7 +253,7 @@ echo'
 }
 
 echo'
-<form action="" method="post">
+<form action="" method="post"  enctype="multipart/form-data">
 <div class="row mt-0 pr-0">
     <div class="col border-right border-light ml-5 mr-0"> 
 
@@ -269,8 +332,14 @@ echo'
                     invalide City Name !
                 </p>
             </div>
-';
-        }
+        ';}
+
+        echo '
+        <div class="form-group col-md-10 mx-auto pl-0 mt-5">
+          <textarea class="form-control form_effect bg-dark text-center text-white border-top-0 border-left-0 border-right-0" name="description" id="" rows="2" placeholder="write about YourSelf" style="resize:none;">'.$description.'</textarea>
+        </div>
+        ';
+        
     
 
     echo'
@@ -358,6 +427,38 @@ echo'
                 </p>
             </div>';
         }
+
+        echo'
+        <div class="form-group col-md-10 mx-auto pl-0 mt-3">
+          <label for="AVA" class="letter text-light">Change Avatar : </label>
+            <input name="AVA" type="file" accept=".gif,.png,.jpg,.bmp,.jpeg" id="AVA" class="form-control-file form_effect bg-dark text-center text-white border border-light rounded border-top-0 border-left-0 border-right-0 py-3" aria-describedby="fileHelpId">
+          <small id="fileHelpId" class="form-text  text-light">*png,jpg,bmp,jpeg&GIF 500kb 256 x 256 pixels</small>
+        </div>
+        ';if(isset($uploadOk)&&  $uploadOk !=1){
+            echo'
+            <div id="namealert" class="alert alert-danger alert-dismissible fade show col-6 text-center mx-auto mt-0" style="left: 25%; top:395px;position: absolute;z-index: 2;height:35px;" role="alert">
+                <button type="button" class="close mt-n2" data-dismiss="alert" id="closesuc" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <p class="mt-n2">';
+                    switch( $uploadOk){
+                        case 2:
+                            echo'Invalide File Format !';
+                            break;
+                        case 3:
+                            echo 'Max size 500KB!';
+                            break;
+                        case 4:
+                            echo 'invalid Image Formate !';
+                            break;
+                        case 5:
+                            echo 'Image Dimensions 256x256 px';
+                            break;
+                    }
+                    echo '
+                </p>
+            </div>
+        ';}
 
     echo'
     </div>

@@ -20,7 +20,7 @@ include('../includes/config.php');
 <body>
 <nav class="navbar navbar-expand-md bg-dark navbar-dark py-3 mb-0">
     <div class="mx-auto">
-        <a class="navbar-brand" href="../"><span class="letter" style="font-size: 28px;">C-</span>NetworK </a>
+        <a class="navbar-brand" href="../"><span class="letter" style="font-size: 28px;">Code</span>NetworK </a>
     </div>
 </nav>
 
@@ -122,6 +122,7 @@ if( isset($_POST['loginbtn']) )
             if($log)    {
                             $_SESSION['email']=$uemail;
                             $_SESSION['username']=$username;
+                            $_SESSION['id']=$id;
                             header("location:../Profile/");           
                     }else{
                         echo'<script>alert("Login Error!");</script>';
