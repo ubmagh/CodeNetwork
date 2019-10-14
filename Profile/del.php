@@ -18,6 +18,16 @@ if( $GetPostOwner['username'] == $username ){ // the owner who can delete his po
         unlink("../sharedPics/".$GetPostOwner['img']);
     }
     $mysqli->query("DELETE FROM posts WHERE id='$pid' ;");
+    
+    /// Deleting Comments on this post
+
+    $mysqli->query("DELETE FROM comments WHERE PostID='$pid';");
+
+    ///// and Likes also I FORGET ABOUT THEM :/
+
+    $mysqli->query("DELETE FROM likes WHERE PostID='$pid';");
+
+
     echo 'true';
     
 }else{

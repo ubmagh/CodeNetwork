@@ -1,7 +1,7 @@
 <?php
 $post=$mysqli->query("SELECT * FROM posts WHERE username='$username' ORDER BY postingDate desc;");
 while($row=$post->fetch_assoc()){
-        if(empty($row['postType'])){//posttype empty means displaying post for his owner 
+        if(empty($row['postType'])){//posttype empty means displaying post for its owner 
                    
             echo'
             <div class="tweetEntry-tweetHolder bg-light text-dark border border-secondary mb-2" id="p'.$row['id'].'">
@@ -24,11 +24,8 @@ while($row=$post->fetch_assoc()){
 
                   
                   <span style="cursor:pointer;left:78%;position:sticky;" onclick="del('."'".$row['id']."'".')"> <i class="fas fa-trash-alt ml-4 text-danger"></i> </span>
-<<<<<<< HEAD
                   <span style="cursor:pointer;left:38%;position:relative;top:15%;"> <a href="./PostEdit.php?post='.$row['id'].'"> <i class="fas fa-pen ml-4 text-info"></i> </a></span>
-=======
-                  
->>>>>>> b574ce7fba86298a032549b6cd232b12b1567c76
+
 
                   <div class="tweetEntry-text-container mt-2">
                   '.$row['Post'].'  
@@ -89,9 +86,9 @@ while($row=$post->fetch_assoc()){
               $comments=$comments->fetch_assoc();
               $comments=$comments['num'];
               echo'
-                  <i class="fa fa-comment d-inline-block pt-1 active" style="width: 80px;"></i>';
+                  <i class="fa fa-comment d-inline-block pt-1 active" style="width: 80px;cursor:pointer;" onclick="Comment('."'".$PID."'".')"></i>';
               if($comments>0){
-                    echo'<span class="text-info d-inline-block ml-n4 mr-2">'.$comments.'</span>';
+                    echo'<span class="text-info d-inline-block ml-n4 mr-2" >'.$comments.'</span>';
                   }
                   echo'
                   <i class="fa fa-share d-inline-block pt-1" style="width: 80px"></i>

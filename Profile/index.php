@@ -100,7 +100,7 @@ if( !empty($_POST['CodeID'])){
     }
 }
 
-
+ 
 echo'
 <!DOCTYPE html>
 <html lang="en">
@@ -161,43 +161,70 @@ echo'
             //end of image zoom trigger
 
             //post errors   Modal: 
-            echo'
-            <div class="modal fade" id="ErrorModal">
-    <div class="modal-dialog">
-      <div class="modal-content">
-      
-        <!-- Modal Header -->
-        <div class="modal-header">
-          <h4 class="modal-title">Invalid Post</h4>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    echo'
+                    <div class="modal fade" id="ErrorModal">
+            <div class="modal-dialog">
+            <div class="modal-content">
+            
+                <!-- Modal Header -->
+                <div class="modal-header">
+                <h4 class="modal-title">Invalid Post</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                
+                <!-- Modal body -->
+                <div class="modal-body" id="eRRor">
+                </div>
+                
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                <button type="button" id="CloseErr" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+                
+            </div>
+            </div>
         </div>
-        
-        <!-- Modal body -->
-        <div class="modal-body" id="eRRor">
-        </div>
-        
-        <!-- Modal footer -->
-        <div class="modal-footer">
-          <button type="button" id="CloseErr" class="btn btn-danger" data-dismiss="modal">Close</button>
-        </div>
-        
-      </div>
-    </div>
-  </div>
-  ';
-  if(isset($eRROr)) {echo "
-    <script>
-    $('#eRRor').append('".$eRROr."');
-  $('#ErrorModal').modal('show');
-  $('#CloseErr').click(
-      function(){
-          $('#eRRor').empty();
-        });
-  </script>";
-         }
+        ';
+        if(isset($eRROr)) {echo "
+            <script>
+            $('#eRRor').append('".$eRROr."');
+        $('#ErrorModal').modal('show');
+        $('#CloseErr').click(
+            function(){
+                $('#eRRor').empty();
+                });
+        </script>";
+                }
 
             //end post errors modal
             
+
+            //// Comments Modal Start
+                echo'
+            <!-- The Modal -->
+            <div class="modal fade mt-n4" id="CommentsModal" style="height:100%;overflow-y: hidden; // hide vertical overflow-x: hidden; // hide horizontal">
+              <div class="modal-dialog modal-dialog-scrollable modal-xl">
+                <div class="modal-content w-100 mt-n5 mb-5">
+            
+                  <!-- Modal Header -->
+                  <div class="modal-header"  style="width:100%">
+                    <h4 class="modal-title" id="CommentsHeading">Comments</h4>
+                    <button type="button" class="close" data-dismiss="modal" id="CloseComments"><span style="font-size:40px;">&times;</span></button>
+                  </div>
+            
+                  <!-- Modal body -->
+                  <div class="modal-body col-12" id="CommentsBody"  style="width:100%">
+                   
+                  </div>
+            
+                  <!-- Modal footer -->
+                  <div class="modal-footer">
+                    </div>
+                </div>
+              </div>
+            </div>
+                        ';
+            ///// Comments Modal END
 
 
 
@@ -269,6 +296,65 @@ echo'
                }
                });}
         }
+
+        $('#CloseComments').click(
+            function(){
+                $('#CommentsModal').modal('hide');
+                $('#CommentsBody').empty();
+            }
+            );
+
+        function Comment(pid){
+            $.ajax({
+                url:'./GetComments.php',
+                method:'POST',
+                datatype: 'html',
+                data:{
+                    pid: pid
+                        },
+                success:function(result){
+                        $('#CommentsBody').empty();
+                        $('#CommentsBody').append(result);
+                        $('#CommentsModal').modal('show');
+                    }
+
+
+            });
+
+        }
+        
+        function DelCom(ComID,pid){
+            $.ajax({
+                url:'./DelComment.php',
+                method:'GET',
+                datatype: 'html',
+                data:{
+                    commentID: ComID,
+                        },
+                success:function(result){
+                    if(result=='true'){
+                    Comment(pid);}
+                        }
+                    });
+        }
+
+        function SubmitComment(pid){
+                var comment=$('#TheComment').val();
+                $.ajax({
+                    url:'./SubmitComment.php',
+                    method:'GET',
+                    datatype: 'html',
+                    data:{
+                        comment: comment,
+                        pid:pid
+                            },
+                    success:function(result){
+                        Comment(pid);//reload Comments modal
+                            }
+                        });
+        }
+
+
         </script>
             ";
             ///End  Ajax Syncing Likes 

@@ -90,6 +90,7 @@ body {
   font-size: 14px;
   color: #292f33;
   line-height: 18px;
+  word-wrap: break-word;
 }
 
 .optionalMedia {

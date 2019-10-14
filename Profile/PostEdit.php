@@ -138,21 +138,19 @@ if(isset($_POST['submit'])){
 
     <div class="tweetEntry-tweetHolder bg-light text-dark border border-secondary mb-2" id="p<?php echo $GetPostInfos['id']; ?>" >
             <div class="tweetEntry ">
-  
                 <div class="tweetEntry-content">
     
                   <a class="tweetEntry-account-group" href="./">
-                      <img class="tweetEntry-avatar" src="./Avatars/<?php echo $username.'.'.$getUserInfo['avatarEXT'] ?> ">
+                      <img class="tweetEntry-avatar" src="./Avatars/<?php echo $username.'.'.$getUserInfo['avatarEXT']?>">
                       
                       <strong class="tweetEntry-fullname">
                       <?php echo $Fname.' '.$Lname; ?>
-                      
                       </strong>
                       
                       <span class="tweetEntry-username">
                         @<b><?php echo $username; ?></b>
                       </span>
-                        <span class="tweetEntry-timestamp ml-1"> <?php echo $GetPostInfos['postingDate'] ?> </span>
+                        <span class="tweetEntry-timestamp ml-1"><?php echo $GetPostInfos['postingDate']?></span>
                   </a>
 
 
