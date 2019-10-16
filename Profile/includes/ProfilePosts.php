@@ -55,7 +55,7 @@ while($row=$post->fetch_assoc()){
 
               //check if is already liked poste
               $PID=$row['id'];
-              $liked=$mysqli->query("SELECT username FROM likes WHERE PostID='$PID';");
+              $liked=$mysqli->query("SELECT username FROM likes WHERE PostID='$PID' and username='$username';");
               $liked=$liked->fetch_assoc();
               $liked=$liked['username'];
 

@@ -1,12 +1,12 @@
 <?php
 session_start();
-if( isset($_SESSION['username']) ){
+if (isset($_SESSION['username'])) {
     include "../includes/config.php";
-    $username=$_SESSION['username'];
-    $email=$_SESSION['email'];
+    $username = $_SESSION['username'];
+    $email = $_SESSION['email'];
 
 
-    echo'
+    echo '
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,7 +25,7 @@ if( isset($_SESSION['username']) ){
 </head>
 
 
-<body style="height:100%">
+<body style="height:100%;overflow-y: hidden; // hide vertical overflow-x: hidden; // hide horizontal">
 <nav class="navbar navbar-expand-sm navbar-dark text-light fixed-top pb-4 pt-2 " style="z-index:10; background: #212121;">
         <ul class="navbar-nav ml-auto mb-n4 mt-n2">
         <li class=" ">
@@ -36,7 +36,7 @@ if( isset($_SESSION['username']) ){
         </li>
         </ul>
 </nav>
-<div class="area mb-0 pb-5" style="background-image: url('."'./includes/bg1.jpg'".') !important;background-size: cover !important;background-repeat:none;height:640px; ">
+<div class="area mb-0 pb-5" style="background-image: url(' . "'./includes/bg1.jpg'" . ') !important;background-size: cover !important;background-repeat:none;height:640px; ">
 
 <!-- page content here -->
 <div class="row mt-5 ml-2 mb-0 h-100">
@@ -145,7 +145,7 @@ if( isset($_SESSION['username']) ){
     </li>  
 </ul>
 </nav>
-<nav class="navbar navbar-expand-sm navbar-dark text-light mb-0 pb-5" style="z-index:0; background: #212121;">
+<nav class="navbar navbar-expand-sm navbar-dark text-light mt-4 pb-2" style="z-index:0; background: #212121;">
         <ul class="navbar-nav mx-auto mb-n4">
         <p> <a href="https://www.fb.com/SparoXUB" target="_blank" class="text-danger nav-link d-inline"> <span style="font-size:18px;font-family:Awsome;" ><span class="letter" style="font-size: 18px;">Code</span>Network</span></a><span class="nav-link d-inline">©2019 All Rights Reserved</span> </p>
         </ul>
@@ -153,13 +153,6 @@ if( isset($_SESSION['username']) ){
 </body>
 </html>
 ';
-
-
-
-
-
-}else{
+} else {
     header('location:../Login');
 }
-
-?>

@@ -66,8 +66,10 @@ function checkTime(i){if (i<10){i="0" + i;}return i;}</script>
             <textarea name="input" class="form-control text-dark bg-light btn-outline-dark px-4 py-2" id="Code-input" cols="30" rows="10" style="resize:none;font-family:Courier New;">
         <?php 
         if(isset($_GET['id'])){
-
             $id=$_GET['id'];
+            $getter=$mysqli->query("SELECT username FROM codes WHERE id='$id' ;");
+            $getter=$getter->fetch_assoc();
+            $username=$getter['username'];
             $Code=$mysqli->query("select * From codes where id='$id'");
             $Code=$Code->fetch_assoc();
             if($Code['langType']!='html'){

@@ -1,10 +1,12 @@
 <?php 
 include "../includes/config.php";
-
-
 session_start();
 $PID=$_POST['pid'];
-$username=$_SESSION['username'];
+$username=$_POST['username'];
+
+if($_SESSION['username']!=$username)
+echo 'false';
+else{
 
               $liked=$mysqli->query("SELECT username FROM likes WHERE PostID='$PID';");
               $liked=$liked->fetch_assoc();
@@ -17,4 +19,6 @@ $username=$_SESSION['username'];
               }
 
 $mysqli->close();
+echo 'true';
+}
 ?>

@@ -400,10 +400,10 @@ echo'
        
     </li>
     <li>
-       <a href="#">
+       <a href="../members/">
            <i class="fa fa-share-alt fa-2x"></i>
             <span class="nav-text">
-                people & friends
+                Members & friends
             </span>
         </a>
     </li>

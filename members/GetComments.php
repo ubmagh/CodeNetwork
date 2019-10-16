@@ -7,7 +7,7 @@ if(!isset($_POST['pid'])) {
 include "../includes/config.php";
 session_start();
 $pid=$_POST['pid'];
-$username=$_SESSION['username'];
+$username=$_POST['poster'];
 
 //////////////////////////////////////////
 //////////////////////////////////////////
@@ -28,8 +28,8 @@ $TO_echo='
   
                 <div class="tweetEntry-content">
     
-                  <a class="tweetEntry-account-group" href="./">
-                      <img class="tweetEntry-avatar" src="./Avatars/'.$getPost['username'].'.'.$getPostOwner['avatarEXT'].'">
+                  <a class="tweetEntry-account-group" href="./index.php?username='.$getPost['username'].'">
+                      <img class="tweetEntry-avatar" src="../Profile/Avatars/'.$getPost['username'].'.'.$getPostOwner['avatarEXT'].'">
                       
                       <strong class="tweetEntry-fullname">
                       '.$getPostOwner['Fname'].' '.$getPostOwner['Lname'].'
@@ -81,8 +81,8 @@ while($GetComment=$Query->fetch_assoc()){
     <div class="tweetEntry-tweetHolder bg-light text-dark border border-secondary mb-1 py-0 d-block"  style="width:90%;">
         <div class="tweetEntry py-1 border-0">
             <div class="tweetEntry-content">
-                 <a class="tweetEntry-account-group" href="../members/index.php?username='.$CommentorUSERname.'">
-                      <img class="tweetEntry-avatar" src="./Avatars/'.$CommentorUSERname.'.'.$CommentOWnerInfos['avatarEXT'].'">
+                 <a class="tweetEntry-account-group" href="./members/index.php?username='.$CommentorUSERname.'">
+                      <img class="tweetEntry-avatar" src="../Profile/Avatars/'.$CommentorUSERname.'.'.$CommentOWnerInfos['avatarEXT'].'">
                       
                       <strong class="tweetEntry-fullname">
                       '.$CommentOWnerInfos['Fname'].' '.$CommentOWnerInfos['Lname'].'
@@ -121,3 +121,4 @@ $TO_echo=$TO_echo.'
 ';
 
 echo $TO_echo;
+?>

@@ -1,48 +1,51 @@
 <?php
 include "../includes/config.php";
 session_start();
-if(empty($_SESSION['email'])){
+if (empty($_SESSION['email'])) {
     header("location:./");
-}
-else{
+} else {
 
-    if(isset($_SESSION['username'])){
-        header("location:../Profile/");  
+    if (isset($_SESSION['username'])) {
+        header("location:../Profile/");
     }
 
-    if(isset($_POST['Ubtn'])){
-        $choosen=$_POST['Username'];
-        $eMail=$_SESSION['email'];
+    if (isset($_POST['Ubtn'])) {
+        $choosen = $_POST['Username'];
+        $eMail = $_SESSION['email'];
         //check if an email has already a username
-        $check=$mysqli->query("SELECT Email FROM profiles WHERE Email='".$eMail."';");
-        $CheckResult=$check->fetch_assoc();
-        if( empty($CheckResult['Email'])){
-        unset($CheckResult);
-        //check duplicated username
-        $check=$mysqli->query("SELECT Email FROM profiles WHERE username='".$choosen."';");
-        $CheckResult=$check->fetch_assoc();
-        if( empty($CheckResult['Email']) ){
+        $check = $mysqli->query("SELECT Email FROM profiles WHERE Email='" . $eMail . "';");
+        $CheckResult = $check->fetch_assoc();
+        if (empty($CheckResult['Email'])) {
+            unset($CheckResult);
+            //check duplicated username
+            $check = $mysqli->query("SELECT Email FROM profiles WHERE username='" . $choosen . "';");
+            $CheckResult = $check->fetch_assoc();
+            if (empty($CheckResult['Email'])) {
 
-            //check invalide usernames
-            if( preg_match("/^[a-zA-Z]*$/",$choosen)){
-            $Insert=$mysqli->query("INSERT INTO profiles VALUES ('$eMail','$choosen');");
-            copy("../Profile/Avatars/Default-Avatar.png","../Profile/Avatars/".$choosen.".png");
-            $_SESSION['username']=$choosen;
-            header("location:../Profile/");
-            $mysqli->query("INSERT INTO description VALUES ('','$choosen','Hello World !');");
-        
-        }
-            else{$alreadyExisted=2;}
-        }
-        else{
-            $alreadyExisted=1;
+                //check invalide usernames
+                if (preg_match("/^[a-zA-Z0-9]*$/", $choosen)) {
+                    $Insert = $mysqli->query("INSERT INTO profiles VALUES ('$eMail','$choosen');");
+                    copy("../Profile/Avatars/Default-Avatar.png", "../Profile/Avatars/" . $choosen . ".png");
+                    $_SESSION['username'] = $choosen;
+                    mkdir('../codes/' . $choosen . '');
+                    mkdir('../codes/' . $choosen . '/c');
+                    mkdir('../codes/' . $choosen . '/cpp');
+                    mkdir('../codes/' . $choosen . '/java');
+                    mkdir('../codes/' . $choosen . '/html');
+
+                    $mysqli->query("INSERT INTO description VALUES ('','$choosen','Hello World !');");
+                    header("location:../Profile/");
+                } else {
+                    $alreadyExisted = 2;
+                }
+            } else {
+                $alreadyExisted = 1;
+            }
+        } else {
+            $alreadyExisted = 3;
         }
     }
-    else{
-        $alreadyExisted=3;
-    }
-}
-    echo'
+    echo '
     
     <!DOCTYPE html>
 <html lang="en">
@@ -85,7 +88,7 @@ else{
                 </div>
             </div>
     
-            <div class="container-fluid  " style="background-image: url('."../images/bg5.jpg".'); 
+            <div class="container-fluid  " style="background-image: url(' . "../images/bg5.jpg" . '); 
             background-repeat: no-repeat;background-size: 100% 100%;height: 690px;border-raduis:0px; display: flex; align-items: center;">
         
                 <div class="mx-auto col-md-8 mt-n5">
@@ -101,33 +104,34 @@ else{
                         </div>
                         ';
 
-                        if(isset($alreadyExisted)){
+    if (isset($alreadyExisted)) {
 
 
-        if($alreadyExisted==1){
-                            echo "<script> 
+        if ($alreadyExisted == 1) {
+            echo "<script> 
         $(function(){
-            $('#modal-body').append('<p><i class=".'"fa fa-dashcube"' .' aria-hidden= '.'"true"'."></i>".$choosen." Is already existing choose another !</p> ');
+            $('#modal-body').append('<p><i class=" . '"fa fa-dashcube"' . ' aria-hidden= ' . '"true"' . "></i>" . $choosen . " Is already existing choose another !</p> ');
             $('#myModal').modal('show');
         });
         $('#closebtn').click(function(){
             $('#modal-body').empty();
         });
-        </script> ";  }
-        else{ if($alreadyExisted==2){
-            echo "<script> 
+        </script> ";
+        } else {
+            if ($alreadyExisted == 2) {
+                echo "<script> 
             $(function(){
-                $('#modal-body').append('<p><i class=".'"fa fa-dashcube"' .' aria-hidden= '.'"true"'."></i>Invalide username, use letters and numbers only!(white space isnt allowed)</p> ');
+                $('#modal-body').append('<p><i class=" . '"fa fa-dashcube"' . ' aria-hidden= ' . '"true"' . "></i>Invalide username, use letters and numbers only!(white space isnt allowed)</p> ');
                 $('#myModal').modal('show');
             });
             $('#closebtn').click(function(){
                 $('#modal-body').empty();
             });
-            </script> ";}
-            else{
+            </script> ";
+            } else {
                 echo "<script> 
                 $(function(){
-                    $('#modal-body').append('<p><i class=".'"fa fa-dashcube"' .' aria-hidden= '.'"true"'."></i>You have already choosen a username!</p> ');
+                    $('#modal-body').append('<p><i class=" . '"fa fa-dashcube"' . ' aria-hidden= ' . '"true"' . "></i>You have already choosen a username!</p> ');
                     $('#myModal').modal('show');
                 });
                 $('#closebtn').click(function(){
@@ -136,9 +140,9 @@ else{
                 </script> ";
             }
         }
-                        }
+    }
 
-                        echo'<div class="form-group mx-auto col-8 mt-4 " id="pispis">
+    echo '<div class="form-group mx-auto col-8 mt-4 " id="pispis">
                             <button type="submit" name="Ubtn" value="yupe" class="btn form_effect btn-dark col-12 border-0" id="RegBut"><span class="shadow"> 
                             <i class="fa fa-arrow-circle-right ml-n1 mr-1" aria-hidden="true"></i> Set</span></button>
                         </div>
@@ -149,8 +153,8 @@ else{
                 
     
     ';
-    
-    echo'
+
+    echo '
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark text-light py-0">
         <ul class="navbar-nav mx-auto mt-3">
         <p> <a href="https://www.fb.com/SparoXUB" target="_blank" class="text-danger nav-link d-inline"> <span class="letter" style="font-size: 18px;">Code</span></a><span class="nav-link d-inline">©2019 All Rights Reserved</span> </p>
@@ -158,4 +162,3 @@ else{
 </nav>
     ';
 }
-?>

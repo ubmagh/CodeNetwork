@@ -61,7 +61,7 @@ include "../includes/config.php";
                         <tbody>
 
                         <?php 
-                        $getCppS_Query=$mysqli->query("select * From codes where langType='cpp' order by date;");
+                        $getCppS_Query=$mysqli->query("select * From codes where langType='cpp' and username='$username' order by date;");
                         $num=1;
                         while( $getCppS_Row=$getCppS_Query->fetch_assoc() ){
                             echo'
@@ -96,7 +96,7 @@ include "../includes/config.php";
                         </thead>
                         <tbody>
                         <?php 
-                        $getCppS_Query=$mysqli->query("select * From codes where langType='c' order by date;");
+                        $getCppS_Query=$mysqli->query("select * From codes where langType='c' and username='$username' order by date;");
                         $num=1;
                         while( $getCppS_Row=$getCppS_Query->fetch_assoc() ){
                             echo'
@@ -131,7 +131,7 @@ include "../includes/config.php";
                         </thead>
                         <tbody>
                         <?php 
-                        $getCppS_Query=$mysqli->query("select * From codes where langType='java' order by date;");
+                        $getCppS_Query=$mysqli->query("select * From codes where langType='java' and username='$username' order by date;");
                         $num=1;
                         while( $getCppS_Row=$getCppS_Query->fetch_assoc() ){
                             echo'
@@ -164,7 +164,7 @@ include "../includes/config.php";
                         </thead>
                         <tbody>
                         <?php 
-                        $getCppS_Query=$mysqli->query("select * From codes where langType='html' order by date;");
+                        $getCppS_Query=$mysqli->query("select * From codes where langType='html' and username='$username' order by date;");
                         $num=1;
                         while( $getCppS_Row=$getCppS_Query->fetch_assoc() ){
                             echo'

@@ -67,6 +67,9 @@ function checkTime(i){if (i<10){i="0" + i;}return i;}</script>
             <?php 
         if(isset($_GET['id'])){
             $id=$_GET['id'];
+            $getter=$mysqli->query("SELECT username FROM codes WHERE id='$id' ;");
+            $getter=$getter->fetch_assoc();
+            $username=$getter['username'];
             $Code=$mysqli->query("select * From codes where id='$id'");
             $Code=$Code->fetch_assoc();
             if($Code['langType']!='java'){
