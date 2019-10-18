@@ -104,7 +104,7 @@ if (!empty($_GET['username'])) {
     //// Comments Modal Start
     echo '
             <!-- The Modal -->
-            <div class="modal fade mt-n4" id="CommentsModal" style="height:100%;overflow-y: hidden; // hide vertical overflow-x: hidden; // hide horizontal">
+            <div class="modal fade mt-n4" id="CommentsModal" style="height:100%;overflow-y: hidden; overflow-x: hidden; ">
               <div class="modal-dialog modal-dialog-scrollable modal-xl">
                 <div class="modal-content w-100 mt-n5 mb-5">
             
@@ -128,6 +128,34 @@ if (!empty($_GET['username'])) {
                         ';
     ///// Comments Modal END*
 
+    //// Sharing Modal Start
+    echo '
+            <!-- The Modal -->
+            <div class="modal fade mt-n4" id="SharingModal" style="height:100%;overflow-y: hidden;overflow-x: hidden;">
+              <div class="modal-dialog modal-dialog-scrollable modal-xl">
+                <div class="modal-content w-100 mt-n5 mb-5">
+            
+                  <!-- Modal Header -->
+                  <div class="modal-header"  style="width:100%">
+                    <h4 class="modal-title" id="SharingHeading">Share Post</h4>
+                    <button type="button" class="close" data-dismiss="modal" id="CloseComments"><span style="font-size:40px;">&times;</span></button>
+                  </div>
+            
+                  <!-- Modal body -->
+                  <div class="modal-body col-12" id="SharingBody"  style="width:100%">
+                   
+                  </div>
+            
+                  <!-- Modal footer -->
+                  <div class="modal-footer">
+                  <a id="Sharebtn" class="btn btn-info mx-auto col-2 text-light" role="button" style="cursor:pointer;"><i class="fa fa-share d-inline"></i> Share </a>
+                    </div>
+                </div>
+              </div>
+            </div>
+                        ';
+    ///// Sharing Modal END*
+
 
     ////ADD here (add Foreign POST on somebody profile) Fonctionality
     echo ' <div id="after"></div>';
@@ -142,7 +170,7 @@ if (!empty($_GET['username'])) {
                 <div class="tweetEntry-tweetHolder bg-light text-dark border border-secondary mb-2" id="p' . $row['id'] . '">
                   <div class="tweetEntry ">
       
-                    <div class="tweetEntry-content">
+                    <div class="tweetEntry-content"  id="Con' . $row['id'] . '">
         
                       <a class="tweetEntry-account-group" href="./?username=' . $Profile . '">
                           <img class="tweetEntry-avatar" src="../Profile/Avatars/' . $Profile . '.' . $EXT . '">
@@ -154,9 +182,11 @@ if (!empty($_GET['username'])) {
                           <span class="tweetEntry-username">
                             @<b>' . $Profile . '</b>
                           </span>
-                            <span class="tweetEntry-timestamp ml-1"> ' . $row['postingDate'] . '</span>
                       </a>
-                      <div class="tweetEntry-text-container mt-2">
+                      <a class="tweetEntry-account-group" href="../posts/?post=' . $row['id'] . '">
+                      <span class="tweetEntry-timestamp ml-1"> ' . $row['postingDate'] . '</span>
+                      </a>
+                      <div class="tweetEntry-text-container mt-2" >
                       ' . $row['Post'] . '  
                       </div>
                       ';
@@ -174,16 +204,13 @@ if (!empty($_GET['username'])) {
                         </div>
                         ';
         }
-        echo '
-                    </div>
-                    ';
 
         //if there is an image included
         $imgid = explode('.', $row['img']);
         if (!empty($row['img'])) {
             echo '
                 <div class="optionalMedia text-center mr-5">
-                  <img id="img' . $imgid[0] . '" onclick="imgTrigger(' . "'img" . $imgid[0] . "'" . ')" class="optionalMedia-img myImg" src="../sharedPics/' . $row['img'] . '">
+                  <img id="img' . $imgid[0] . '" onclick="imgTrigger(' . "'img" . $imgid[0] . "'" . ')" style="max-width:100%;x" class="optionalMedia-img myImg" src="../sharedPics/' . $row['img'] . '">
                 </div>';
         }
 
@@ -194,11 +221,11 @@ if (!empty($_GET['username'])) {
         $liked = $liked['username'];
 
         if ($liked == $username) { //liked
-            echo '
+            echo '</div>
                 <div class="tweetEntry-action-list" style="line-height:24px;color: #b1bbc3;">
                 <button class="btn mr-4" style="padding: 0px;height:34px;width:30px;" onclick="Like(' . $PID . ')"><i class="fa fa-heart d-inline-block pt-1 mr-1" id="post' . $PID . '" style="width: 20px;color: #ff3333;"></i></button>';
         } else {
-            echo '
+            echo '</div>
                 <div class="tweetEntry-action-list" style="line-height:24px;color: #b1bbc3;">
                 <button class="btn mr-5" style="padding: 0px;height:34px;width:30px;" onclick="Like(' . $PID . ')"><i class="fa fa-heart d-inline-block pt-1 mr-1" id="post' . $PID . '" style="width: 20px;color: #C2C5CC;"></i></button>';
         }
@@ -224,7 +251,7 @@ if (!empty($_GET['username'])) {
             echo '<span class="text-info d-inline-block ml-n4 mr-2" >' . $comments . '</span>';
         }
         echo '
-                  <i class="fa fa-share d-inline-block pt-1" style="width: 80px"></i>
+                  <i class="fa fa-share d-inline-block pt-1" style="width: 80px;cursor:pointer;" onclick="share(' . "'" . $PID . "'" . ')"></i>
                 </div>
   
               </div>
@@ -332,7 +359,43 @@ if (!empty($_GET['username'])) {
                                         }
                                     });
                     }
+                    
+                    var Postid='';
 
+                    function share(pid){
+                        $('#SharingBody').empty();
+                        Postid=pid;
+                        $('#Sharebtn').css('display','block');
+                        var clone=$('#Con'+pid).html(); 
+                        $('#SharingBody').append('" . '<div class="border border-info rounded py-2 mb-2"> <div class="form-group col-11 mx-auto mb-1"><textarea placeholder="add something.." class="form-control bg-light border-dark btn-outline-dark text-dark" name="" id="postShare" rows="3" style="resize:none;"></textarea></div> <div class="col-10  border border-secondary mx-auto"><div class="py-2 col-10 ml-auto mb-3 pr-0" style="max-width:90%;">' . "'+clone+'" . '</div></div>' . "');
+                        $('#SharingModal').modal('show');
+                    }
+                    
+
+                    
+                    $('#Sharebtn').click(function(){
+                        var post= $('#postShare').val();
+
+                        $.ajax({
+                            url:'./Share.php',
+                            method:'GET',
+                            datatype: 'html',
+                            data:{
+                                pid:Postid,
+                                POST:post
+                                    },
+                            success:function(result){
+                                $('#SharingBody').empty();
+                                $('#Sharebtn').css('display','none');
+                                if(result=='true'){
+                                    $('#SharingBody').append('<div class=" . '"alert alert-success py-3 text-center" role="alert"> <strong>Successfully Shared ! </strong></div>' . "');
+                                }else{
+                                    $('#SharingBody').append('<div class=" . '"alert alert-danger py-3 text-center" role="alert"> <strong>Oops ! </strong>Something Went Wrong !</div>' . "');
+                                }
+                                    }
+                                });
+
+                    });
 
                     </script>
                     </div>";
@@ -523,7 +586,6 @@ if (!empty($_GET['username'])) {
                     },
             success:function(result){
 
-                    alert("msg");
 
                     if(result=="nothing"){
                             //append to row nothing found + clear columns
@@ -552,7 +614,7 @@ echo '
 <nav class="main-menu border-0 navbar-fixed-left">
 <ul>
     <li>
-        <a href="#">
+        <a href="../dashboard/">
             <i class="fa fa-home fa-2x"></i>
             <span class="nav-text">
                 Dashboard

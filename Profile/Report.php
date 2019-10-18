@@ -1,27 +1,27 @@
-<?php 
+<?php
 session_start();
-if( isset($_SESSION['username']) ){
+if (isset($_SESSION['username'])) {
     include "../includes/config.php";
-    $username=$_SESSION['username'];
-    $email=$_SESSION['email'];
+    $username = $_SESSION['username'];
+    $email = $_SESSION['email'];
 
 
-    if( isset($_POST['ReportBTN']) ){
-        $report=$_POST['report'];
-        $report=htmlspecialchars(strip_tags($report));
-        if(empty($report)){
-            $flag=false;
-        }else{
-            $date=date("Y-m-d h:i:s");
+    if (isset($_POST['ReportBTN'])) {
+        $report = $_POST['report'];
+        $report = htmlspecialchars(strip_tags($report));
+        if (empty($report)) {
+            $flag = false;
+        } else {
+            $date = date("Y-m-d h:i:s");
 
-            if( $mysqli->query("INSERT INTO reports VALUES ('','$username','$email','$date','$report');") )
-            $flag=true;
+            if ($mysqli->query("INSERT INTO reports VALUES ('','$username','$email','$date','$report');"))
+                $flag = true;
             else
-            $flag=false;
+                $flag = false;
         }
     }
 
-    echo'
+    echo '
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -51,7 +51,7 @@ if( isset($_SESSION['username']) ){
         </li>
         </ul>
 </nav>
-<div class="area" style="background-image: url('."'./includes/img/rep.jpg'".') !important;background-size: 100% 100% !important; height:790px;">
+<div class="area" style="background-image: url(' . "'./includes/img/rep.jpg'" . ') !important;background-size: 100% 100% !important; height:790px;">
 
 <!-- page content here -->
 
@@ -74,9 +74,9 @@ if( isset($_SESSION['username']) ){
 </form>
 </div>';
 
-if(isset($flag)){
-if($flag){//if report is insered succ
-    echo'
+    if (isset($flag)) {
+        if ($flag) { //if report is insered succ
+            echo '
     <div class="alert alert-success alert-dismissible fade show col-md-8 mx-auto text-center" role="alert">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
@@ -85,8 +85,8 @@ if($flag){//if report is insered succ
         <strong>Holy guacamole!</strong> Your Repport is Sent Successfuly ! 
     </div>
     ';
-}else{//if not
-    echo'
+        } else { //if not
+            echo '
     <div class="alert alert-danger alert-dismissible fade show col-md-8 mx-auto text-center" role="alert">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
@@ -95,17 +95,17 @@ if($flag){//if report is insered succ
         <strong>Oops!</strong> something went wrong
     </div>
     ';
-}
-}
+        }
+    }
 
 
-echo'
+    echo '
 </div>
 </div>
 <nav class="main-menu border-0 navbar-fixed-left">
 <ul>
     <li>
-        <a href="#">
+        <a href="../dashboard/">
             <i class="fa fa-home fa-2x"></i>
             <span class="nav-text">
                 Dashboard
@@ -122,7 +122,7 @@ echo'
         </a>
     </li>
     <li>
-        <a href="../Playground">
+        <a href="../Playground/">
             <i class="fa fa-code fa-2x"></i>
             <span class="nav-text">
                Code PlayGround
@@ -139,10 +139,10 @@ echo'
        
     </li>
     <li>
-       <a href="#">
+       <a href="../members/">
            <i class="fa fa-share-alt fa-2x"></i>
             <span class="nav-text">
-                people & friends
+                Members & friends
             </span>
         </a>
     </li>
@@ -183,12 +183,6 @@ echo'
 </body>
 </html>
 ';
-
-
-
-
-
-}else{
+} else {
     header('location:./');
 }
-?>

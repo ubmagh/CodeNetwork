@@ -217,7 +217,7 @@ $("#save").click(
 <nav class="main-menu border-0 navbar-fixed-left">
 <ul>
     <li>
-        <a href="#">
+        <a href="../../dashboard/">
             <i class="fa fa-home fa-2x"></i>
             <span class="nav-text">
                 Dashboard
@@ -251,10 +251,10 @@ $("#save").click(
        
     </li>
     <li>
-       <a href="#">
+       <a href="../../members/">
            <i class="fa fa-share-alt fa-2x"></i>
             <span class="nav-text">
-                people & friends
+                Members & friends
             </span>
         </a>
     </li>
