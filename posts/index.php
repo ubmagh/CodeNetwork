@@ -73,7 +73,7 @@ if (!empty($_GET['post'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>' . $PostOwner . ' Post </title>
+    <title>' . $PostOwner . '`s Post </title>
     <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/font-awesome.min.css">
@@ -85,7 +85,31 @@ if (!empty($_GET['post'])) {
     <script src="../js/bootstrap.js"></script>
 </head>
 <body style="height:100%;overflow-y: hidden;overflow-x: hidden;" class="bg-white">
-    
+
+            <!-- Sharing Modal -->
+            <div class="modal fade mt-n4" id="SharingModal" style="height:100%;overflow-y: hidden;overflow-x: hidden;">
+              <div class="modal-dialog modal-dialog-scrollable modal-xl">
+                <div class="modal-content w-100 mt-n5 mb-5">
+            
+                  <!-- Modal Header -->
+                  <div class="modal-header"  style="width:100%">
+                    <h4 class="modal-title" id="SharingHeading">Share Post</h4>
+                    <button type="button" class="close" data-dismiss="modal" id="CloseComments"><span style="font-size:40px;">&times;</span></button>
+                  </div>
+            
+                  <!-- Modal body -->
+                  <div class="modal-body col-12" id="SharingBody"  style="width:100%">
+                   
+                  </div>
+            
+                  <!-- Modal footer -->
+                  <div class="modal-footer">
+                  <a id="Sharebtn" class="btn btn-info mx-auto col-2 text-light" role="button" style="cursor:pointer;"><i class="fa fa-share d-inline"></i> Share </a>
+                    </div>
+                </div>
+              </div>
+            </div>
+
 
     <div class="container">
 
@@ -281,7 +305,7 @@ if (!empty($_GET['post'])) {
     echo '<span class="text-info d-inline-block ml-n4 mr-2" >' . $comments . '</span>';
   }
   echo '
-  </li><li class="col d-inline py-1 "> <i class="fa fa-share d-inline-block pt-1 text-success" style="width: 80px"></i></li></ul>
+  </li><li class="col d-inline py-1 "> <i class="fa fa-share d-inline-block pt-1 text-success" style="width: 80px;cursor:pointer;" onclick="share(' . "'" . $PID . "'" . ')"></i></li></ul>
               </div>
 
             </div>
@@ -442,6 +466,55 @@ if (!empty($_GET['post'])) {
                             }
                         });
         }
+
+        var Postid='';
+
+                    function share(pid){
+                        $('#SharingBody').empty();
+                        Postid=pid;
+                        $('#Sharebtn').css('display','block');
+                        
+                        $.ajax({
+                            url:'./GetShare.php',
+                            method:'GET',
+                            datatype: 'html',
+                            data:{
+                                pid:pid,
+                                    },
+                            success:function(result){
+                            $('#SharingBody').append('" . '<div class="border border-info rounded py-2 mb-2"> <div class="form-group col-11 mx-auto mb-1"><textarea placeholder="add something.." class="form-control bg-light border-dark btn-outline-dark text-dark" name="" id="postShare" rows="3" style="resize:none;"></textarea></div> <div class="col-10  border border-secondary rounded mx-auto"><div class="py-2 col-10 ml-auto mb-3 pr-0" style="max-width:90%;">' . "'+result+'" . '</div></div>' . "');
+                                    }
+                                });
+                        
+                        $('#SharingModal').modal('show');
+                    }
+                    
+
+                    
+                    $('#Sharebtn').click(function(){
+                        var post= $('#postShare').val();
+
+                        $.ajax({
+                            url:'./Share.php',
+                            method:'GET',
+                            datatype: 'html',
+                            data:{
+                                pid:Postid,
+                                POST:post
+                                    },
+                            success:function(result){
+                                $('#SharingBody').empty();
+                                $('#Sharebtn').css('display','none');
+                                if(result=='true'){
+                                    $('#SharingBody').append('<div class=" . '"alert alert-success py-3 text-center" role="alert"> <strong>Successfully Shared ! </strong></div>' . "');
+                                }else{
+                                    $('#SharingBody').append('<div class=" . '"alert alert-danger py-3 text-center" role="alert"> <strong>Oops ! </strong>Something Went Wrong !</div>' . "');
+                                }
+                                    }
+                                });
+
+                    });
+
         </script>
 </body>
     ";

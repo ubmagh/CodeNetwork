@@ -288,7 +288,7 @@ if (!empty($_GET['username'])) {
                       ' . $row['Post'] . '  
                       </div>
                       </div>
-          <div class="my-3 col-10 mx-auto border border-secondary rounded ">
+          <div class="my-3 col-11 mx-auto border border-secondary rounded ">
             <div class="col-9 mx-auto px-1" style="max-width:90%;"> 
                     
 
@@ -311,7 +311,7 @@ if (!empty($_GET['username'])) {
   ';
             } else {
                 echo '
-<div class="tweetEntry-tweetHolder bg-light text-dark ml-n5 mr-2 mb-2" style="max-width:100%">
+<div class="tweetEntry-tweetHolder bg-light text-dark ml-n2 mr-2 mb-2" style="max-width:100%">
   <div class="tweetEntry ">
 
     <div class="tweetEntry-content" >

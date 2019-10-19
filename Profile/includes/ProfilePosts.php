@@ -103,7 +103,7 @@ while ($row = $post->fetch_assoc()) {
     <div class="tweetEntry-tweetHolder bg-light text-dark border border-secondary mb-2" id="p' . $row['id'] . '">
       <div class="tweetEntry ">
 
-        <div class="tweetEntry-content"  id="Con' . $row['id'] . '">
+        <div class="tweetEntry-content "  id="Con' . $row['id'] . '">
 
           <a class="tweetEntry-account-group" href="./">
               <img class="tweetEntry-avatar" src="./Avatars/' . $username . '.' . $EXT . '">
@@ -130,7 +130,7 @@ while ($row = $post->fetch_assoc()) {
 
     echo '
         </div> 
-          <div class="my-3 col-10 mx-auto border border-secondary rounded ">
+          <div class="my-3 col-11 mx-auto border border-secondary rounded ">
             <div class="col-9 mx-auto px-1" style="max-width:90%;"> 
         ';
     /////Shared post start
@@ -150,9 +150,9 @@ while ($row = $post->fetch_assoc()) {
     } else {
       echo '
     <div class="tweetEntry-tweetHolder bg-light text-dark ml-n5 mr-2 mb-2" style="max-width:100%">
-      <div class="tweetEntry ">
+      <div class="tweetEntry col-12">
 
-        <div class="tweetEntry-content" >
+        <div class="tweetEntry-content col-12" >
 
           <a class="tweetEntry-account-group" href="../members/?username=' . $OwnerUsername . '">
               <img class="tweetEntry-avatar" src="./Avatars/' . $OwnerUsername . '.' . $owner['avatarEXT'] . '" style="max-width:90%;">
@@ -194,7 +194,7 @@ while ($row = $post->fetch_assoc()) {
       $imgid = explode('.', $SharedPost['img']);
       if (!empty($SharedPost['img'])) {
         echo '
-                <div class="optionalMedia text-center mr-5">
+                <div class="optionalMedia text-center mr-5 mt-4">
                   <img id="img' . $imgid[0] . '" onclick="imgTrigger(' . "'img" . $imgid[0] . "'" . ')" class="optionalMedia-img myImg" src="../sharedPics/' . $SharedPost['img'] . '">
                 </div>';
       }
