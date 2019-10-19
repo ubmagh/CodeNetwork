@@ -1,5 +1,7 @@
 <?php
 
+if (empty($_GET['post']))
+  header("location:../dashboard/");
 
 session_start();
 include "../includes/config.php";
@@ -124,35 +126,120 @@ if (!empty($_GET['post'])) {
   echo '
                     <div class="tweetEntry-text-container mt-1" style="left:30px;">
                     ' . $getPost['Post'] . '  
-                    </div>';
+                    </div></div>';
+  if (empty($getPost['postRef'])) {
 
-  if (!empty($getPost['codeID'])) {
-    $CODEID = $getPost['codeID'];
-    $getCodeInfos = $mysqli->query("SELECT * From codes WHERE id='$CODEID';");
-    $getCodeInfos = $getCodeInfos->fetch_assoc();
-    $codeURL = "../Playground/" . $getCodeInfos['langType'] . "/index.php?id=" . $CODEID;
 
-    if (!empty($getCodeInfos['id']))
-      echo '
+
+    if (!empty($getPost['codeID'])) {
+      $CODEID = $getPost['codeID'];
+      $getCodeInfos = $mysqli->query("SELECT * From codes WHERE id='$CODEID';");
+      $getCodeInfos = $getCodeInfos->fetch_assoc();
+      $codeURL = "../Playground/" . $getCodeInfos['langType'] . "/index.php?id=" . $CODEID;
+
+      if (!empty($getCodeInfos['id']))
+        echo '
                         <div class="text-center mr-5"> 
                         <p><i class="fa fa-code d-inline-block text-success pt-2" aria-hidden="true"></i> <a href="' . $codeURL . '" target="_blank"> <span>' . $getCodeInfos['name'] . '</span></a> <i class="fa fa-code d-inline-block text-success pt-2" aria-hidden="true"></i></p>
                         </div>
                         ';
-  }
-  echo '
-    </div>';
+    }
 
 
-  //if there is an image included
-  $imgid = explode('.', $getPost['img']);
-  if (!empty($getPost['img'])) {
-    echo '
+
+    //if there is an image included
+    $imgid = explode('.', $getPost['img']);
+    if (!empty($getPost['img'])) {
+      echo '
 <div class="optionalMedia text-center mr-5">
   <img id="img' . $imgid[0] . '"  onclick="imgTrigger(' . "'img" . $imgid[0] . "'" . ')" style="max-width:350px;" class="optionalMedia-img myImg" src="../sharedPics/' . $getPost['img'] . '">
 </div>';
+    }
+  } else {
+
+    echo '<div class="my-3 col-10 mx-auto border border-secondary rounded ">
+    <div class="col-9 mx-auto px-1" style="max-width:90%;"> 
+';
+    /////Shared post start
+    $SharedID = $getPost['postRef'];
+    $getter = $mysqli->query("SELECT * FROM posts WHERE id='$SharedID' ;");
+    $SharedPost = $getter->fetch_assoc();
+    $OwnerUsername = $SharedPost['username'];
+    $owner = $mysqli->query("SELECT Fname,Lname,avatarEXT FROM users WHERE Email in (SELECT Email FROM profiles WHERE username='$OwnerUsername') ;");
+    $owner = $owner->fetch_assoc();
+
+    if (empty($SharedPost['id'])) { /// if the shared post 's original is deleted
+      echo '
+  <div class="alert alert-danger btn-block text-center px-5 py-4 mb-n1 mt-n1  " role="alert">
+    <strong> Post not found ! </strong>
+  </div>
+  ';
+    } else {
+      echo '
+<div class="tweetEntry-tweetHolder bg-light text-dark ml-n2 mr-2 mb-2" style="max-width:100%">
+  <div class="tweetEntry ">
+
+    <div class="tweetEntry-content" >
+
+      <a class="tweetEntry-account-group" href="../members/?username=' . $OwnerUsername . '">
+          <img class="tweetEntry-avatar" src="../Profile/Avatars/' . $OwnerUsername . '.' . $owner['avatarEXT'] . '" class="col-12" style="max-width:90%;">
+          
+          <strong class="tweetEntry-fullname">
+          ' . $owner['Fname'] . ' ' . $owner['Lname'] . '
+          </strong>
+          
+          <span class="tweetEntry-username">
+            @<b>' . $OwnerUsername . '</b>
+          </span>
+      </a>
+      <a class="tweetEntry-account-group" href="../posts/?post=' . $SharedID . '">
+        <span class="tweetEntry-timestamp ml-1"> ' . $SharedPost['postingDate'] . '</span>
+      </a>
+
+     <div class="tweetEntry-text-container mt-2">
+      ' . $SharedPost['Post'] . '  
+      </div>
+      ';
+
+      if (!empty($SharedPost['codeID'])) {
+        $CODEID = $SharedPost['codeID'];
+        $getCodeInfos = $mysqli->query("SELECT * From codes WHERE id='$CODEID';");
+        $getCodeInfos = $getCodeInfos->fetch_assoc();
+        $codeURL = "../Playground/" . $getCodeInfos['langType'] . "/index.php?id=" . $CODEID;
+
+        if (!empty($getCodeInfos['id']))
+          echo '
+                      <div class="text-center"> 
+                      <p><i class="fa fa-code d-inline-block text-success pt-2" aria-hidden="true"></i> <a href="' . $codeURL . '" target="_blank"> <span>' . $getCodeInfos['name'] . '</span></a> <i class="fa fa-code d-inline-block text-success pt-2" aria-hidden="true"></i></p>
+                      </div>
+                      ';
+      }
+      echo '
+            </div>
+            ';
+      //if there is an image included
+      $imgid = explode('.', $SharedPost['img']);
+      if (!empty($SharedPost['img'])) {
+        echo '
+            <div class="optionalMedia text-center mr-5">
+              <img id="img' . $imgid[0] . '" onclick="imgTrigger(' . "'img" . $imgid[0] . "'" . ')" class="optionalMedia-img myImg col-12" src="../sharedPics/' . $SharedPost['img'] . '">
+            </div>';
+      }
+
+
+
+
+
+      /////Shared post end
+
+      echo '</div>
+</div>';
+    }
+    echo '
+      </div> 
+    </div> 
+    ';
   }
-
-
 
   //check if is already liked poste
   $PID = $pid;
@@ -256,7 +343,7 @@ if (!empty($_GET['post'])) {
               <span class="close text-light" style="font-size:60px;" id="closeTri">&times;</span>
             
               <!-- Modal Content (The Image) -->
-              <img class="modal-content mt-n5 pt-0" id="img01" style="max-height:600px;">
+              <img class="modal-content mt-n5 pt-0" id="img01" style="max-height:100%;">
             
               <!-- Modal Caption (Image Text) -->
               <div id="text-img" class="text-img"></div>

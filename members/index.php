@@ -1,12 +1,14 @@
 <?php
 session_start();
-if (!empty($_GET['username']))
+if (empty($_SESSION['username'])) {
+    header("location:../");
+}
+
+if (isset($_GET['username']))
     if ($_GET['username'] == $_SESSION['username']) {
         header("location:../profile/");
     }
-if (!isset($_SESSION['username'])) {
-    header("location:../");
-}
+
 include "../includes/config.php";
 
 
@@ -165,8 +167,8 @@ if (!empty($_GET['username'])) {
     //Getting this Profile POsts
     $getter = $mysqli->query("SELECT * FROM posts where username='$Profile' order by postingDate desc ;");
     while ($row = $getter->fetch_assoc()) {
-
-        echo '
+        if (empty($row['postRef'])) {
+            echo '
                 <div class="tweetEntry-tweetHolder bg-light text-dark border border-secondary mb-2" id="p' . $row['id'] . '">
                   <div class="tweetEntry ">
       
@@ -191,71 +193,238 @@ if (!empty($_GET['username'])) {
                       </div>
                       ';
 
-        if (!empty($row['codeID'])) {
-            $CODEID = $row['codeID'];
-            $getCodeInfos = $mysqli->query("SELECT * From codes WHERE id='$CODEID';");
-            $getCodeInfos = $getCodeInfos->fetch_assoc();
-            $codeURL = "../Playground/" . $getCodeInfos['langType'] . "/index.php?id=" . $CODEID;
+            if (!empty($row['codeID'])) {
+                $CODEID = $row['codeID'];
+                $getCodeInfos = $mysqli->query("SELECT * From codes WHERE id='$CODEID';");
+                $getCodeInfos = $getCodeInfos->fetch_assoc();
+                $codeURL = "../Playground/" . $getCodeInfos['langType'] . "/index.php?id=" . $CODEID;
 
-            if (!empty($getCodeInfos['id']))
-                echo '
+                if (!empty($getCodeInfos['id']))
+                    echo '
                         <div class="text-center"> 
                         <p><i class="fa fa-code d-inline-block text-success pt-2" aria-hidden="true"></i> <a href="' . $codeURL . '" target="_blank"> <span>' . $getCodeInfos['name'] . '</span></a> <i class="fa fa-code d-inline-block text-success pt-2" aria-hidden="true"></i></p>
                         </div>
                         ';
-        }
+            }
 
-        //if there is an image included
-        $imgid = explode('.', $row['img']);
-        if (!empty($row['img'])) {
-            echo '
+            //if there is an image included
+            $imgid = explode('.', $row['img']);
+            if (!empty($row['img'])) {
+                echo '
                 <div class="optionalMedia text-center mr-5">
                   <img id="img' . $imgid[0] . '" onclick="imgTrigger(' . "'img" . $imgid[0] . "'" . ')" style="max-width:100%;x" class="optionalMedia-img myImg" src="../sharedPics/' . $row['img'] . '">
                 </div>';
-        }
+            }
 
-        //check if is already liked poste
-        $PID = $row['id'];
-        $liked = $mysqli->query("SELECT username FROM likes WHERE PostID='$PID' and username='$username';");
-        $liked = $liked->fetch_assoc();
-        $liked = $liked['username'];
+            //check if is already liked poste
+            $PID = $row['id'];
+            $liked = $mysqli->query("SELECT username FROM likes WHERE PostID='$PID' and username='$username';");
+            $liked = $liked->fetch_assoc();
+            $liked = $liked['username'];
 
-        if ($liked == $username) { //liked
-            echo '</div>
+            if ($liked == $username) { //liked
+                echo '</div>
                 <div class="tweetEntry-action-list" style="line-height:24px;color: #b1bbc3;">
+                <ul class="row col-8 mx-auto" style="list-style: none;">
+                <li class="col d-inline">
                 <button class="btn mr-4" style="padding: 0px;height:34px;width:30px;" onclick="Like(' . $PID . ')"><i class="fa fa-heart d-inline-block pt-1 mr-1" id="post' . $PID . '" style="width: 20px;color: #ff3333;"></i></button>';
-        } else {
-            echo '</div>
+            } else {
+                echo '</div>
                 <div class="tweetEntry-action-list" style="line-height:24px;color: #b1bbc3;">
+                <ul class="row col-8 mx-auto" style="list-style: none;">
+        <li class="col d-inline">
                 <button class="btn mr-5" style="padding: 0px;height:34px;width:30px;" onclick="Like(' . $PID . ')"><i class="fa fa-heart d-inline-block pt-1 mr-1" id="post' . $PID . '" style="width: 20px;color: #C2C5CC;"></i></button>';
-        }
-        /// Ajax Syncing Likes with database into index.php
+            }
+            /// Ajax Syncing Likes with database into index.php
 
 
-        //printing nummber of likes if not null
-        $likes = $mysqli->query("SELECT count(*) AS num FROM likes WHERE PostID='$PID';");
-        $likes = $likes->fetch_assoc();
-        $likes = $likes['num'];
-        if ($likes == 0) {
-            echo '<span class="text-danger d-inline-block ml-n4 mr-1" id="NumLikes' . $PID . '"></span>';
-        } else {
-            echo '<span class="text-danger d-inline-block ml-n4 mr-1" id="NumLikes' . $PID . '">' . $likes . '</span>';
-        }
+            //printing nummber of likes if not null
+            $likes = $mysqli->query("SELECT count(*) AS num FROM likes WHERE PostID='$PID';");
+            $likes = $likes->fetch_assoc();
+            $likes = $likes['num'];
+            if ($likes == 0) {
+                echo '<span class="text-danger d-inline-block ml-n4 mr-1" id="NumLikes' . $PID . '"></span></li>';
+            } else {
+                echo '<span class="text-danger d-inline-block ml-n4 mr-1" id="NumLikes' . $PID . '">' . $likes . '</span></li>';
+            }
 
-        $comments = $mysqli->query("SELECT count(*) AS num FROM comments WHERE PostID='$PID';");
-        $comments = $comments->fetch_assoc();
-        $comments = $comments['num'];
-        echo '
-                  <i class="fa fa-comment d-inline-block pt-1 active" style="width: 80px;cursor:pointer;" onclick="Comment(' . "'" . $PID . "'" . ')"></i>';
-        if ($comments > 0) {
-            echo '<span class="text-info d-inline-block ml-n4 mr-2" >' . $comments . '</span>';
-        }
-        echo '
-                  <i class="fa fa-share d-inline-block pt-1" style="width: 80px;cursor:pointer;" onclick="share(' . "'" . $PID . "'" . ')"></i>
+            $comments = $mysqli->query("SELECT count(*) AS num FROM comments WHERE PostID='$PID';");
+            $comments = $comments->fetch_assoc();
+            $comments = $comments['num'];
+            echo '
+            <li class="col d-inline"><i class="fa fa-comment d-inline-block pt-1 active" style="width: 80px;cursor:pointer;" onclick="Comment(' . "'" . $PID . "'" . ')"></i>';
+            if ($comments > 0) {
+                echo '<span class="text-info d-inline-block ml-n4 mr-2" >' . $comments . '</span>';
+            }
+            echo '
+            </li><li class=" col d-inline"><i class="fa fa-share d-inline-block pt-1" style="width: 80px;cursor:pointer;" onclick="share(' . "'" . $PID . "'" . ')"></i></li></ul>
                 </div>
   
               </div>
             </div>';
+        } else {
+            /////
+            echo '
+                <div class="tweetEntry-tweetHolder bg-light text-dark border border-secondary mb-2" id="p' . $row['id'] . '">
+                  <div class="tweetEntry ">
+      
+                    <div class="tweetEntry-content"  id="Con' . $row['id'] . '">
+        
+                      <a class="tweetEntry-account-group" href="./?username=' . $Profile . '">
+                          <img class="tweetEntry-avatar" src="../Profile/Avatars/' . $Profile . '.' . $EXT . '">
+                          
+                          <strong class="tweetEntry-fullname">
+                          ' . $Fname . ' ' . $Lname . ' 
+                          </strong>
+                          
+                          <span class="tweetEntry-username">
+                            @<b>' . $Profile . '</b>
+                          </span>
+                      </a>
+                      <a class="tweetEntry-account-group" href="../posts/?post=' . $row['id'] . '">
+                      <span class="tweetEntry-timestamp ml-1"> ' . $row['postingDate'] . '</span>
+                      </a>
+                      <div class="tweetEntry-text-container mt-2" >
+                      ' . $row['Post'] . '  
+                      </div>
+                      </div>
+          <div class="my-3 col-10 mx-auto border border-secondary rounded ">
+            <div class="col-9 mx-auto px-1" style="max-width:90%;"> 
+                    
+
+                        
+            
+                      ';
+            /////Shared post start
+            $SharedID = $row['postRef'];
+            $getter2 = $mysqli->query("SELECT * FROM posts WHERE id='$SharedID' ;");
+            $SharedPost = $getter2->fetch_assoc();
+            $OwnerUsername = $SharedPost['username'];
+            $owner = $mysqli->query("SELECT Fname,Lname,avatarEXT FROM users WHERE Email in (SELECT Email FROM profiles WHERE username='$OwnerUsername') ;");
+            $owner = $owner->fetch_assoc();
+
+            if (empty($SharedPost['id'])) { /// if the shared post 's original is deleted
+                echo '
+  <div class="alert alert-danger btn-block text-center px-5 py-4 mb-n1 mt-n1  " role="alert">
+    <strong> Post not found ! </strong>
+  </div>
+  ';
+            } else {
+                echo '
+<div class="tweetEntry-tweetHolder bg-light text-dark ml-n5 mr-2 mb-2" style="max-width:100%">
+  <div class="tweetEntry ">
+
+    <div class="tweetEntry-content" >
+
+      <a class="tweetEntry-account-group" href="../members/?username=' . $OwnerUsername . '">
+          <img class="tweetEntry-avatar" src="../Profile/Avatars/' . $OwnerUsername . '.' . $owner['avatarEXT'] . '" style="max-width:90%;">
+          
+          <strong class="tweetEntry-fullname">
+          ' . $owner['Fname'] . ' ' . $owner['Lname'] . '
+          </strong>
+          
+          <span class="tweetEntry-username">
+            @<b>' . $OwnerUsername . '</b>
+          </span>
+      </a>
+      <a class="tweetEntry-account-group" href="../posts/?post=' . $SharedID . '">
+        <span class="tweetEntry-timestamp ml-1"> ' . $SharedPost['postingDate'] . '</span>
+      </a>
+
+     <div class="tweetEntry-text-container mt-2">
+      ' . $SharedPost['Post'] . '  
+      </div>
+      ';
+
+                if (!empty($SharedPost['codeID'])) {
+                    $CODEID = $SharedPost['codeID'];
+                    $getCodeInfos = $mysqli->query("SELECT * From codes WHERE id='$CODEID';");
+                    $getCodeInfos = $getCodeInfos->fetch_assoc();
+                    $codeURL = "../Playground/" . $getCodeInfos['langType'] . "/index.php?id=" . $CODEID;
+
+                    if (!empty($getCodeInfos['id']))
+                        echo '
+                      <div class="text-center"> 
+                      <p><i class="fa fa-code d-inline-block text-success pt-2" aria-hidden="true"></i> <a href="' . $codeURL . '" target="_blank"> <span>' . $getCodeInfos['name'] . '</span></a> <i class="fa fa-code d-inline-block text-success pt-2" aria-hidden="true"></i></p>
+                      </div>
+                      ';
+                }
+                echo '
+            </div>
+            ';
+                //if there is an image included
+                $imgid = explode('.', $SharedPost['img']);
+                if (!empty($SharedPost['img'])) {
+                    echo '
+            <div class="optionalMedia text-center mr-5">
+              <img id="img' . $imgid[0] . '" onclick="imgTrigger(' . "'img" . $imgid[0] . "'" . ')" class="optionalMedia-img myImg" src="../sharedPics/' . $SharedPost['img'] . '">
+            </div>';
+                }
+
+
+
+
+
+                /////Shared post end
+
+                echo '</div>
+</div>';
+            }
+
+            //// Closure 
+            echo '</div>
+</div> ';
+
+            //check if is already liked poste
+            $PID = $row['id'];
+            $liked = $mysqli->query("SELECT username FROM likes WHERE PostID='$PID' and username='$username';");
+            $liked = $liked->fetch_assoc();
+            $liked = $liked['username'];
+
+            if ($liked == $username) { //liked
+                echo '
+                <div class="tweetEntry-action-list" style="line-height:24px;color: #b1bbc3;">
+                <ul class="row col-8 mx-auto" style="list-style: none;">
+                <li class="col d-inline">
+                <button class="btn mr-4" style="padding: 0px;height:34px;width:30px;" onclick="Like(' . $PID . ')"><i class="fa fa-heart d-inline-block pt-1 mr-1" id="post' . $PID . '" style="width: 20px;color: #ff3333;"></i></button>';
+            } else {
+                echo '
+                <div class="tweetEntry-action-list" style="line-height:24px;color: #b1bbc3;">
+                <ul class="row col-8 mx-auto" style="list-style: none;">
+                <li class="col d-inline">
+                <button class="btn mr-5" style="padding: 0px;height:34px;width:30px;" onclick="Like(' . $PID . ')"><i class="fa fa-heart d-inline-block pt-1 mr-1" id="post' . $PID . '" style="width: 20px;color: #C2C5CC;"></i></button>';
+            }
+            /// Ajax Syncing Likes with database into index.php
+
+
+            //printing nummber of likes if not null
+            $likes = $mysqli->query("SELECT count(*) AS num FROM likes WHERE PostID='$PID';");
+            $likes = $likes->fetch_assoc();
+            $likes = $likes['num'];
+            if ($likes == 0) {
+                echo '<span class="text-danger d-inline-block ml-n4 mr-1" id="NumLikes' . $PID . '"></span></li>';
+            } else {
+                echo '<span class="text-danger d-inline-block ml-n4 mr-1" id="NumLikes' . $PID . '">' . $likes . '</span></li>';
+            }
+
+            $comments = $mysqli->query("SELECT count(*) AS num FROM comments WHERE PostID='$PID';");
+            $comments = $comments->fetch_assoc();
+            $comments = $comments['num'];
+            echo '
+            <li class="col d-inline"> <i class="fa fa-comment d-inline-block pt-1 active" style="width: 80px;cursor:pointer;" onclick="Comment(' . "'" . $PID . "'" . ')"></i>';
+            if ($comments > 0) {
+                echo '<span class="text-info d-inline-block ml-n4 mr-2" >' . $comments . '</span>';
+            }
+            echo '
+            </li><li class=" col d-inline"> <i class="fa fa-share d-inline-block pt-1" style="width: 80px;cursor:pointer;" onclick="share(' . "'" . $PID . "'" . ')"></i></li></ul>
+                </div>
+  
+              </div>
+            </div>';
+
+            ///
+            ////
+        }
     }
     ///END getting this PROFILE POSTS
 
@@ -366,8 +535,19 @@ if (!empty($_GET['username'])) {
                         $('#SharingBody').empty();
                         Postid=pid;
                         $('#Sharebtn').css('display','block');
-                        var clone=$('#Con'+pid).html(); 
-                        $('#SharingBody').append('" . '<div class="border border-info rounded py-2 mb-2"> <div class="form-group col-11 mx-auto mb-1"><textarea placeholder="add something.." class="form-control bg-light border-dark btn-outline-dark text-dark" name="" id="postShare" rows="3" style="resize:none;"></textarea></div> <div class="col-10  border border-secondary mx-auto"><div class="py-2 col-10 ml-auto mb-3 pr-0" style="max-width:90%;">' . "'+clone+'" . '</div></div>' . "');
+                        
+                        $.ajax({
+                            url:'./GetShare.php',
+                            method:'GET',
+                            datatype: 'html',
+                            data:{
+                                pid:pid,
+                                    },
+                            success:function(result){
+                            $('#SharingBody').append('" . '<div class="border border-info rounded py-2 mb-2"> <div class="form-group col-11 mx-auto mb-1"><textarea placeholder="add something.." class="form-control bg-light border-dark btn-outline-dark text-dark" name="" id="postShare" rows="3" style="resize:none;"></textarea></div> <div class="col-10  border border-secondary rounded mx-auto"><div class="py-2 col-10 ml-auto mb-3 pr-0" style="max-width:90%;">' . "'+result+'" . '</div></div>' . "');
+                                    }
+                                });
+                        
                         $('#SharingModal').modal('show');
                     }
                     
@@ -399,7 +579,6 @@ if (!empty($_GET['username'])) {
 
                     </script>
                     </div>";
-    ///End  Ajax Syncing Likes 
 } else {
     /// Not entring to Sombody's PRofile
 

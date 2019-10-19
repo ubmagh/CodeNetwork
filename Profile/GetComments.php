@@ -9,11 +9,7 @@ session_start();
 $pid = $_POST['pid'];
 $username = $_SESSION['username'];
 
-//////////////////////////////////////////
-//////////////////////////////////////////
-/// In this Case we ignored Shared Post //
-//////////////////////////////////////////
-//////////////////////////////////////////
+$TO_echo = '';
 
 
 $Query = $mysqli->query("SELECT * FROM posts WHERE id='$pid' ; ");
@@ -22,7 +18,10 @@ $getPost = $Query->fetch_assoc();
 $Query = $mysqli->query("SELECT Fname,Lname,avatarEXT FROM users where Email=(SELECT Email FROM profiles WHERE username='$username');");
 $getPostOwner = $Query->fetch_assoc();
 
-$TO_echo = '
+
+if (empty($getPost['postRef'])) {
+
+  $TO_echo = '
 <div class="tweetEntry-tweetHolder bg-light text-dark border border-secondary mb-3 pt-2 pb-4" style="width:100%;">
               <div class="tweetEntry pb-2 border-0">
   
@@ -49,33 +48,147 @@ $TO_echo = '
 
 ';
 
-if (!empty($getPost['codeID'])) {
-  $CODEID = $getPost['codeID'];
-  $getCodeInfos = $mysqli->query("SELECT * From codes WHERE id='$CODEID';");
-  $getCodeInfos = $getCodeInfos->fetch_assoc();
-  $codeURL = "../Playground/" . $getCodeInfos['langType'] . "/index.php?id=" . $CODEID;
+  if (!empty($getPost['codeID'])) {
+    $CODEID = $getPost['codeID'];
+    $getCodeInfos = $mysqli->query("SELECT * From codes WHERE id='$CODEID';");
+    $getCodeInfos = $getCodeInfos->fetch_assoc();
+    $codeURL = "../Playground/" . $getCodeInfos['langType'] . "/index.php?id=" . $CODEID;
 
-  if (!empty($getCodeInfos['id']))
-    $TO_echo = $TO_echo . '
+    if (!empty($getCodeInfos['id']))
+      $TO_echo = $TO_echo . '
     <div class="text-center"> 
     <p><i class="fa fa-code d-inline-block text-success pt-2" aria-hidden="true"></i> <a href="' . $codeURL . '" target="_blank"> <span>' . $getCodeInfos['name'] . '</span></a> <i class="fa fa-code d-inline-block text-success pt-2" aria-hidden="true"></i></p>
     </div>
     ';
-}
-$TO_echo = $TO_echo . '</div>';
+  }
+  $TO_echo = $TO_echo . '</div>';
 
-//if there is an image included
-$imgid = explode('.', $getPost['img']);
-if (!empty($getPost['img'])) {
-  $TO_echo = $TO_echo . '
+  //if there is an image included
+  $imgid = explode('.', $getPost['img']);
+  if (!empty($getPost['img'])) {
+    $TO_echo = $TO_echo . '
 <div class="optionalMedia text-center mr-5">
   <img id="img' . $imgid[0] . '"  class="optionalMedia-img myImg" src="../sharedPics/' . $getPost['img'] . '">
-</div>';
+';
+  }
+
+  $TO_echo = $TO_echo . '</div></div>';
+} else {
+  ////shared POst
+
+  $sharedID = $getPost['postRef'];
+
+  $getter = $mysqli->query("SELECT * FROM posts WHERE id='$sharedID' ;");
+  $sharedpost = $getter->fetch_assoc();
+
+  $ownerUsername = $sharedpost['username'];
+
+  $getter = $mysqli->query("SELECT Fname,Lname,avatarEXT from users where Email in(SELECT Email from profiles where username='$ownerUsername' ) ;");
+  $getownerInfo = $getter->fetch_assoc();
+
+
+
+  $TO_echo = $TO_echo . ' 
+  <div class="tweetEntry-tweetHolder bg-light text-dark border border-secondary mb-3 pt-2 pb-4" style="width:100%;">
+              <div class="tweetEntry pb-2 border-0">
+  
+                <div class="tweetEntry-content">
+    
+                  <a class="tweetEntry-account-group" href="./">
+                      <img class="tweetEntry-avatar" src="./Avatars/' . $getPost['username'] . '.' . $getPostOwner['avatarEXT'] . '">
+                      
+                      <strong class="tweetEntry-fullname">
+                      ' . $getPostOwner['Fname'] . ' ' . $getPostOwner['Lname'] . '
+                      </strong>
+                      
+                      <span class="tweetEntry-username">
+                        @<b>' . $username . '</b>
+                      </span>
+                    </a>
+                    <a class="tweetEntry-account-group" href="../posts/?post=' . $getPost['id'] . '">
+                        <span class="tweetEntry-timestamp ml-1"> ' . $getPost['postingDate'] . '</span>
+                    </a>
+
+                  <div class="tweetEntry-text-container mt-1" style="left:30px;">
+                  ' . $getPost['Post'] . '  
+                  </div>
+
+      <div class="col-12  border border-secondary rounded mx-auto mb-2 mt-3 py-2">
+          <div class="py-2 col-10 mb-2 pr-0" style="max-width:90%;">';
+
+  if (empty($sharedpost['id'])) {
+    //post is delete by its owner
+    $TO_echo = $TO_echo . '
+            <div class="alert alert-danger py-4 mb-n4 mt-n3 mr-n5 ml-n5 px-5 text-center display-5" role="alert">
+              <strong>post not found !</strong>
+            </div>
+            ';
+  } else {
+
+    $TO_echo = $TO_echo . '
+              <div class="tweetEntry-tweetHolder bg-light text-dark mb-3 py-2" style="width:100%;">
+                <div class="tweetEntry pb-2 border-0">
+                  <div class="tweetEntry-content">
+
+                        <a class="tweetEntry-account-group" href="../members/?username=' . $ownerUsername . '">
+                          <img class="tweetEntry-avatar" src="./Avatars/' . $ownerUsername . '.' . $getownerInfo['avatarEXT'] . '">
+                          
+                          <strong class="tweetEntry-fullname">
+                          ' . $getownerInfo['Fname'] . ' ' . $getownerInfo['Lname'] . '
+                          </strong>
+                          
+                          <span class="tweetEntry-username">
+                            @<b>' . $ownerUsername . '</b>
+                          </span>
+                        </a>
+                        <a class="tweetEntry-account-group" href="../posts/?post=' . $sharedID . '">
+                            <span class="tweetEntry-timestamp ml-1"> ' . $sharedpost['postingDate'] . '</span>
+                        </a>
+
+                        <div class="tweetEntry-text-container mt-1" style="left:30px;">
+                        ' . $sharedpost['Post'] . '  
+                        </div>';
+
+    if (!empty($sharedpost['codeID'])) {
+      $CODEID = $sharedpost['codeID'];
+      $getCodeInfos = $mysqli->query("SELECT * From codes WHERE id='$CODEID';");
+      $getCodeInfos = $getCodeInfos->fetch_assoc();
+      $codeURL = "../Playground/" . $getCodeInfos['langType'] . "/index.php?id=" . $CODEID;
+
+      if (!empty($getCodeInfos['id']))
+        $TO_echo = $TO_echo . '
+                          <div class="text-center"> 
+                          <p><i class="fa fa-code d-inline-block text-success pt-2" aria-hidden="true"></i> <a href="' . $codeURL . '" target="_blank"> <span>' . $getCodeInfos['name'] . '</span></a> <i class="fa fa-code d-inline-block text-success pt-2" aria-hidden="true"></i></p>
+                          </div>
+                          ';
+    }
+    $TO_echo = $TO_echo . '</div>';
+
+    //if there is an image included
+    $imgid = explode('.', $sharedpost['img']);
+    if (!empty($sharedpost['img'])) {
+      $TO_echo = $TO_echo . '
+                      <div class="optionalMedia text-center mr-5">
+                        <img id="img' . $imgid[0] . '"  class="optionalMedia-img myImg" src="../sharedPics/' . $sharedpost['img'] . '" style="max-width:90%;">
+                      ';
+    }
+
+
+    $TO_echo = $TO_echo . '
+  </div>
+       </div>
+          </div>
+       </div>
+  </div>';
+  }
+  $TO_echo = $TO_echo . '
+  </div> 
+  </div>
+  ';
 }
 
-$TO_echo = $TO_echo . '</div></div>';
 
-$Query = $mysqli->query("SELECT * FROM comments where PostID='$pid';");
+$Query = $mysqli->query("SELECT * FROM comments where PostID='$pid' order by date ; ");
 while ($GetComment = $Query->fetch_assoc()) {
   $CommentorUSERname = $GetComment['username'];
   $CommentOWnerInfos = $mysqli->query("SELECT Lname,Fname,avatarEXT FROM users where Email=(SELECT Email FROM profiles WHERE username='$CommentorUSERname');");
@@ -123,4 +236,7 @@ $TO_echo = $TO_echo . '
 </div>
 ';
 
+
 echo $TO_echo;
+
+$mysqli->close();
