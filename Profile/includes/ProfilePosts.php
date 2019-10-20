@@ -61,7 +61,7 @@ while ($row = $post->fetch_assoc()) {
                 <div class="tweetEntry-action-list" style="line-height:24px;color: #b1bbc3;">
                 <ul class="row col-8 mx-auto" style="list-style: none;">
                 <li class="col d-inline">
-                <button class="btn mr-4" style="padding: 0px;height:34px;width:30px;" onclick="Like(' . $PID . ')"><i class="fa fa-heart d-inline-block pt-1 mr-1" id="post' . $PID . '" style="width: 20px;color: #ff3333;"></i></button>';
+                <button class="btn mr-4" style="padding: 0px;height:34px;width:30px;cursor:pointer;" onclick="Like(' . $PID . ')"><i class="fa fa-heart d-inline-block pt-1 mr-1" id="post' . $PID . '" style="width: 20px;color: #ff3333;"></i></button>';
     } else {
       echo '</div>
                 <div class="tweetEntry-action-list" style="line-height:24px;color: #b1bbc3;">
@@ -77,9 +77,9 @@ while ($row = $post->fetch_assoc()) {
     $likes = $likes->fetch_assoc();
     $likes = $likes['num'];
     if ($likes == 0) {
-      echo '<span class="text-danger d-inline-block ml-n4 mr-1" id="NumLikes' . $PID . '"></span></li>';
+      echo '<span class="text-danger d-inline-block ml-n4 mr-1" id="NumLikes' . $PID . '" style="cursor:pointer;" onclick="Likes(' . "'" . $PID . "'" . ')"> </span></li>';
     } else {
-      echo '<span class="text-danger d-inline-block ml-n4 mr-1" id="NumLikes' . $PID . '">' . $likes . '</span></li>';
+      echo '<span class="text-danger d-inline-block ml-n4 mr-1" id="NumLikes' . $PID . '" style="cursor:pointer;" onclick="Likes(' . "'" . $PID . "'" . ')">' . $likes . '</span></li>';
     }
     $comments = $mysqli->query("SELECT count(*) AS num FROM comments WHERE PostID='$PID';");
     $comments = $comments->fetch_assoc();
@@ -238,9 +238,9 @@ while ($row = $post->fetch_assoc()) {
     $likes = $likes->fetch_assoc();
     $likes = $likes['num'];
     if ($likes == 0) {
-      echo '<span class="text-danger d-inline-block ml-n4 mr-1" id="NumLikes' . $PID . '"></span></li>';
+      echo '<span class="text-danger d-inline-block ml-n4 mr-1" id="NumLikes' . $PID . '" style="cursor:pointer;" onclick="Likes(' . "'" . $PID . "'" . ')"> </span></li>';
     } else {
-      echo '<span class="text-danger d-inline-block ml-n4 mr-1" id="NumLikes' . $PID . '">' . $likes . '</span></li>';
+      echo '<span class="text-danger d-inline-block ml-n4 mr-1" id="NumLikes' . $PID . '" style="cursor:pointer;" onclick="Likes(' . "'" . $PID . "'" . ')">' . $likes . '</span></li>';
     }
     $comments = $mysqli->query("SELECT count(*) AS num FROM comments WHERE PostID='$PID';");
     $comments = $comments->fetch_assoc();

@@ -95,6 +95,8 @@ if (!empty($_POST['submit'])) {
         }
 }
 
+$getter = $mysqli->query("SELECT * FROM userlog WHERE userEmail=(SELECT Email FROM profiles WHERE username='$username') order by date ;");
+$LogInfos = $getter->fetch_assoc();
 echo '
 <!DOCTYPE html>
 <html lang="en">
@@ -131,8 +133,20 @@ echo '
             <div class="jumbotron mt-n2 pb-1 mb-1 border border-light">
                 <div class="text-center mx-auto avatar"> <img src="./Avatars/' . $username . '.' . $EXT . '" class="mx-auto" alt=""> </div>
                 <h1 class="display-4 text-center my-1" id="Ful">' . $Fname . ' ' . $Lname . '</h1>
-                <hr class="my-2">
                 <p class="lead text-center">' . $description . '</p>
+                <hr class="my-2">
+
+                <div class="row col-3 mb-2 mx-auto">
+                        <button type="button" id="FollowingList" class="btn btn-success btn-block" btn-lg btn-block"> <i class="fa fa-list d-inline ml-n3 mr-2 mt-0" aria-hidden="true"></i> My Followings</button>
+                </div>
+
+                <div class="alert alert-primary alert-dismissible fade show col-8 mx-auto text-center" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <strong>Last Login: </strong> ' . $LogInfos['date'] . ' From ' . $LogInfos['userIp'] . ' ' . $LogInfos['guestName'] . '
+                </div>
             </div>';
 //the image zoom trigger
 echo '<!-- The Modal -->
@@ -213,6 +227,30 @@ if (isset($eRROr)) {
         </script>";
 }
 //end post errors modal
+///LikesModal
+echo '
+
+<!-- Modal -->
+<div class="modal fade" id="LikesModal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="LikesModalHeader"> Likes : </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" style="font-size:50px;">&times;</span>
+                    </button>
+            </div>
+            <div class="modal-body py-1 px-0" id="LikesModalBody">
+            
+            </div>
+            <div class="modal-footer">
+               
+            </div>
+        </div>
+    </div>
+</div>';
+
+////Likes Modal end
 
 //// Comments Modal Start
 echo '
@@ -407,6 +445,52 @@ $('#CloseComments').click(function(){ //// to refresh page if shared succeded
     if(reload=='true')
         location.reload();
 });
+        
+//printing Likers 
+function Likes(pid){
+            $.ajax({
+                url:'./likers.php',
+                method:'GET',
+                datatype: 'html',
+                data:{
+                    postID:pid
+                        },
+                success:function(result){
+                    $('#LikesModalBody').empty();
+                    $('#LikesModalBody').append(result);
+                    $('#LikesModalHeader').html(' Likes : ');
+                    $('#LikesModal').modal('show');
+                        }
+                    });
+        }
+$('#FollowingList').click(function(){
+    $.ajax({
+        url:'./followings.php',
+        method:'GET',
+        datatype: 'html',
+        success:function(result){
+            $('#LikesModalBody').empty();
+            $('#LikesModalBody').append(result);
+            $('#LikesModalHeader').html(' My Followings List :');
+            $('#LikesModal').modal('show');
+                }
+            });
+});
+
+function Unfollow(following,item){
+    $.ajax({
+        url:'./follow.php',
+        method:'GET',
+        datatype: 'html',
+        data:{
+            Tofollow:following
+                },
+        success:function(result){
+            $('#list-item-'+item).css('display','none');
+                }
+            });
+
+}
         </script>
             ";
 ///End  Ajax Syncing Likes 

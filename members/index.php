@@ -38,13 +38,20 @@ if (!empty($_GET['username'])) {
     $Country = $Country->fetch_assoc();
     $Country = $Country['country_name'];
 
+    $Follow = $mysqli->query("SELECT * FROM follows WHERE username='$username' and following='$Profile' ;");
+    $Follow = $Follow->fetch_assoc();
+
+    $numFollows = $mysqli->query("SELECT count(*) as num FROM follows where following='$Profile' ;");
+    $numFollows = $numFollows->fetch_assoc();
+    $numFollows = $numFollows['num'];
+
     echo '
     <!DOCTYPE html>
     <html lang="en">
     <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>' . $Profile . ' Profile</title>
+    <title>' . $Profile . '`s Profile</title>
     <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/font-awesome.min.css">
@@ -80,8 +87,25 @@ if (!empty($_GET['username'])) {
                     <h1 class="display-4 text-center my-1" id="Ful">' . $Fname . ' ' . $Lname . '</h1>
                     <p class="text-secondary text-center mb-0 mt-n2">' . $age . ' years</p>
                     <p class="text-secondary text-center mb-n1 mt-n1">' . $City . ' - ' . $Country . '</p>
+                    <p class="lead text-center mb-0">' . $description . '</p>
+                    <h5 class="text-center mb-0"> <span class="badge badge-warning"> +' . $numFollows . ' Followers </span> </h5>
                     <hr class="my-2">
-                    <p class="lead text-center">' . $description . '</p>
+                    <div class="row col-6 mx-auto mt-0">';
+
+    if (empty($Follow['id']))
+        echo '
+                    <div class="col mt-0">
+                    <button type="button" id="FollowBtn" class="btn btn-success btn-block mx-2 px-0" btn-lg btn-block"><i class="fas fa-plus-circle"></i> Follow</button>
+                </div>';
+    else
+        echo '<div class="col mt-0">
+        <button type="button" id="FollowBtn" class="btn btn-success btn-block mx-2 px-0" btn-lg btn-block"><i class="fas fa-spinner"></i> Following</button>
+    </div>';
+
+    echo '    <div class="col">
+                        <button type="button" id="ChatBtn" class="btn btn-primary btn-block mx-2 px-0" btn-lg btn-block"><i class="fas fa-envelope"></i> Message</button>
+                        </div>
+                    </div>
                 </div>';
 
 
@@ -100,7 +124,30 @@ if (!empty($_GET['username'])) {
         </div>';
     //end of image zoom trigger
 
+    ///LikesModal
+    echo '
 
+<!-- Modal -->
+<div class="modal fade" id="LikesModal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"> Likes : </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+            </div>
+            <div class="modal-body py-1 px-0" id="LikesModalBody">
+            
+            </div>
+            <div class="modal-footer">
+               
+            </div>
+        </div>
+    </div>
+</div>';
+
+    ////Likes Modal end
 
 
     //// Comments Modal Start
@@ -243,9 +290,9 @@ if (!empty($_GET['username'])) {
             $likes = $likes->fetch_assoc();
             $likes = $likes['num'];
             if ($likes == 0) {
-                echo '<span class="text-danger d-inline-block ml-n4 mr-1" id="NumLikes' . $PID . '"></span></li>';
+                echo '<span class="text-danger d-inline-block ml-n4 mr-1" id="NumLikes' . $PID . '" style="cursor:pointer;" onclick="Likes(' . "'" . $PID . "'" . ')"> </span></li>';
             } else {
-                echo '<span class="text-danger d-inline-block ml-n4 mr-1" id="NumLikes' . $PID . '">' . $likes . '</span></li>';
+                echo '<span class="text-danger d-inline-block ml-n4 mr-1" id="NumLikes' . $PID . '" style="cursor:pointer;" onclick="Likes(' . "'" . $PID . "'" . ')">' . $likes . '</span></li>';
             }
 
             $comments = $mysqli->query("SELECT count(*) AS num FROM comments WHERE PostID='$PID';");
@@ -402,9 +449,9 @@ if (!empty($_GET['username'])) {
             $likes = $likes->fetch_assoc();
             $likes = $likes['num'];
             if ($likes == 0) {
-                echo '<span class="text-danger d-inline-block ml-n4 mr-1" id="NumLikes' . $PID . '"></span></li>';
+                echo '<span class="text-danger d-inline-block ml-n4 mr-1" id="NumLikes' . $PID . '" style="cursor:pointer;" onclick="Likes(' . "'" . $PID . "'" . ')"> </span></li>';
             } else {
-                echo '<span class="text-danger d-inline-block ml-n4 mr-1" id="NumLikes' . $PID . '">' . $likes . '</span></li>';
+                echo '<span class="text-danger d-inline-block ml-n4 mr-1" id="NumLikes' . $PID . '" style="cursor:pointer;" onclick="Likes(' . "'" . $PID . "'" . ')">' . $likes . '</span></li>';
             }
 
             $comments = $mysqli->query("SELECT count(*) AS num FROM comments WHERE PostID='$PID';");
@@ -576,7 +623,66 @@ if (!empty($_GET['username'])) {
                                 });
 
                     });
+                    
+                    //printing Likers 
+function Likes(pid){
+            $.ajax({
+                url:'./likers.php',
+                method:'GET',
+                datatype: 'html',
+                data:{
+                    postID:pid
+                        },
+                success:function(result){
+                    $('#LikesModalBody').empty();
+                    $('#LikesModalBody').append(result);
+                    
+                    $('#LikesModal').modal('show');
+                        }
+                    });
+        }
+        
+        $('#ChatBtn').click(function(){alert('This Function is not available yet !');});
+        
+        $('#FollowBtn').click(function(){
+            
+            var profile='" . $Profile . "';
+            $.ajax({
+                url:'./follow.php',
+                method:'GET',
+                datatype: 'html',
+                data:{
+                    Tofollow:profile
+                        },
+                success:function(result){
+                    
+                    var getContent=$('#FollowBtn').html();
+            if( getContent =='<i class=" . '"fas fa-plus-circle"' . "></i> Follow' ){ // If not Following yet
+                $('#FollowBtn').html('<i class=" . '"fas fa-spinner"' . "></i> Following');
+            }else{
+                $('#FollowBtn').html('<i class=" . '"fas fa-plus-circle"' . "></i> Follow');
+            }
 
+                        }
+                    });
+
+
+        });
+
+
+        $('#FollowBtn').mouseover(function(){
+            var getContent=$('#FollowBtn').html();
+            if( getContent !='<i class=" . '"fas fa-plus-circle"' . "></i> Follow' ){ // If not Following yet
+                $('#FollowBtn').html('<i class=" . '"fas fa-minus-circle"' . "></i> unFollow');
+            }
+        });
+        $('#FollowBtn').mouseout(function(){
+            var getContent=$('#FollowBtn').html();
+            if( getContent =='<i class=" . '"fas fa-minus-circle"' . "></i> unFollow'){ // If not Following yet
+                $('#FollowBtn').html('<i class=" . '"fas fa-spinner"' . "></i> Following');
+            }
+        });
+        
                     </script>
                     </div>";
 } else {
