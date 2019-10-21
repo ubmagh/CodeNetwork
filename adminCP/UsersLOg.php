@@ -59,7 +59,7 @@ if(isset($_SESSION['id'])){
     $logs=mysqli_query($mysqli,"SELECT * FROM userlog ORDER BY date;");
     $num=1;
     while($row=$logs->fetch_assoc()){
-    $uid=$row['userId'];
+    $uid=$row['guestName'];
     $getname=$mysqli->query("SELECT Fname,Lname From users WHERE id='$uid';");
     $getname=$getname->fetch_assoc();
     $Fullname=$getname['Lname']." ".$getname['Fname'];
@@ -107,4 +107,3 @@ else{
 header("location:.");
 }
 include "includes/footer.php";
-?>

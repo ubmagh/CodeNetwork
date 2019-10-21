@@ -1,24 +1,17 @@
 <?php
-	if( !isset($_POST['input']))
-    Header("location:./");
-	
-	session_start();
+if (!isset($_POST['input']))
+	Header("location:./");
 
-	$filename=$_SESSION['username']."-html.html";
+session_start();
 
-	$code_source=$_POST['input'];
+$filename = $_SESSION['username'] . "-html.html";
 
-	$fileCode=fopen("./".$filename,"w+");
-	
-	fwrite($fileCode,$code_source);
+$code_source = $_POST['input'];
 
-	echo $filename;
+$fileCode = fopen("./tmp/" . $filename, "w+");
+
+fwrite($fileCode, $code_source);
+
+echo $filename;
 
 	//sleep(60);
-	
-	
-	
-
-
-
-?>

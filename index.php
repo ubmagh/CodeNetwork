@@ -2,7 +2,7 @@
 session_start();
 include 'includes/config.php';
 if (isset($_SESSION['username'])) {
-    header("location:./Profile/"); ////Untile you create a dashBoard
+    header("location:./dashboard/"); ////Untile you create a dashBoard
 }
 ?>
 <!DOCTYPE html>
@@ -49,7 +49,7 @@ if (isset($_SESSION['username'])) {
     <div class="jumbotron mb-0 mb-n1 mt-n1" id="features" style="background-image: url('images/bg3.jpg'); background-repeat: no-repeat;background-size: cover;height: 840px;border-raduis:0px;">
 
         <div class="container align-bottom h-100 my-0 d-flex align-items-end">
-            <div class="row h-50 mt-3">
+            <div class="row h-50 mt-3 ml-3">
 
                 <div class="col-3 px-2 py-2 card text-left bg-dark text-light ml-n5 ">
                     <div class="card-body text-center ">

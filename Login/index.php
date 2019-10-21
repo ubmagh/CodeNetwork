@@ -104,7 +104,7 @@ include('../includes/config.php');
                 $uid = $_SESSION['id'];
                 $uemail = $_SESSION['login'];
                 $ip = $_SERVER['REMOTE_ADDR'];
-                $hostName = $_SERVER['REMOTE_HOST'];
+                $hostName = '<br>' . $_SERVER['REMOTE_HOST'] . ' ' . $_SERVER['HTTP_USER_AGENT'];
                 $log = "insert into userlog values('','$hostName','$uemail','$ip','$ldate')";
                 $mysqli->query($log);
 

@@ -131,7 +131,7 @@ echo '
         <div class="container mb-5" >
             
             <div class="jumbotron mt-n2 pb-1 mb-1 border border-light">
-                <div class="text-center mx-auto avatar"> <img src="./Avatars/' . $username . '.' . $EXT . '" class="mx-auto" alt=""> </div>
+                <div class="text-center mx-auto avatar"> <img src="./Avatars/' . $username . '.' . $EXT . '" class="mx-auto"  width="150px;"> </div>
                 <h1 class="display-4 text-center my-1" id="Ful">' . $Fname . ' ' . $Lname . '</h1>
                 <p class="lead text-center">' . $description . '</p>
                 <hr class="my-2">
@@ -145,8 +145,9 @@ echo '
                         <span aria-hidden="true">&times;</span>
                         <span class="sr-only">Close</span>
                     </button>
-                    <strong>Last Login: </strong> ' . $LogInfos['date'] . ' From ' . $LogInfos['userIp'] . ' ' . $LogInfos['guestName'] . '
-                </div>
+                    <h6><strong>Last Login: </strong> ' . $LogInfos['date'] . ' FromIP: ' . $LogInfos['userIp'] . ' ' . $LogInfos['guestName'] . '
+                    </h6>
+                    </div>
             </div>';
 //the image zoom trigger
 echo '<!-- The Modal -->
@@ -303,8 +304,15 @@ echo "
              success:function(){
                var getRGB=$('#post'+postid).css('color');
                var numlikes=$('#NumLikes'+postid).text() ;
+               
                if( ($('#NumLikes'+postid).text().length)==0 ){numlikes=0;}
+               
+               if(numlikes==' '){
+               numlikes=0;
+                    }
                numlikes = parseInt(numlikes);
+               
+
               if( rgb2hex(getRGB) =='#ff3333' ){
                 $('#post'+postid).css('color','#C2C5CC');//grey
                 if(numlikes>1)

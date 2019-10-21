@@ -164,14 +164,14 @@ $(document).ready(function(){
             data: $('form').serialize(), //target your form's data and serialize for a POST
             success: function(result) { // data is the var which holds the output of your process.php
                 // locate the div with #result and fill it with returned data from process.php
-                $('#framy').attr("src",'./'+result);
+                $('#framy').attr("src",'./tmp/'+result);
 
                 //an other ajax query to delete html file that is just compiled 
-                $.ajax({ 
-                    type: "POST",
-                    url: "delete-html.php",
-                    data:{ "F": result }
-                });
+              //  $.ajax({ 
+              //      type: "POST",
+              //      url: "delete-html.php",
+               //     data:{ "F": result }
+             //   });
             }
         });
     });

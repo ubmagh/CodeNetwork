@@ -83,7 +83,7 @@ if (!empty($_GET['username'])) {
             <div class="container mb-5" >
                 
                 <div class="jumbotron mt-n2 pb-1 mb-1 border border-light">
-                    <div class="text-center mx-auto avatar"> <img src="../Profile/Avatars/' . $Profile . '.' . $EXT . '" class="mx-auto" alt=""> </div>
+                    <div class="text-center mx-auto avatar"> <img src="../Profile/Avatars/' . $Profile . '.' . $EXT . '" class="mx-auto"  width="150px;"> </div>
                     <h1 class="display-4 text-center my-1" id="Ful">' . $Fname . ' ' . $Lname . '</h1>
                     <p class="text-secondary text-center mb-0 mt-n2">' . $age . ' years</p>
                     <p class="text-secondary text-center mb-n1 mt-n1">' . $City . ' - ' . $Country . '</p>
@@ -501,6 +501,10 @@ if (!empty($_GET['username'])) {
                         var getRGB=$('#post'+postid).css('color');
                         var numlikes=$('#NumLikes'+postid).text() ;
                         if( ($('#NumLikes'+postid).text().length)==0 ){numlikes=0;}
+                        
+                            if(numlikes==' '){
+                                numlikes=0;
+                                    }
                         numlikes = parseInt(numlikes);
                         if( rgb2hex(getRGB) =='#ff3333' ){
                             $('#post'+postid).css('color','#C2C5CC');//grey

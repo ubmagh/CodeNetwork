@@ -5,8 +5,4 @@ if(!isset($_POST['F'])){
 //delete For compliation
 $filename=$_POST['F'];
 
-exec("del $filename");
-
-
-
-?>
+//exec("del $filename");

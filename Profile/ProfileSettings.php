@@ -156,7 +156,7 @@ if (isset($_SESSION['username'])) {
             // Get Image Dimension
             $width = $check[0];
             $height = $check[1];
-            if ($width > 256 || $height > 256) {
+            if ($width > 512 || $height > 512) {
                 $uploadOk = 5;
             }
 
@@ -436,7 +436,7 @@ if (isset($_SESSION['username'])) {
         <div class="form-group col-md-10 mx-auto pl-0 mt-3">
           <label for="AVA" class="letter text-light">Change Avatar : </label>
             <input name="AVA" type="file" accept=".gif,.png,.jpg,.bmp,.jpeg" id="AVA" class="form-control-file form_effect bg-dark text-center text-white border border-light rounded border-top-0 border-left-0 border-right-0 py-3" aria-describedby="fileHelpId">
-          <small id="fileHelpId" class="form-text  text-light">*png,jpg,bmp,jpeg&GIF 500kb 256 x 256 pixels</small>
+          <small id="fileHelpId" class="form-text  text-light">*png,jpg,bmp,jpeg&GIF 500kb 512 x 512 pixels</small>
         </div>
         ';
     if (isset($uploadOk) &&  $uploadOk != 1) {
@@ -457,7 +457,7 @@ if (isset($_SESSION['username'])) {
                 echo 'invalid Image Formate !';
                 break;
             case 5:
-                echo 'Image Dimensions 256x256 px';
+                echo 'Image Dimensions 512x512 px';
                 break;
         }
         echo '
