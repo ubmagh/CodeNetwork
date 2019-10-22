@@ -1,10 +1,10 @@
-<?php 
+<?php
 session_start();
 include "./includes/config.php";
 
-if(isset($_SESSION['id'])){
+if (isset($_SESSION['id'])) {
 
-    echo'<!DOCTYPE html>
+    echo '<!DOCTYPE html>
     <html lang="en">
     <head>
             <meta charset="UTF-8">
@@ -21,7 +21,7 @@ if(isset($_SESSION['id'])){
         </head><body>';
     include "includes/nav&sidebar.php";
 
-    echo'
+    echo '
 
             <!-- modals -->
             <div class="modal fade" id="myModal">
@@ -69,13 +69,13 @@ if(isset($_SESSION['id'])){
                         </form>
                         ';
 
-                        if(! empty($_POST['pwdChange'])){
-                            $password=$_POST['pwd1'];
-                            $password= crypt($password,"SCoMae =!");
-                            $CPquery=mysqli_query($mysqli,"UPDATE admin SET password='$password' WHERE id=10 ");
-                            
-                            if($CPquery){
-                                echo '
+    if (!empty($_POST['pwdChange'])) {
+        $password = $_POST['pwd1'];
+        $password = crypt($password, "SCoMae =!");
+        $CPquery = mysqli_query($mysqli, "UPDATE admin SET password='$password' WHERE id=10 ");
+
+        if ($CPquery) {
+            echo '
                                 <div id="namealert" class="alert alert-success alert-dismissible fade show col-6 text-center mx-auto mt-n3" style="left: 25%; top:250px;position: absolute;z-index: 2;" role="alert">
                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
@@ -85,9 +85,8 @@ if(isset($_SESSION['id'])){
                                     </p>
                                 </div>
                                 ';
-                            }
-                            else{
-                                echo '
+        } else {
+            echo '
                                 <div id="namealert" class="alert alert-danger alert-dismissible fade show col-6 text-center mx-auto mt-n3" style="left: 25%; top:250px;position: absolute;z-index: 2;" role="alert">
                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
@@ -97,10 +96,10 @@ if(isset($_SESSION['id'])){
                                     </p>
                                 </div>
                                 ';
-                            }
-                        }
+        }
+    }
 
-                        echo '
+    echo '
                     </div>
                 </div>
                 <div class="col pr-5 pl-3">
@@ -122,18 +121,18 @@ if(isset($_SESSION['id'])){
                     <h3 style="font-family:Source Sans Pro;">Select Avatar :</h3>
                     <form action="" method="post">
                     ';
-        
-                    $images_array=glob("uploads/*.png");
-                    foreach ($images_array as $image){
-                        echo'<button type="submit" name="avatar" class="p-0 m-0" value="'.$image.'"><img src="'.$image.'"alt="" class=""></button>';
-                    }
-                    echo'
+
+    $images_array = glob("uploads/*.png");
+    foreach ($images_array as $image) {
+        echo '<button type="submit" name="avatar" class="p-0 m-0" value="' . $image . '"><img src="' . $image . '"alt="" class="" width="100px"></button>';
+    }
+    echo '
                     </div>';
-                    if( isset($_POST['avatar']) ) {
-                        $sel=$_POST['avatar'];
-                        $ChAvaque=mysqli_query($mysqli,"UPDATE admin SET Avatar='$sel' WHERE id=10;");
-                        if($ChAvaque){
-                            echo'<div id="namealert" class="alert alert-success alert-dismissible fade show col-6 text-center mx-auto mt-n3" style="left: 25%; top:250px;position: absolute;z-index: 2;" role="alert">
+    if (isset($_POST['avatar'])) {
+        $sel = $_POST['avatar'];
+        $ChAvaque = mysqli_query($mysqli, "UPDATE admin SET Avatar='$sel' WHERE id=10;");
+        if ($ChAvaque) {
+            echo '<div id="namealert" class="alert alert-success alert-dismissible fade show col-6 text-center mx-auto mt-n3" style="left: 25%; top:250px;position: absolute;z-index: 2;" role="alert">
                             <button type="button" class="close" data-dismiss="alert" id="closesuc" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -142,13 +141,11 @@ if(isset($_SESSION['id'])){
                             </p>
                         </div>
                         <script>
-                       setTimeout(function(){window.location.replace("http://'.$_SERVER['SERVER_NAME'].$_SERVER['PHP_SELF'].'");},3000);
+                       setTimeout(function(){window.location.replace("http://' . $_SERVER['SERVER_NAME'] . $_SERVER['PHP_SELF'] . '");},3000);
                         </script>
                         ';
-                        
-                        }
-                        else{
-                            echo'<div id="namealert" class="alert alert-danger alert-dismissible fade show col-6 text-center mx-auto mt-n3" style="left: 25%; top:250px;position: absolute;z-index: 2;" role="alert">
+        } else {
+            echo '<div id="namealert" class="alert alert-danger alert-dismissible fade show col-6 text-center mx-auto mt-n3" style="left: 25%; top:250px;position: absolute;z-index: 2;" role="alert">
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -156,9 +153,9 @@ if(isset($_SESSION['id'])){
                                 failed to change avatar !  
                             </p>
                         </div>';
-                        }
-                    }
-                echo '
+        }
+    }
+    echo '
                 </div>
             </div>
           </div>
@@ -173,12 +170,12 @@ $("#Cpwd").click( function (event) {
     if( $va1 != $va2 ){
             $("#modal-body").append("two passwords are not equal !");
             event.preventDefault();
-            $('."'#myModal').modal('show'".');
+            $(' . "'#myModal').modal('show'" . ');
         }
     if( ($va1 == $va2) && $va1.length<8){
         $("#modal-body").append("too short password, use 8 car min.");
         event.preventDefault();
-        $('."'#myModal').modal('show'".');
+        $(' . "'#myModal').modal('show'" . ');
     }
 });
 
@@ -200,9 +197,7 @@ $("#menu-toggle").click(function(e) {
     ';
 
 
-include "includes/footer.php";
-}
-else{
+    include "includes/footer.php";
+} else {
     header("location:../");
 }
-?>

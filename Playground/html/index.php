@@ -70,7 +70,7 @@ function checkTime(i){if (i<10){i="0" + i;}return i;}</script>
             $getter=$mysqli->query("SELECT username FROM codes WHERE id='$id' ;");
             $getter=$getter->fetch_assoc();
             $username=$getter['username'];
-            $Code=$mysqli->query("select * From codes where id='$id'");
+            $Code=$mysqli->query("select * From codes where id='$id' ;");
             $Code=$Code->fetch_assoc();
             if($Code['langType']!='html'){
                 header("location:../".$Code['langType'].'/index.php?id='.$id);
@@ -84,22 +84,10 @@ function checkTime(i){if (i<10){i="0" + i;}return i;}</script>
 
             $file = fopen($file_path,"r");
             
-            function RespectHTML($Str){
-                $Str=str_replace("&","&#38;",$Str);
-                $Str=str_replace("<","&lt;",$Str);
-                $Str=str_replace(">","&gt;",$Str);
-                return $Str;
-            }
-
-            $To_Insert="";
-            while(! feof($file))
-            {
-            $To_Insert=fgets($file);
-            $To_Insert=RespectHTML($To_Insert);
-            echo $To_Insert;
-            }
-            fclose($file);
             
+            echo fread($file,filesize($file_path));
+            
+            fclose($file);
 
         }}
             
@@ -155,6 +143,7 @@ $(document).ready(function(){
     $('form').on('submit', function(e){
       //prevent form from submitting and leaving page
       e.preventDefault();
+      $('#framy').html("Compiling .... ");
       // AJAX 
       $.ajax({
             type: "POST", //type of submit
@@ -164,7 +153,8 @@ $(document).ready(function(){
             data: $('form').serialize(), //target your form's data and serialize for a POST
             success: function(result) { // data is the var which holds the output of your process.php
                 // locate the div with #result and fill it with returned data from process.php
-                $('#framy').attr("src",'./tmp/'+result);
+                setTimeout(function(){$('#framy').attr("src",'./tmp/'+result);},1000);
+                
 
                 //an other ajax query to delete html file that is just compiled 
               //  $.ajax({ 
@@ -215,7 +205,7 @@ $("#save").click(
 </div>
 </div>
 <nav class="main-menu border-0 navbar-fixed-left">
-<ul>
+<ul class="mt-5">
     <li>
         <a href="../../dashboard/">
             <i class="fa fa-home fa-2x"></i>

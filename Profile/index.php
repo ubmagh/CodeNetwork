@@ -506,7 +506,7 @@ echo '
         </div>
 </div>
 <nav class="main-menu border-0 navbar-fixed-left">
-<ul>
+<ul class="mt-5">
     <li>
         <a href="../dashboard/">
             <i class="fa fa-home fa-2x"></i>

@@ -119,7 +119,7 @@ include('../includes/config.php');
                         $_SESSION['email'] = $uemail;
                         $_SESSION['username'] = $username;
                         $_SESSION['id'] = $id;
-                        header("location:../Profile/");
+                        header("location:../dashboard/");
                     } else {
                         echo '<script>alert("Login Error!");</script>';
                     }
