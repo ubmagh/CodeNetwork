@@ -1,5 +1,9 @@
 <?php
+
 session_start();
+if (!empty($_SESSION['username'])) {
+    header('location:../Profile/');
+}
 include('../includes/config.php');
 ?>
 

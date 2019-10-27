@@ -169,7 +169,7 @@ if (isset($_SESSION['username'])) {
                         $.ajax({
                             type: "POST", //type of submit
                             cache: false, //important or else you might get wrong data returned to you
-                            url: "java-compile.php", //destination
+                            url: "./tmp/java-compile.php", //destination
                             datatype: "html", //expected data format from process.php
                             data: $('form').serialize(), //target your form's data and serialize for a POST
                             success: function(result) { // data is the var which holds the output of your process.php
