@@ -14,7 +14,11 @@ echo'<!DOCTYPE html>
         <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
         <link rel="stylesheet" href="../css/style.css">
         <link rel="stylesheet" href="../css/font-awesome.min.css">
-        <link rel="stylesheet" href="../css/bootstrap.css">
+        <link rel="stylesheet" href="../css/bootstrap.min.css">
+        <link rel="stylesheet" href="../css/all.min.css">
+        <link rel="stylesheet" href="../css/solid.min.css">
+        <link rel="stylesheet" href="../css/fontawesome.min.css">
+        <link rel="stylesheet" href="../css/regular.min.css">
         <link rel="stylesheet" href="../css/simple-sidebar.css">
         <script src="../js/jquery.js"></script>
         <script src="../js/bootstrap.js"></script>
@@ -245,4 +249,3 @@ $("#wrapper").toggleClass("toggled");
 }
 
 include "includes/footer.php";
-?>

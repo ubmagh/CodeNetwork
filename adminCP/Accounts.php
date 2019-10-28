@@ -1,9 +1,9 @@
-<?php 
+<?php
 session_start();
 include "./includes/config.php";
-if(isset($_SESSION['id'])){
+if (isset($_SESSION['id'])) {
 
-    echo'<!DOCTYPE html>
+    echo '<!DOCTYPE html>
     <html lang="en">
     <head>
             <meta charset="UTF-8">
@@ -23,8 +23,8 @@ if(isset($_SESSION['id'])){
 
             <title>-Manage Accounts-</title>
         </head><body>';
-        include "includes/nav&sidebar.php";
-        echo'
+    include "includes/nav&sidebar.php";
+    echo '
         <div class="container-fluid">
         <h1 class="mt-4 text-center">Accounts Management : </h1>
 <div class="mt-4 mb-2">
@@ -43,64 +43,63 @@ if(isset($_SESSION['id'])){
   </thead>
   <tbody>
     ';
-    if(isset($_GET['QCtu'])){
-        $Cid=$_GET['QCtu'];
+    if (isset($_GET['QCtu'])) {
+        $Cid = $_GET['QCtu'];
         $acchange = $mysqli->query("SELECT Activated FROM users WhERE id='$Cid';");
         $acchange = $acchange->fetch_assoc();
-        $acchange= $acchange['Activated'];
-        if($acchange=='1')
-            {$newStat="0";}
-        else 
-            {$newStat="1";}
-        $mysqli->query("UPDATE users SET Activated= '".$newStat."' WHERE id='$Cid';");
-        echo'<script>window.location.replace("http://'.$_SERVER['SERVER_NAME'].'/CodeNet/admincp/Accounts.php");</script>';
+        $acchange = $acchange['Activated'];
+        if ($acchange == '1') {
+            $newStat = "0";
+        } else {
+            $newStat = "1";
+        }
+        $mysqli->query("UPDATE users SET Activated= '" . $newStat . "' WHERE id='$Cid';");
+        echo '<script>window.location.replace("http://' . $_SERVER['SERVER_NAME'] . '/CodeNet/admincp/Accounts.php");</script>';
         // location.reload(); on the up line causes a loop 
-        unset($Cid,$acchang,$newStat);
-     }
+        unset($Cid, $acchang, $newStat);
+    }
 
-    $users=mysqli_query($mysqli,"SELECT * FROM users ORDER BY Fname;");
-    $num=1;
-    while($row=$users->fetch_assoc()){
-    $country=$row['Country'];
-    $userContry=mysqli_query($mysqli,"SELECT country_name FROM apps_countries WHERE country_code='$country';");
-    $country=$userContry->fetch_assoc();
-    $country=$country['country_name']; 
-    echo'
+    $users = mysqli_query($mysqli, "SELECT * FROM users ORDER BY Fname;");
+    $num = 1;
+    while ($row = $users->fetch_assoc()) {
+        $country = $row['Country'];
+        $userContry = mysqli_query($mysqli, "SELECT country_name FROM apps_countries WHERE country_code='$country';");
+        $country = $userContry->fetch_assoc();
+        $country = $country['country_name'];
+        echo '
         <tr> 
-         <th scope="row">'.$num.'</th>
-         <td>'.$row['Fname'].'</td>
-         <td>'.$row['Lname'].'</td>
-         <td>'.$row['Email'].'</td>
-         <td>'.$row['age'].'</td>
-         <td>'.$row['City'].' - '.$country.'</td>';
+         <th scope="row">' . $num . '</th>
+         <td>' . $row['Fname'] . '</td>
+         <td>' . $row['Lname'] . '</td>
+         <td>' . $row['Email'] . '</td>
+         <td>' . $row['age'] . '</td>
+         <td>' . $row['City'] . ' - ' . $country . '</td>';
 
 
-         if($row['Activated']==1){
-                            echo'
+        if ($row['Activated'] == 1) {
+            echo '
                             <td>
-                               <a href="./Accounts.php?QCtu='.$row['id'].'" >
+                               <a href="./Accounts.php?QCtu=' . $row['id'] . '" >
                                <i class="fas fa-toggle-on text-success"></i>
                                <span class="text-success"> Activated</span>
                                </a>
                             </td>';
-                                   }
-        else{
-            echo'
+        } else {
+            echo '
             <td>
-                <a href="./Accounts.php?QCtu='.$row['id'].'" >
+                <a href="./Accounts.php?QCtu=' . $row['id'] . '" >
                 <i class="fas fa-toggle-off text-warning"></i>
                     <span class="text-warning">Desactivated</span>
                 </a>
             </td>';
         }
-         echo'
+        echo '
        </tr>
            ';
         $num++;
-
     }
 
-          echo '
+    echo '
                 </tbody>
         </table>    
         </form> 
@@ -118,10 +117,8 @@ $("#wrapper").toggleClass("toggled");
 </script>
 </div>
 ';
-$mysqli->close();
-}
-else{
-header("location:./index.php");
+    $mysqli->close();
+} else {
+    header("location:./index.php");
 }
 include "includes/footer.php";
-?>
