@@ -24,8 +24,15 @@ while ($row = $post->fetch_assoc()) {
                     <span class="tweetEntry-timestamp ml-1"> ' . $row['postingDate'] . '</span>
                   </a>
 
-                  <span style="cursor:pointer;left:78%;position:sticky;" onclick="del(' . "'" . $row['id'] . "'" . ')"> <i class="fas fa-trash-alt ml-4 text-danger"></i> </span>
-                  <span style="cursor:pointer;left:38%;position:relative;top:15%;"> <a href="./PostEdit.php?post=' . $row['id'] . '"> <i class="fas fa-pen ml-4 text-info"></i> </a></span>
+                  <ul style="list-style:none;float:right;" class="d-inline col-2 mr-0" >
+                  <li class="d-inline">
+                      <span style="cursor:pointer;"> <a href="./PostEdit.php?post=' . $row['id'] . '"> <i class="fas fa-pen ml-4 text-info"></i> </a></span>
+                    </li>  
+                  <li class="d-inline">
+                      <span style="cursor:pointer;" onclick="del(' . "'" . $row['id'] . "'" . ')"> <i class="fas fa-trash-alt ml-4 text-danger"></i> </span>
+                    </li>
+                  </ul>
+
                   <div class="tweetEntry-text-container mt-2">
                   ' . $row['Post'] . '  
                   </div>
@@ -120,8 +127,15 @@ while ($row = $post->fetch_assoc()) {
             <span class="tweetEntry-timestamp ml-1"> ' . $row['postingDate'] . '</span>
           </a>
 
-          <span style="cursor:pointer;left:78%;position:absolute;" onclick="del(' . "'" . $row['id'] . "'" . ')"> <i class="fas fa-trash-alt ml-4 text-danger"></i> </span>
-          <span style="cursor:pointer;left:73%;position:absolute;"> <a href="./PostEdit.php?post=' . $row['id'] . '"> <i class="fas fa-pen ml-4 text-info"></i> </a></span>
+          <ul style="list-style:none;float:right;" class="d-inline col-2" >
+            <li class="d-inline">
+              <span style="cursor:pointer;"> <a href="./PostEdit.php?post=' . $row['id'] . '"> <i class="fas fa-pen ml-4 text-info"></i> </a></span>
+            </li>  
+            <li class="d-inline">
+              <span style="cursor:pointer;" onclick="del(' . "'" . $row['id'] . "'" . ')"> <i class="fas fa-trash-alt ml-4 text-danger"></i> </span>
+            </li>
+            
+          </ul>
           <div class="tweetEntry-text-container mt-2 mb-2">
           ' . $row['Post'] . '  
           </div>
@@ -130,7 +144,7 @@ while ($row = $post->fetch_assoc()) {
 
     echo '
         </div> 
-          <div class="my-3 col-11 mx-auto border border-secondary rounded ">
+          <div class="mb-3 mt-5 col-11 mx-auto border border-secondary rounded ">
             <div class="col-9 mx-auto px-1" style="max-width:90%;"> 
         ';
     /////Shared post start

@@ -7,7 +7,7 @@ $username = $_SESSION['username'];
 
 putenv("PATH=C:\Program Files\Java\jdk1.8.0_231\bin");
 $CC = "javac ";
-$out = "cd $username | java "; //it was out="java Main";
+$out = "cd .\\$username | java "; //it was out="java Main"; //////////////   .\$username 
 $code = $_POST["input"];
 $input = $_POST["Args"];
 
@@ -22,6 +22,7 @@ $Namawa = $filename_code;
 $filename_code = $username . "/" . $filename_code;
 
 $out = $out . $Namawa;
+$outt = $out;
 $filename_code = $filename_code . ".java";
 
 // echo $filename_code; // maintenenace
@@ -61,10 +62,9 @@ if (trim($error) == "") {
 		$out = $out . " < " . $filename_in;
 		$output = shell_exec($out);
 	}
-	//echo "<pre>$runtime_error</pre>";
+	echo "<pre>$runtime_error</pre>" . $outt;
 	//echo "<pre>$output</pre>";
 	echo "$output";
-	//echo "<textarea id='div' class=\"form-control\" name=\"output\" rows=\"10\" cols=\"50\">$output</textarea><br><br>";
 } else if (!strpos($error, "error")) {
 	echo " $error ";
 	if (trim($input) == "") {

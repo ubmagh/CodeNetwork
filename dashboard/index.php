@@ -393,7 +393,7 @@ if (!empty($_POST['submit'])) {
           ' . $row['Post'] . '  
           </div>
           </div> 
-          <div class="my-3 col-11 mx-auto border border-secondary rounded ">
+          <div class="mb-3 mt-5 col-11 mx-auto border border-secondary rounded ">
             <div class="col-9 mx-auto px-1" style="max-width:90%;"> 
         ';
                     $SharedID = $row['postRef'];

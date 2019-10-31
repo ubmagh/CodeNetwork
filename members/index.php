@@ -335,7 +335,7 @@ if (!empty($_GET['username'])) {
                       ' . $row['Post'] . '  
                       </div>
                       </div>
-          <div class="my-3 col-11 mx-auto border border-secondary rounded ">
+          <div class="my-3 col-11 mx-auto border border-secondary rounded mt-5 ">
             <div class="col-9 mx-auto px-1" style="max-width:90%;"> 
                     
 

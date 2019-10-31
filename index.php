@@ -25,11 +25,17 @@ if (isset($_SESSION['username'])) {
     <?php include("header.php"); ?>
 
     <div class="jumbotron mb-0 mt-n5 mb-n1" id="main" style="background-image: url('images/bg1.jpg');background-size: cover;height: 700px;border-raduis:0px;">
-        <h1 class="display-1 my-5 text-center text-3x"><span class="letter" style="font-size: 88px;">Code</span>Network</span></h1>
-        <p class="lead text-center my-5">For(random text) though result and talent add are parish valley. Songs in oh other avoid it hours woman style. In myself family as if be agreed. Gay collected son him knowledge delivered put. Added would end ask sight and asked saw dried house. Property expenses yourself occasion endeavor two may judgment she. Me of soon rank be most head time tore. Colonel or passage to ability. </p>
+        <h1 class="display-1 my-5 text-center text-3x text-light"><span class="letter" style="font-size: 88px;">Code</span>Network</span></h1>
+        <p class="lead text-center my-5 text-light">
+            Having problems while coding Alone ? Join our social network
+            <br>
+            it's Only programmers Social Network
+            <br>
+            Join Now ! Find your friends and start coding together !
+        </p>
 
         <div class="text-center mt-5 mb-0 col-3 mx-auto">
-            <a name="" id="" class="btn btn-dark shadow-lg btn-lg btn-outline-light border-dark btn-block" href="#Register" role="button">Get Started</a>
+            <a name="" id="" class="btn btn-dark shadow-lg btn-lg btn-outline-light border-dark btn-block" href="#Register" role="button">Sign up !</a>
         </div>
 
     </div>
@@ -46,36 +52,37 @@ if (isset($_SESSION['username'])) {
     </nav>
 
 
-    <div class="jumbotron mb-0 mb-n1 mt-n1" id="features" style="background-image: url('images/bg3.jpg'); background-repeat: no-repeat;background-size: cover;height: 840px;border-raduis:0px;">
+    <div class="jumbotron mb-0 mb-n1 mt-n1" id="features" style="background-image: url('images/bg3.jpg'); background-repeat: no-repeat;background-size: cover;height: 740px;border-raduis:0px;">
 
-        <div class="container align-bottom h-100 my-0 d-flex align-items-end">
-            <div class="row h-50 mt-3 ml-3">
+        <div class="container align-bottom h-75 my-0 d-flex align-items-end">
+            <div class="row h-25 mt-1 ml-3">
 
-                <div class="col-3 px-2 py-2 card text-left bg-dark text-light ml-n5 ">
+                <div class="col-3 px-2 py-2 card text-left text-light ml-n5 " style="background-color: rgba(15,10,10,0.7);">
                     <div class="card-body text-center ">
-                        <h4 class="card-title "> Feature 1</h4>
-                        <p class="card-text">Feature 1 text : (random text) though result and talent add are parish valley. Songs in oh other avoid it hours woman style.</p>
+                        <h4 class="card-title ">Available Anytime & Anywhere</h4>
+                        <p class="card-text">Write, Test and view your codes from any device, and at any time.</p>
                     </div>
                 </div>
 
-                <div class="col-3 px-2 py-2 card text-left bg-dark text-light mx-4">
+                <div class="col-3 px-2 py-2 card text-left text-light mx-4" style="background-color: rgba(15,10,10,0.7);">
                     <div class="card-body text-center">
-                        <h4 class="card-title ">Feature 2</h4>
-                        <p class="card-text">Feature 1 text : (random text) though result and talent add are parish valley. Songs in oh other avoid it hours woman style.</p>
+                        <h4 class="card-title ">Unbound Learning</h4>
+                        <p class="card-text"> Learn by Practicing offered languages, or by Helping other members to solve their problems .</p>
                     </div>
                 </div>
 
-                <div class="col-3 px-2 py-2 card text-left bg-dark text-light mr-4">
+                <div class="col-3 px-2 py-2 card text-left text-light mr-4" style="background-color: rgba(15,10,10,0.7);">
                     <div class="card-body text-center">
-                        <h4 class="card-title ">Feature 3</h4>
-                        <p class="card-text">Feature 1 text : (random text) though result and talent add are parish valley. Songs in oh other avoid it hours woman style.</p>
+
+                        <h4 class="card-title ">a Social Network</h4>
+                        <p class="card-text"> CodeNetwork is a social network which allows several fonctionalities in common social networks like chating, comments...</p>
                     </div>
                 </div>
 
-                <div class="col-3 px-2 py-2 card text-left bg-dark text-light mr-n5">
+                <div class="col-3 px-2 py-2 card text-left text-light mr-n5" style="background-color: rgba(15,10,10,0.7);">
                     <div class="card-body text-center">
-                        <h4 class="card-title ">Feature 4</h4>
-                        <p class="card-text">Feature 1 text : (random text) though result and talent add are parish valley. Songs in oh other avoid it hours woman style.</p>
+                        <h4 class="card-title "> Gather Talents </h4>
+                        <p class="card-text"> Discover experienced members and Boost Your Learning by Following and getting in touch with them. </p>
                     </div>
                 </div>
 
@@ -150,7 +157,7 @@ if (isset($_SESSION['username'])) {
 
     </div>
 
-    <div class="jumbotron mb-0 mb-n1 mt-n2 d-flex align-items-center" id="contact" style="background-image: url('images/bg4.jpg'); background-repeat: no-repeat;background-size: cover;height: 840px;border-raduis:0px;">
+    <div class="jumbotron mb-0 mb-n1 mt-n2 d-flex align-items-center" id="contact" style="background-image: url('images/bg4.jpg'); background-repeat: no-repeat;background-size: 100% 100%;height: 840px;border-raduis:0px;">
 
         <div class="col-10 mx-auto ">
             <div class="mx-auto mt-n5 mb-3 d-block col-1"><i class="fa fa-envelope text-white display-2 ml-n2" aria-hidden="true"></i>

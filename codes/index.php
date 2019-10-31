@@ -25,7 +25,7 @@ include "../includes/config.php";
 </head>
 
 
-<body style="height:100%">
+<body style=" ">
     <nav class="navbar navbar-expand-sm navbar-dark text-light fixed-top pb-4 pt-2 " style="z-index:10; background: #212121;">
         <ul class="navbar-nav ml-auto mb-n4 mt-n2">
             <li class=" ">
@@ -36,13 +36,13 @@ include "../includes/config.php";
             </li>
         </ul>
     </nav>
-    <div class="  area mb-0 pb-5 " style="background-image: url('./bg.jpg') !important;background-size: 85% 100% !important;background-repeat:none;height:660px;">
+    <div class="  area mb-0 pb-5 " style="background-image: url('./bg.jpg') !important;background-size: cover !important;background-repeat:none;height:660px;">
 
         <!-- page content here -->
 
-        <div class=" d-flex align-items-center mt-5 ml-5  mr-n5 mb-0 h-100 w-100">
+        <div class=" d-flex align-items-center mt-5 ml-5  mr-n5 w-100">
 
-            <div class="w-100 ml-5 h-100 mt-3 mr-5 align-items-center">
+            <div class="w-100 ml-5 h-100 mt-3 mr-5 mb-n3 align-items-center">
 
                 <div class="row w-100">
                     <h3 class="text-center text-dark letter mx-auto"> Your saved Codes :</h3>
