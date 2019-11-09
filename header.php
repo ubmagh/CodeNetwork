@@ -1,8 +1,6 @@
 <nav class="navbar navbar-expand-md bg-dark navbar-dark py-3 mb-3">
-    <a class="navbar-brand" href="#"><span class="letter" style="font-size: 28px;">Code</span>NetworK </a>
-    <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId"
-        aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation"> <i
-            class="fa fa-arrow-down "></i> </button>
+    <a class="navbar-brand" href=""><span class="letter" style="font-size: 28px;">Code</span>NetworK </a>
+    <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation"> <i class="fa fa-arrow-down "></i> </button>
     <div class="collapse navbar-collapse" id="collapsibleNavId">
 
         <form method="post" action="./Login/index.php" class="form-inline my-1 my-lg-0 mr-sm-4 ml-md-auto mx-md-0">
@@ -23,7 +21,7 @@
             </div>
 
             <div class="input-group">
-            <button type="submit" name="loginbtn" value="yupe" class="btn btn-dark btn-outline-light my-2 my-sm-0"><i class="fa fa-arrow-right" aria-hidden="true"></i> Login</button>
+                <button type="submit" name="loginbtn" value="yupe" class="btn btn-dark btn-outline-light my-2 my-sm-0"><i class="fa fa-arrow-right" aria-hidden="true"></i> Login</button>
             </div>
         </form>
 

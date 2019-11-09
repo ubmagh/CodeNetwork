@@ -720,7 +720,7 @@ function Likes(pid){
                     
                         <div class="mt-1">
                             <a href="./?username=' . $GetUsername . '">
-                                <img src="../Profile/Avatars/' . $GetUsername . '.' . $row['avatarEXT'] . '" alt="' . $GetUsername . '-Avatar" style="max-width:150px;">
+                                <img src="../Profile/Avatars/' . $GetUsername . '.' . $row['avatarEXT'] . '" class="rounded" alt="' . $GetUsername . '-Avatar" style="max-width:180px;height:180px;">
                             </a>
                         </div>
                         <div>
@@ -741,7 +741,7 @@ function Likes(pid){
                     
                         <div class="mt-1">
                             <a href="./?username=' . $GetUsername . '">
-                                <img src="../Profile/Avatars/' . $GetUsername . '.' . $row['avatarEXT'] . '" alt="' . $GetUsername . '-Avatar" style="max-width:150px;">
+                                <img src="../Profile/Avatars/' . $GetUsername . '.' . $row['avatarEXT'] . '" class="rounded" alt="' . $GetUsername . '-Avatar" style="max-width:180px;height:180px;">
                             </a>
                         </div>
                         <div>
@@ -762,7 +762,7 @@ function Likes(pid){
                     
                         <div class="mt-1">
                             <a href="./?username=' . $GetUsername . '">
-                                <img src="../Profile/Avatars/' . $GetUsername . '.' . $row['avatarEXT'] . '" alt="' . $GetUsername . '-Avatar" style="max-width:150px;">
+                                <img src="../Profile/Avatars/' . $GetUsername . '.' . $row['avatarEXT'] . '" class="rounded" alt="' . $GetUsername . '-Avatar" style="max-width:180px;height:180px;">
                             </a>
                         </div>
                         <div>

@@ -22,7 +22,7 @@ include '../includes/config.php';
 
 
     <nav class="navbar navbar-expand-md bg-dark navbar-dark py-2">
-        <a class="navbar-brand" href="../"><span class="letter" style="font-size: 28px;">C-</span>NetworK </a>
+        <a class="navbar-brand" href=".."><span class="letter" style="font-size: 28px;">Code</span>NetworK </a>
         <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation"> <i class="fa fa-arrow-down "></i> </button>
         <div class="collapse navbar-collapse" id="collapsibleNavId">
 

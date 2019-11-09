@@ -7,7 +7,7 @@ $username = $_SESSION['username'];
 
 putenv("PATH=C:\Program Files\Java\jdk1.8.0_231\bin");
 $CC = "javac ";
-$out = "cd .\\$username | java "; //it was out="java Main"; //////////////   .\$username 
+$out = "java -classpath ./$username "; //it was out="java Main"; //////////////   .\$username 
 $code = $_POST["input"];
 $input = $_POST["Args"];
 
@@ -22,7 +22,7 @@ $Namawa = $filename_code;
 $filename_code = $username . "/" . $filename_code;
 
 $out = $out . $Namawa;
-$outt = $out;
+//$outt = $out;
 $filename_code = $filename_code . ".java";
 
 // echo $filename_code; // maintenenace
@@ -62,7 +62,7 @@ if (trim($error) == "") {
 		$out = $out . " < " . $filename_in;
 		$output = shell_exec($out);
 	}
-	echo "<pre>$runtime_error</pre>" . $outt;
+	//echo "<pre>$runtime_error</pre>"; /// Uncomment this :D to see runtime errors 
 	//echo "<pre>$output</pre>";
 	echo "$output";
 } else if (!strpos($error, "error")) {
@@ -79,11 +79,10 @@ if (trim($error) == "") {
 } else {
 	echo " $error ";
 }
-/*
+
 unlink($filename_in);
 unlink($filename_error);
 unlink($runtime_file);
 unlink($filename_code);
 unlink($username . "/" . $Namawa . ".class");
 rmdir($username);
-*/

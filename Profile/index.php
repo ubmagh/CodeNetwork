@@ -19,8 +19,8 @@ if (!empty($_POST['submit'])) {
     //get the post content could be empty
     $post = $_POST['post'];
     if (!empty($post)) {
-        $post = strip_tags($post);
         $post = htmlspecialchars($post);
+        $post = strip_tags($post);
     } else {
         $post = "";
     }
@@ -131,7 +131,7 @@ echo '
         <div class="container mb-5" >
             
             <div class="jumbotron mt-n2 pb-1 mb-1 border border-light">
-                <div class="text-center mx-auto avatar"> <img src="./Avatars/' . $username . '.' . $EXT . '" class="mx-auto"  width="150px;"> </div>
+                <div class="text-center mx-auto avatar"> <img src="./Avatars/' . $username . '.' . $EXT . '" class="mx-auto rounded"  width="150px;"> </div>
                 <h1 class="display-4 text-center my-1" id="Ful">' . $Fname . ' ' . $Lname . '</h1>
                 <p class="lead text-center">' . $description . '</p>
                 <hr class="my-2">

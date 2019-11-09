@@ -188,7 +188,7 @@ include "../includes/config.php";
 
                 <div class="row mt-4 w-25 mx-auto ">
                     <div class="col card mr-1 pt-1 pb-0 shadow" style="background:rgba(102,204,153,0.7);">
-                        <h5 class="text-center text-warning border border-top-0 border-left-0 border-right-0 border-danger shadow">Total number :</h5>
+                        <h5 class="text-center text-warning border border-top-0 border-left-0 border-right-0 border-danger shadow"> Number of codes :</h5>
                         <h4 class="text-center"> <span class="badge badge-info px-3">
                                 <?php
                                 $num = $mysqli->query("SELECT count(*) AS nm FROM codes WHERE username='$username'");

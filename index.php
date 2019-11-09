@@ -163,7 +163,7 @@ if (isset($_SESSION['username'])) {
             <div class="mx-auto mt-n5 mb-3 d-block col-1"><i class="fa fa-envelope text-white display-2 ml-n2" aria-hidden="true"></i>
             </div>
 
-            <form action="/#contact" method="post" class="col-12 mx-auto">
+            <form action="./#contact" method="post" class="col-12 mx-auto">
 
                 <?php
                 $flag = false;
