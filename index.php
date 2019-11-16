@@ -26,16 +26,14 @@ if (isset($_SESSION['username'])) {
 
     <div class="jumbotron mb-0 mt-n5 mb-n1" id="main" style="background-image: url('images/bg1.jpg');background-size: cover;height: 700px;border-raduis:0px;">
         <h1 class="display-1 my-5 text-center text-3x text-light"><span class="letter" style="font-size: 88px;">Code</span>Network</span></h1>
-        <p class="lead text-center my-5 text-light">
+        <p class="lead text-center my-5 text-white">
             Having problems while coding Alone ? Join our social network
             <br>
-            it's Only programmers Social Network
-            <br>
-            Join Now ! Find your friends and start coding together !
+            it's just for programmers Only! Join Now, Find your friends and start coding together !
         </p>
 
         <div class="text-center mt-5 mb-0 col-3 mx-auto">
-            <a name="" id="" class="btn btn-dark shadow-lg btn-lg btn-outline-light border-dark btn-block" href="#Register" role="button">Sign up !</a>
+            <a name="" id="" class="btn btn-dark shadow-lg btn-lg btn-outline-light border-dark btn-block" href="#Register" role="button">Sign up Now!</a>
         </div>
 
     </div>
