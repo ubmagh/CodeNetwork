@@ -36,7 +36,7 @@ if (isset($_SESSION['username'])) {
         </li>
         </ul>
 </nav>
-<div class="area mb-0 pb-5" style="background-image: url(' . "'./includes/bg1.jpg'" . ') !important;background-size: cover !important;background-repeat:none;height:660px;">
+<div class="area mb-0 pb-5" style="height: 100% !important; background-image: url(' . "'./includes/bg1.jpg'" . ') !important;background-size: cover !important;background-repeat:none;height:660px;">
 
 <!-- page content here -->
 <div class="row mt-5 ml-2 mb-0 h-100">

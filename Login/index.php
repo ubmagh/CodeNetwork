@@ -96,11 +96,12 @@ include('../includes/config.php');
         $ldate = date("Y-m-d h:i:s");
         $isActivated = mysqli_query($mysqli, "select Activated from users where id='$id'");
         $isActivated = $isActivated->fetch_row();
-        if ($isActivated[0] == 0) {
-            $isActivated = false;
-        } else {
-            $isActivated = true;
-        }
+        if (!empty($isActivated))
+            if ($isActivated[0] == 0) {
+                $isActivated = false;
+            } else {
+                $isActivated = true;
+            }
         if ($rs) {
             ////////
             if ($isActivated) {
@@ -153,7 +154,8 @@ include('../includes/config.php');
         });
         </script> ";
         }
-    } else { }
+    } else {
+    }
     $mysqli->close();
     ?>
     <?php include "../footer.php"; ?>

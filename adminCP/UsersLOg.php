@@ -1,8 +1,8 @@
-<?php 
+<?php
 session_start();
 include "./includes/config.php";
-if(isset($_SESSION['id'])){
-    echo'<!DOCTYPE html>
+if (isset($_SESSION['id'])) {
+  echo '<!DOCTYPE html>
     <html lang="en">
     <head>
             <meta charset="UTF-8">
@@ -22,8 +22,8 @@ if(isset($_SESSION['id'])){
 
             <title>-Users Log-</title>
         </head><body>';
-        include "includes/nav&sidebar.php";
-        echo'
+  include "includes/nav&sidebar.php";
+  echo '
         <div class="container-fluid">
         <h1 class="mt-4 text-center"> Users Log :</h1>
 <div class="mt-4 mb-2">
@@ -45,43 +45,42 @@ if(isset($_SESSION['id'])){
   </thead>
   <tbody>
     ';
-    
-    // delete
-    if(isset($_GET['Zfux'])){
-        $Cid=$_GET['Zfux'];
-        if($Cid=="all")
-          $mysqli->query("DELETE FROM `userlog`");
-        $mysqli->query("DELETE FROM `userlog` WHERE `userlog`.`id` ='$Cid';");
-        echo'<script>window.location.replace("http://'.$_SERVER['SERVER_NAME'].'/CodeNet/admincp/UsersLOg.php");</script>';
-        unset($Cid);
-     }
 
-    $logs=mysqli_query($mysqli,"SELECT * FROM userlog ORDER BY date;");
-    $num=1;
-    while($row=$logs->fetch_assoc()){
-    $uid=$row['guestName'];
-    $getname=$mysqli->query("SELECT Fname,Lname From users WHERE id='$uid';");
-    $getname=$getname->fetch_assoc();
-    $Fullname=$getname['Lname']." ".$getname['Fname'];
-    unset($getname);
-    echo'
+  // delete
+  if (isset($_GET['Zfux'])) {
+    $Cid = $_GET['Zfux'];
+    if ($Cid == "all")
+      $mysqli->query("DELETE FROM `userlog`");
+    $mysqli->query("DELETE FROM `userlog` WHERE `userlog`.`id` ='$Cid';");
+    echo '<script>window.location.replace("http://' . $_SERVER['SERVER_NAME'] . '/CodeNet/admincp/UsersLOg.php");</script>';
+    unset($Cid);
+  }
+
+  $logs = mysqli_query($mysqli, "SELECT * FROM userlog ORDER BY date;");
+  $num = 1;
+  while ($row = $logs->fetch_assoc()) {
+    $Uemail = $row['userEmail'];
+    $getname = $mysqli->query("SELECT Fname,Lname From users WHERE Email='$Uemail' ;");
+    $getname = $getname->fetch_assoc();
+    $Fullname = $getname['Lname'] . " " . $getname['Fname'];
+    echo '
         <tr> 
-         <th scope="row">'.$num.'</th>
-         <td>'.$Fullname.'</td>
-         <td class="text-info">'.$row['userEmail'].'</td>
-         <td class="text-warning">'.$row['date'].'</td>
-         <td>'.$row['userIp'].'</td>
+         <th scope="row">' . $num . '</th>
+         <td>' . $Fullname . '</td>
+         <td class="text-info">' . $row['userEmail'] . '</td>
+         <td class="text-warning">' . $row['date'] . '</td>
+         <td>' . $row['userIp'] . '</td>
          <td>
-            <a href="./UsersLOg.php?Zfux='.$row['id'].'">
+            <a href="./UsersLOg.php?Zfux=' . $row['id'] . '">
                 <i class="fas fa-trash-alt text-danger"></i>
             </a>
          </td>
          ';
-        $num++;
-    }
+    $num++;
+  }
 
 
-    echo '
+  echo '
     </tbody>
 </table>    
 </form> 
@@ -101,9 +100,8 @@ $("#wrapper").toggleClass("toggled");
 ';
 
 
-$mysqli->close();
-}
-else{
-header("location:.");
+  $mysqli->close();
+} else {
+  header("location:.");
 }
 include "includes/footer.php";

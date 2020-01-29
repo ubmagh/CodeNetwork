@@ -227,7 +227,7 @@ if (isset($_SESSION['username'])) {
         </li>
         </ul>
 </nav>
-<div class="area" style="background-image: url(' . "' ./includes/img/set.jpg'" . ') !important;background-size: 100% 100% !important; height:790px;">
+<div class="area" style="height: 100% !important; background-image: url(' . "' ./includes/img/set.jpg'" . ') !important;background-size: 100% 100% !important; height:790px;">
 
 <!-- page content here -->
 <div class="jumbotron col-6 mx-auto bg-transparent mt-n3 mb-0">

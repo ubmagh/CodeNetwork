@@ -249,7 +249,7 @@ if (!empty($_POST['submit'])) {
     <!--  ModalS END -->
 
 
-    <div class="area min-vh-100">
+    <div class="area min-vh-100" style="height : unset !important;">
         <!-- page content here -->
         <div class="container mb-1 mt-5" id="PostsContainer">
 
@@ -320,8 +320,7 @@ if (!empty($_POST['submit'])) {
                     $PID = $row['id'];
                     $liked = $mysqli->query("SELECT username FROM likes WHERE PostID='$PID' and username='$username';");
                     $liked = $liked->fetch_assoc();
-                    $liked = $liked['username'];
-                    if ($liked == $username) { //liked
+                    if (  isset($liked['username']) && ($liked['username'] == $username)) { //liked
                         echo '</div>
                 <div class="tweetEntry-action-list" style="line-height:24px;color: #b1bbc3;">
                 <ul class="row col-8 mx-auto" style="list-style: none;">

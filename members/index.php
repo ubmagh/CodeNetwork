@@ -77,7 +77,7 @@ if (!empty($_GET['username'])) {
             </li>
             </ul>
     </nav>
-    <div class="area min-vh-100">
+    <div class="area min-vh-100" style="height : unset !important;">
 
     <!-- page content here -->
             <div class="container mb-5" >

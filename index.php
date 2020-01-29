@@ -18,13 +18,21 @@ if (isset($_SESSION['username'])) {
     <link rel="stylesheet" href="css/bootstrap.css">
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.js"></script>
+
+    <style>
+    .sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+    </style>
 </head>
 
 <body data-spy="scroll" data-target="#navbarscrolspy" data-offset="600" style="overflow: unset;">
 
     <?php include("header.php"); ?>
 
-    <div class="jumbotron mb-0 mt-n5 mb-n1" id="main" style="background-image: url('images/bg1.jpg');background-size: cover;height: 700px;border-raduis:0px;">
+    <div class="jumbotron mb-0 mt-n5 mb-n1" id="main" style="height: 90% !important; background-image: url('images/bg1.jpg');background-size: cover;height: 700px;border-raduis:0px;">
         <h1 class="display-1 my-5 text-center text-3x text-light"><span class="letter" style="font-size: 88px;">Code</span>Network</span></h1>
         <p class="lead text-center my-5 text-white">
             Having problems while coding Alone ? Join our social network
@@ -40,7 +48,7 @@ if (isset($_SESSION['username'])) {
 
 
 
-    <nav class="navbar py-3 navbar-dark bg-dark fixed-bottom sticky-top" style="overflow:unset;" id="navbarscrolspy">
+    <nav class="navbar py-3 navbar-dark bg-dark sticky-top  " style="overflow:unset;" id="navbarscrolspy">
         <ul class="navbar-nav nav-pilloss mx-auto d-inline">
             <li class="nav-item d-inline pill-black mx-1"> <a href="#main" class=" px-2 nav-link active d-inline"> <i class="fa fa-home" aria-hidden="true"></i> Home</a> </li>
             <li class="nav-item d-inline pill-black"> <a href="#features" class=" px-2 nav-link d-inline"><i class="fa fa-star" aria-hidden="true"></i> Features</a> </li>
@@ -50,7 +58,7 @@ if (isset($_SESSION['username'])) {
     </nav>
 
 
-    <div class="jumbotron mb-0 mb-n1 mt-n1" id="features" style="background-image: url('images/bg3.jpg'); background-repeat: no-repeat;background-size: cover;height: 740px;border-raduis:0px;">
+    <div class="jumbotron mb-0 mb-n1 mt-n1" id="features" style="height: 100% !important; background-image: url('images/bg3.jpg'); background-repeat: no-repeat;background-size: cover;height: 740px;border-raduis:0px;">
 
         <div class="container align-bottom h-75 my-0 d-flex align-items-end">
             <div class="row h-25 mt-1 ml-3">
@@ -90,8 +98,8 @@ if (isset($_SESSION['username'])) {
     </div>
 
 
-    <div class="jumbotron mb-0 mt-n1 mb-n5" id="Register" style="background-image: url('images/bg2.jpg'); 
-    background-repeat: no-repeat;background-size: cover;height: 840px;border-raduis:0px;">
+    <div class="jumbotron mb-0 mt-n1 mb-n5" id="Register" style="height: 100% !important; background-image: url('images/bg2.jpg'); 
+    background-repeat: no-repeat;background-size: cover;height: 840px; ">
         <h1 class="display-3 text-light text-center">Register Now!</h1>
         <p class="lead text-white text-center">Join your Freinds, It's Free !</p>
         <hr class="my-2 hidden mb-5">
@@ -297,11 +305,30 @@ if (isset($_SESSION['username'])) {
 
     <!-- scripts-->
 
-
+    
     <script src="js/myscript.js"></script>
     <!-- smooth scroll -->
     <script src="js/smooth-scroll.js"></script>
     <script>
+
+                // When the user scrolls the page, execute myFunction
+        window.onscroll = function() {myFunction()};
+
+        // Get the navbar
+        var navbar = document.getElementById("navbarscrolspy");
+
+        // Get the offset position of the navbar
+        var sticky = navbar.offsetTop;
+
+        // Add the sticky class to the navbar when you reach its scroll position. Remove "sticky" when you leave the scroll position
+        function myFunction() {
+        if (window.pageYOffset >= sticky) {
+            navbar.classList.add("sticky")
+        } else {
+            navbar.classList.remove("sticky");
+        }
+        } 
+
         var scroll = new SmoothScroll('a[href*="#"]', {
             speed: 2000,
             speedAsDuration: true //for all animation got 2000ms

@@ -25,7 +25,7 @@ include "../includes/config.php";
 </head>
 
 
-<body style=" ">
+<body  style="height: 100% !important;">
     <nav class="navbar navbar-expand-sm navbar-dark text-light fixed-top pb-4 pt-2 " style="z-index:10; background: #212121;">
         <ul class="navbar-nav ml-auto mb-n4 mt-n2">
             <li class=" ">
@@ -36,7 +36,7 @@ include "../includes/config.php";
             </li>
         </ul>
     </nav>
-    <div class="  area mb-0 pb-5 " style="background-image: url('./bg.jpg') !important;background-size: cover !important;background-repeat:none;height:660px;">
+    <div class="  area mb-0 pb-5 " style="min-height: 100% !important; background-image: url('./bg.jpg') !important;background-size: cover !important;background-repeat:none;">
 
         <!-- page content here -->
 
