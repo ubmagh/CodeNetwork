@@ -88,7 +88,7 @@ if (empty($_SESSION['email'])) {
                 </div>
             </div>
     
-            <div class="container-fluid  " style="background-image: url(' . "../images/bg5.jpg" . '); 
+            <div class="container-fluid h-100 " style="background-image: url(' . "../images/bg5.jpg" . '); 
             background-repeat: no-repeat;background-size: 100% 100%;height: 690px;border-raduis:0px; display: flex; align-items: center;">
         
                 <div class="mx-auto col-md-8 mt-n5">

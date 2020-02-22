@@ -135,7 +135,7 @@ $("#wrapper").toggleClass("toggled");
                 </div>
             </div>
    
-    <div style="background-image: url('."'../images/bg6.jpg'".');height:700px;background-repeat: no-repeat;background-size: cover;" class="py-5 mt-n5">
+    <div class="h-100 pt-4" style="background-image: url('."'../images/bg6.jpg'".');height:700px;background-repeat: no-repeat;background-size: cover;" class="py-5 mt-n5">
         <form action="" method="post" class="col-8 mx-auto mt-3">
     
             <div class="jumbotron bg-transparent text-center text-dark mt-3">
