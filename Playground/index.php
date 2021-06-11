@@ -36,7 +36,7 @@ if (isset($_SESSION['username'])) {
         </li>
         </ul>
 </nav>
-<div class="area mb-0 pb-5" style="height: 100% !important; background-image: url(' . "'./includes/bg1.jpg'" . ') !important;background-size: cover !important;background-repeat:none;height:660px;">
+<div class="area mb-0 pb-5" style="height: 100% !important; background-image: url(' . "'PlayGround/includes/bg1.jpg'" . ') !important;background-size: cover !important;background-repeat:none;height:660px;">
 
 <!-- page content here -->
 <div class="row mt-5 ml-2 mb-0 h-100">
@@ -49,21 +49,21 @@ if (isset($_SESSION['username'])) {
     <div class="row col-11 mx-auto">
 
         <div class="col px-0 mr-4">
-            <a href="./C" class=""> <img src="./includes/C.png" alt="Programming C" width="100%"> </a>
+            <a href="PlayGround/C" class=""> <img src="PlayGround/includes/C.png" alt="Programming C" width="100%"> </a>
         </div>
         <div class="col px-0 mx-2">
-            <a href="./Cpp"> <img src="./includes/Cpp.png" alt="Programming Cpp" width="120%"> </a>
+            <a href="PlayGround/Cpp"> <img src="PlayGround/includes/Cpp.png" alt="Programming Cpp" width="120%"> </a>
         </div>
         <div class="col px-0 ml-4 mt-n3">
-                <a href="./Java" class=""> <img src="./includes/java.png" alt="Programming Java" width="130%"> </a>
+                <a href="PlayGround/Java" class=""> <img src="PlayGround/includes/java.png" alt="Programming Java" width="130%"> </a>
         </div>
         <div class="col px-0 ml-4 mt-n3">
-                <a href="./html" class=""> <img src="./includes/html.png" alt="Programming Java" width="130%"> </a>
+                <a href="PlayGround/html" class=""> <img src="PlayGround/includes/html.png" alt="Programming Java" width="130%"> </a>
         </div>
     </div>
 
     <div class="row col-8 mx-auto mb-n3">
-        
+
     </div>
 
 </div>
@@ -81,7 +81,7 @@ if (isset($_SESSION['username'])) {
                 Dashboard
             </span>
         </a>
-      
+
     </li>
     <li>
         <a href="../codes/">
@@ -106,7 +106,7 @@ if (isset($_SESSION['username'])) {
                 Profile
             </span>
         </a>
-       
+
     </li>
     <li>
        <a href="../members/">
@@ -142,7 +142,7 @@ if (isset($_SESSION['username'])) {
                 Logout
             </span>
         </a>
-    </li>  
+    </li>
 </ul>
 </nav>
 <nav class="navbar navbar-expand-sm navbar-dark text-light mt-4 pb-2" style="z-index:0; background: #212121;">

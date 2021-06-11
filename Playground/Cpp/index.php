@@ -47,24 +47,24 @@ function checkTime(i){if (i<10){i="0" + i;}return i;}</script>
         </li>
         </ul>
 </nav>
-<div class="area mb-0 pb-3" style="background-image: url('../includes/bg1.jpg') !important;background-size: 100% 100% !important;background-repeat:none;height:990px; ">
+<div class="area mb-0 pb-3" style="background-image: url('/PlayGround/includes/bg1.jpg') !important;background-size: 100% 100% !important;background-repeat:none;height:990px; ">
 
 <!-- page content here -->
 <div class="row  ml-2 mb-0 mt-n3">
         <div class="jumbotron col-7 mx-auto bg-transparent mt-n3 mb-n5">
             <h1 class="display-4 text-center text-light ml-n1"> <span class="letter" style="font-size: 58px;">C++ Programming</span> </h1>
-            <hr class="mt-n2 mb-3 bg-light mb-0">  
+            <hr class="mt-n2 mb-3 bg-light mb-0">
         </div>
 </div>
 
 
 <form action="compile.php" id="form" name="f2" method="POST">
-    
+
     <div class="row container-fluid mt-n5 mb-0 py-0">
         <div class="form-group col-10 mx-auto pl-5 pr-0">
             <label for="Code-input" class="text-secondary text-center bg-light mb-0">Code source input : </label>
             <textarea name="input" class="form-control text-dark bg-light btn-outline-dark px-4 py-2" id="Code-input" cols="30" rows="10" style="resize:none;font-family:Courier New;">
-        <?php 
+        <?php
         if(isset($_GET['id'])){
             $id=$_GET['id'];
             $getter=$mysqli->query("SELECT username FROM codes WHERE id='$id' ;");
@@ -76,14 +76,14 @@ function checkTime(i){if (i<10){i="0" + i;}return i;}</script>
                 header("location:../".$Code['langType'].'/index.php?id='.$id);
             }
             if( empty($Code['id']) ){echo 'File Not Found/Deleted !! ';}
-            
+
             else{
-            
+
             $file_path="../../codes/".$username."/Cpp/".$Code['name'].".cpp";
-            
+
 
             $file = fopen($file_path,"r");
-            
+
             function RespectHTML($Str){
                 $Str=str_replace("&","&#38;",$Str);
                 $Str=str_replace("<","&lt;",$Str);
@@ -105,7 +105,7 @@ function checkTime(i){if (i<10){i="0" + i;}return i;}</script>
             using namespace std;
                 int main(){
                  cout << " \n\t Hello World !";
-                 return 0;  
+                 return 0;
                 }
                 ';
                 ?>
@@ -156,7 +156,7 @@ $(document).ready(function(){
     $('form').on('submit', function(e){
       //prevent form from submitting and leaving page
       e.preventDefault();
-      // AJAX 
+      // AJAX
       $.ajax({
             type: "POST", //type of submit
             cache: false, //important or else you might get wrong data returned to you
@@ -217,7 +217,7 @@ $("#save").click(
                 Dashboard
             </span>
         </a>
-      
+
     </li>
     <li>
         <a href="../../codes/">
@@ -242,7 +242,7 @@ $("#save").click(
                 Profile
             </span>
         </a>
-       
+
     </li>
     <li>
        <a href="../../members/">
@@ -278,7 +278,7 @@ $("#save").click(
                 Logout
             </span>
         </a>
-    </li>  
+    </li>
 </ul>
 </nav>
 <nav class="navbar navbar-expand-sm navbar-dark text-light fixed-bottom" style="z-index:0; background: #212121;">

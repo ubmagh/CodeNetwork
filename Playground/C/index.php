@@ -61,7 +61,7 @@ $email = $_SESSION['email'];
         </ul>
     </nav>
 
-    <div class="area mb-0 pb-3" style="background-image: url('../includes/bg1.jpg') !important;background-size: 100% 100% !important;background-repeat:none;height:990px; ">
+    <div class="area mb-0 pb-3" style="background-image: url('/PlayGround/includes/bg1.jpg') !important;background-size: 100% 100% !important;background-repeat:none;height:990px; ">
 
         <!-- page content here -->
         <div class="row  ml-2 mb-0 mt-n3">
@@ -116,7 +116,7 @@ $email = $_SESSION['email'];
                     }
                 } else echo ' #include <stdio.h>
                         int main(){
-                            printf("\n\t Hello World !");   
+                            printf("\n\t Hello World !");
                             return 0;
                         }
                 ';
@@ -168,7 +168,7 @@ $email = $_SESSION['email'];
                 $('form').on('submit', function(e) {
                     //prevent form from submitting and leaving page
                     e.preventDefault();
-                    // AJAX 
+                    // AJAX
                     $.ajax({
                         type: "POST", //type of submit
                         cache: false, //important or else you might get wrong data returned to you

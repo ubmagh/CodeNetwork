@@ -47,24 +47,24 @@ function checkTime(i){if (i<10){i="0" + i;}return i;}</script>
         </li>
         </ul>
 </nav>
-<div class="area mb-0 pb-3" style="background-image: url('../includes/bg1.jpg') !important;background-size: 100% 100% !important;background-repeat:none;height:1290px; ">
+<div class="area mb-0 pb-3" style="background-image: url('/PlayGround/includes/bg1.jpg') !important;background-size: 100% 100% !important;background-repeat:none;height:1290px; ">
 
 <!-- page content here -->
 <div class="row  ml-2 mb-0 mt-n3">
         <div class="jumbotron col-7 mx-auto bg-transparent mt-n3 mb-n5">
             <h1 class="display-4 text-center text-light ml-n1"><span class="letter" style="font-size: 58px;">WEB-Design</span></h1>
-            <hr class="mt-n2 mb-3 bg-light mb-0">  
+            <hr class="mt-n2 mb-3 bg-light mb-0">
         </div>
 </div>
 
 
 <form action="compile.php" id="form" name="f2" method="POST">
-    
+
     <div class="row container-fluid mt-n5 mb-0 py-0">
         <div class="form-group col-10 mx-auto pl-5 pr-0">
             <label for="Code-input" class="text-secondary text-center bg-light mb-0">Code source input : </label>
             <textarea name="input" class="form-control text-dark bg-light btn-outline-dark px-4 py-2" id="Code-input" cols="30" rows="10" style="resize:none;font-family:Courier New;">
-        <?php 
+        <?php
         if(isset($_GET['id'])){
             $id=$_GET['id'];
             $getter=$mysqli->query("SELECT username FROM codes WHERE id='$id' ;");
@@ -74,23 +74,23 @@ function checkTime(i){if (i<10){i="0" + i;}return i;}</script>
             $Code=$Code->fetch_assoc();
             if($Code['langType']!='html'){
                 header("location:../".$Code['langType'].'/index.php?id='.$id);
-            }   
+            }
             if( empty($Code['id']) ){echo 'File Not Found/DELETED !! ';}
-            
+
             else{
-            
+
             $file_path="../../codes/".$username."/html/".$Code['name'].".html";
-            
+
 
             $file = fopen($file_path,"r");
-            
-            
+
+
             echo fread($file,filesize($file_path));
-            
+
             fclose($file);
 
         }}
-            
+
             else echo'<html>
                 <head>
                     <style>#p{color:red;}</style>
@@ -144,7 +144,7 @@ $(document).ready(function(){
       //prevent form from submitting and leaving page
       e.preventDefault();
       $('#framy').html("Compiling .... ");
-      // AJAX 
+      // AJAX
       $.ajax({
             type: "POST", //type of submit
             cache: false, //important or else you might get wrong data returned to you
@@ -154,10 +154,10 @@ $(document).ready(function(){
             success: function(result) { // data is the var which holds the output of your process.php
                 // locate the div with #result and fill it with returned data from process.php
                 setTimeout(function(){$('#framy').attr("src",'./tmp/'+result);},1000);
-                
 
-                //an other ajax query to delete html file that is just compiled 
-              //  $.ajax({ 
+
+                //an other ajax query to delete html file that is just compiled
+              //  $.ajax({
               //      type: "POST",
               //      url: "delete-html.php",
                //     data:{ "F": result }
@@ -213,7 +213,7 @@ $("#save").click(
                 Dashboard
             </span>
         </a>
-      
+
     </li>
     <li>
         <a href="../../codes/">
@@ -238,7 +238,7 @@ $("#save").click(
                 Profile
             </span>
         </a>
-       
+
     </li>
     <li>
        <a href="../../members/">
@@ -274,7 +274,7 @@ $("#save").click(
                 Logout
             </span>
         </a>
-    </li>  
+    </li>
 </ul>
 </nav>
 <nav class="navbar navbar-expand-sm navbar-dark text-light fixed-bottom" style="z-index:0; background: #212121;">
