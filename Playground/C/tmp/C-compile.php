@@ -4,12 +4,17 @@ if (!isset($_POST['input']))
 session_start();
 $username = $_SESSION['username'];
 
-putenv("PATH=C:\Program Files (x86)\CodeBlocks\MinGW\bin");
+$win_platform = strtoupper(substr(PHP_OS, 0, 3)) === 'WIN';
+
 $CC = "gcc";
-$out = $username . ".exe";
+if ($win_platform) {
+	$out = $username . ".exe";
+}else{
+	$out = "./".$username . ".out";
+}
 $code = $_POST["input"];
 
-/// Disallow some functions
+/// Disallow some functions :DD
 
 if (strstr($code, "system('") || strstr($code, 'system("')) {
 	echo "System Function is not allowed ! ";
@@ -29,9 +34,13 @@ $input = $_POST["Args"];
 $filename_code = $username . "main.c";
 $filename_in = $username . "input.txt";
 $filename_error = $username . "error.txt";
-$executable = $username . ".exe";
-$command = $CC . " -lm " . $filename_code . " -o " . $username;
-$command_error = $command . " 2>" . $filename_error;
+if ($win_platform) {
+	$executable = $username . ".exe";
+}else{
+	$executable = $username . ".out";
+}
+$command = $CC . " -lm " . $filename_code . " -o " . $out;
+$command_error = $command . " 2> " . $filename_error;
 
 if (empty($code)) {
 	echo "no code to compile ! ";
@@ -44,9 +53,13 @@ fclose($file_code);
 $file_in = fopen($filename_in, "w+");
 fwrite($file_in, $input);
 fclose($file_in);
-exec("cacls  $executable /g everyone:f"); // modifies discretionary access control lists  on specified files. to give file permission to run 
-exec("cacls  $filename_error /g everyone:f");	// or modify by any user(every one)
-
+if( $win_platform ){ //win 
+	exec("cacls  $executable /g everyone:f"); // modifies discretionary access control lists  on specified files. to give file permission to run 
+	exec("cacls  $filename_error /g everyone:f");	// or modify by any user(every one)
+}else{
+	exec("chmod ugo+rwx $executable");
+	exec("chmod ugo+rwx  $filename_error");
+}
 shell_exec($command_error);
 $error = file_get_contents($filename_error);
 
@@ -57,7 +70,6 @@ if (trim($error) == "") {
 		$out = $out . " < " . $filename_in;
 		$output = shell_exec($out);
 	}
-
 	echo "$output";
 } else if (!strpos($error, "error")) {
 	echo "<pre>$error</pre>";
@@ -73,7 +85,8 @@ if (trim($error) == "") {
 	echo " $error ";
 }
 
-unlink($executable);
-unlink($filename_code);
-unlink($filename_in);
-unlink($filename_error);
+$del = $win_platform? "rem":"rm";
+exec($del." ".$executable);
+exec($del." ".$filename_code);
+exec($del." ".$filename_in);
+exec($del." ".$filename_error);

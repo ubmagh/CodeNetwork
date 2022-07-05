@@ -1,0 +1,48 @@
+version: "3.8"
+
+services:
+  db:
+    image: mariadb:10.3
+    container_name: mysql-db
+    volumes:
+      - ./SQL-Backup.sql:/docker-entrypoint-initdb.d/SQL-Backup.sql
+    environment:
+      MYSQL_DATABASE: network
+      MYSQL_USER: user
+      MYSQL_PASSWORD: secret
+      MYSQL_ROOT_PASSWORD: secret
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    ports:
+      - 3306:3306
+    networks:
+      - app-db-network
+
+  app:
+    image: scoma/mycodenetwork:latest
+    container_name: php-app
+    depends_on:
+      - db
+    volumes:
+      - app-volume:/usr/src/app
+    environment:
+      APP_ENV: production
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_USER: root
+      DB_PASSWORD: secret
+      DB_NAME: network
+    ports:
+      - 80:80
+    networks:
+      - app-db-network
+
+volumes:
+  app-volume:
+    driver: local
+  db-volume:
+    driver: local
+
+networks:
+  app-db-network:
+    driver: bridge

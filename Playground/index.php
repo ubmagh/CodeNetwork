@@ -12,7 +12,7 @@ if (isset($_SESSION['username'])) {
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>Code PlayGround</title>
+<title>Code Playground</title>
 <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
 <link rel="stylesheet" href="../css/style.css">
 <link rel="stylesheet" href="../css/font-awesome.min.css">
@@ -36,7 +36,7 @@ if (isset($_SESSION['username'])) {
         </li>
         </ul>
 </nav>
-<div class="area mb-0 pb-5" style="height: 100% !important; background-image: url(' . "'PlayGround/includes/bg1.jpg'" . ') !important;background-size: cover !important;background-repeat:none;height:660px;">
+<div class="area mb-0 pb-5" style="height: 100% !important; background-image: url(' . "'Playground/includes/bg1.jpg'" . ') !important;background-size: cover !important;background-repeat:none;height:660px;">
 
 <!-- page content here -->
 <div class="row mt-5 ml-2 mb-0 h-100">
@@ -49,16 +49,16 @@ if (isset($_SESSION['username'])) {
     <div class="row col-11 mx-auto">
 
         <div class="col px-0 mr-4">
-            <a href="PlayGround/C" class=""> <img src="PlayGround/includes/C.png" alt="Programming C" width="100%"> </a>
+            <a href="Playground/C" class=""> <img src="Playground/includes/C.png" alt="Programming C" width="100%"> </a>
         </div>
         <div class="col px-0 mx-2">
-            <a href="PlayGround/Cpp"> <img src="PlayGround/includes/Cpp.png" alt="Programming Cpp" width="120%"> </a>
+            <a href="Playground/Cpp"> <img src="Playground/includes/Cpp.png" alt="Programming Cpp" width="120%"> </a>
         </div>
         <div class="col px-0 ml-4 mt-n3">
-                <a href="PlayGround/Java" class=""> <img src="PlayGround/includes/java.png" alt="Programming Java" width="130%"> </a>
+                <a href="Playground/Java" class=""> <img src="Playground/includes/java.png" alt="Programming Java" width="130%"> </a>
         </div>
         <div class="col px-0 ml-4 mt-n3">
-                <a href="PlayGround/html" class=""> <img src="PlayGround/includes/html.png" alt="Programming Java" width="130%"> </a>
+                <a href="Playground/html" class=""> <img src="Playground/includes/html.png" alt="Programming Java" width="130%"> </a>
         </div>
     </div>
 
@@ -95,7 +95,7 @@ if (isset($_SESSION['username'])) {
         <a href="./">
             <i class="fa fa-code fa-2x"></i>
             <span class="nav-text">
-               Code PlayGround
+               Code Playground
             </span>
         </a>
     </li>

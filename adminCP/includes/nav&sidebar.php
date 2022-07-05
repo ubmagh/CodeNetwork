@@ -40,9 +40,9 @@
                 Admin
               </a>
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="./admin-Profile.php">Account Settings</a>
+                <a class="dropdown-item" href="/adminCP/admin-Profile.php">Account Settings</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="./logout.php">log-out</a>
+                <a class="dropdown-item" href="/adminCP/logout.php">log-out</a>
               </div>
             </li>
           </ul>

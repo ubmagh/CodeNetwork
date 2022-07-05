@@ -12,7 +12,7 @@ if (isset($_SESSION['username'])) {
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Java PlayGround</title>
+        <title>Java Playground</title>
         <link rel="shortcut icon" href="../../favicon.ico" type="image/x-icon">
         <link rel="stylesheet" href="../../css/style.css">
         <link rel="stylesheet" href="../../css/font-awesome.min.css">
@@ -59,7 +59,7 @@ if (isset($_SESSION['username'])) {
                 </li>
             </ul>
         </nav>
-        <div class="area mb-0 pb-3" style="background-image: url('/PlayGround/includes/bg1.jpg') !important;background-size: 100% 100% !important;background-repeat:none;height:990px; ">
+        <div class="area mb-0 pb-3" style="background-image: url('/Playground/includes/bg1.jpg') !important;background-size: 100% 100% !important;background-repeat:none;height:990px; ">
 
             <!-- page content here -->
             <div class="row  ml-2 mb-0 mt-n3">
@@ -169,7 +169,7 @@ if (isset($_SESSION['username'])) {
                         $.ajax({
                             type: "POST", //type of submit
                             cache: false, //important or else you might get wrong data returned to you
-                            url: "./tmp/java-compile.php", //destination
+                            url: "/Playground/Java/tmp/java-compile.php", //destination
                             datatype: "html", //expected data format from process.php
                             data: $('form').serialize(), //target your form's data and serialize for a POST
                             success: function(result) { // data is the var which holds the output of your process.php
@@ -245,7 +245,7 @@ if (isset($_SESSION['username'])) {
                     <a href="../">
                         <i class="fa fa-code fa-2x"></i>
                         <span class="nav-text">
-                            Code PlayGround
+                            Code Playground
                         </span>
                     </a>
                 </li>

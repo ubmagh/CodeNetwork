@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS `admin` (
 --
 
 INSERT INTO `admin` (`id`, `username`, `password`, `LastLogin`, `Avatar`, `LastAvaNum`) VALUES
-(10, 'admin', 'SC9aLMg218r6E', '2019-11-09 18:14:11', 'uploads/2.png', 7);
+(10, 'admin', 'SC2kJwFwYZ7/I', '2019-11-09 18:14:11', 'uploads/2.png', 7);
 
 -- --------------------------------------------------------
 
@@ -567,9 +567,9 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `Fname`, `Lname`, `Email`, `password`, `age`, `City`, `Country`, `avatarEXT`, `Activated`) VALUES
-(46, 'Ayoub', 'Maghdaoui ', 'ubmagh@gmail.com', 'SC9aLMg218r6E', 19, 'Berlin', 'DE', 'png', 1),
+(46, 'Ayoub', 'Maghdaoui ', 'ubmagh@gmail.com', 'SC2kJwFwYZ7/I', 19, 'Berlin', 'DE', 'png', 1),
 (47, 'khadija ', 'hachem ', 'ub2magh@gmail.com', 'SC2kJwFwYZ7/I', 19, 'Paris', 'FR', 'png', 1),
-(54, 'oussama ', 'ouardini ', 'ouss.ouardini@gmail.com', 'SCajOd1j.85FE', 15, 'Mexico-City', 'MX', 'png', 1),
+(54, 'oussama ', 'ouardini ', 'ouss.ouardini@gmail.com', 'SC2kJwFwYZ7/I', 15, 'Mexico-City', 'MX', 'png', 1),
 (56, 'Jack ', 'Sparrow ', 'JackSpa@localhost.com', 'SC2kJwFwYZ7/I', 25, 'Agadir', 'MA', 'png', 1),
 (57, 'Tony ', 'Stark ', 'Tony@Stark.org', 'SC2kJwFwYZ7/I', 35, 'NewYork', 'US', 'png', 1),
 (58, 'GumBall ', 'Waterson ', 'Gum@CN.com', 'SC2kJwFwYZ7/I', 15, 'Elmore', 'US', 'png', 1);

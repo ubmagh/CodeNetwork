@@ -1,10 +1,21 @@
 <?php
-$db="network";
-$host="localhost";
-$username="admin";
-$pwd="lolokoko";
 
-$mysqli =  new mysqli($host,$username,$pwd,$db);//new mysqli($host,$dbuser,$dbpass,$db);  or  mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE);
+$appenv = getenv('APP_ENV');
+
+if( !empty($appenv) && strcmp("prodution", $appenv) ){
+    $host = getenv('DB_HOST');
+    $port = getenv('DB_PORT');
+    $dbuser = getenv('DB_USER');
+    $dbpass = getenv('DB_PASSWORD');
+    $db = getenv('DB_NAME');
+}else{
+    $dbuser="root";
+    $dbpass="secret";
+    $host="localhost";
+    $db="network";
+}
+
+$mysqli =  new mysqli($host,$dbuser,$dbpass,$db);//new mysqli($host,$dbuser,$dbpass,$db);  or  mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE);
 if ( $mysqli->connect_error ) { // $mysqli->connect_error or !$mysqli
     
     echo '

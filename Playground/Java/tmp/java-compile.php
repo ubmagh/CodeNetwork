@@ -5,7 +5,6 @@ if (!isset($_POST['input']))
 session_start();
 $username = $_SESSION['username'];
 
-putenv("PATH=C:\Program Files\Java\jdk1.8.0_231\bin");
 $CC = "javac ";
 $out = "java -classpath ./$username "; //it was out="java Main"; //////////////   .\$username 
 $code = $_POST["input"];

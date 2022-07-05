@@ -1,0 +1,8 @@
+Playground/C/tmp/*.c
+Playground/C/tmp/*.exe
+Playground/C/tmp/*.out
+Playground/Cpp/tmp/*.cpp
+Playground/Cpp/tmp/*.exe
+Playground/Cpp/tmp/*.out
+Playground/html/tmp/*.html
+Playground/Java/tmp/*.class

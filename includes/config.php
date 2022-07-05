@@ -1,15 +1,19 @@
 <?php
-/*
-define("DB_HOST", "localhost");
-define("DB_USER", "visitor");
-define("DB_PASSWORD", "lolokoko");
-define("DB_DATABASE", "network");
-*/
 
-$dbuser="visitor";//set it to visitor user later on !!!!!!
-$dbpass="lolokoko";
-$host="localhost";
-$db="network";
+$appenv = getenv('APP_ENV');
+
+if( !empty($appenv) && strcmp("prodution", $appenv) ){
+    $host = getenv('DB_HOST');
+    $port = getenv('DB_PORT');
+    $dbuser = getenv('DB_USER');
+    $dbpass = getenv('DB_PASSWORD');
+    $db = getenv('DB_NAME');
+}else{
+    $dbuser="root";
+    $dbpass="secret";
+    $host="localhost";
+    $db="network";
+}
 $mysqli =  new mysqli($host,$dbuser,$dbpass,$db);//new mysqli($host,$dbuser,$dbpass,$db);  or  mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE);
 if ( $mysqli->connect_error ) { // $mysqli->connect_error or !$mysqli
     
@@ -31,9 +35,12 @@ if ( $mysqli->connect_error ) { // $mysqli->connect_error or !$mysqli
 <body>
 <div class="alert alert-danger">
 <strong>Error !</strong>  Database not Connected !
+<br>
+'.$mysqli->connect_error.'
 </div>
 </body>
     ';
+    print($mysqli->connect_error);
     exit();
 } 
 

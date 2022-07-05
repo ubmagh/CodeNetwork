@@ -3,7 +3,9 @@
 session_start();
 if (!empty($_SESSION['username'])) {
     header('location:../Profile/');
-}
+    exit();
+}else{
+
 include('../includes/config.php');
 ?>
 
@@ -125,6 +127,7 @@ include('../includes/config.php');
                         $_SESSION['username'] = $username;
                         $_SESSION['id'] = $id;
                         header("location:../dashboard/");
+                        exit();
                     } else {
                         echo '<script>alert("Login Error!");</script>';
                     }
@@ -167,3 +170,6 @@ include('../includes/config.php');
 </body>
 
 </html>
+
+
+<?php }  ?>

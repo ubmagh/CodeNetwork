@@ -4,16 +4,24 @@ if (!isset($_POST['input']))
 
 session_start();
 $username = $_SESSION['username'];
+$win_platform = strtoupper(substr(PHP_OS, 0, 3)) === 'WIN';
 
-putenv("PATH=C:\Program Files (x86)\CodeBlocks\MinGW\bin");
 $CC = "g++";
-$out = $username . ".exe";
+if ($win_platform) {
+	$out = $username . ".exe";
+}else{
+	$out = "./" . $username . ".out";
+}
 $code = $_POST["input"];
 $input = $_POST["Args"];
 $filename_code = $username . "main.cpp";
 $filename_in = $username . "input.txt";
 $filename_error = $username . "error.txt";
-$executable = $username . ".exe";
+if ($win_platform) {
+	$executable = $username . ".exe";
+}else{
+	$executable = $username . ".out";
+}
 $command = $CC . " -lm " . $filename_code . " -o " . $username;
 $command_error = $command . " 2>" . $filename_error;
 
@@ -43,8 +51,14 @@ fclose($file_code);
 $file_in = fopen($filename_in, "w+");
 fwrite($file_in, $input);
 fclose($file_in);
-exec("cacls  $executable /g everyone:f");
-exec("cacls  $filename_error /g everyone:f");
+if( $win_platform ){ //win 
+	exec("cacls  $executable /g everyone:f"); // modifies discretionary access control lists  on specified files. to give file permission to run 
+	exec("cacls  $filename_error /g everyone:f");	// or modify by any user(every one)
+}else{
+	exec("chmod ugo+rwx $executable");
+	exec("chmod ugo+rwx  $filename_error");
+}
+
 
 shell_exec($command_error);
 $error = file_get_contents($filename_error);
@@ -73,7 +87,8 @@ if (trim($error) == "") {
 	echo "<pre>$error</pre>";
 }
 
-unlink($executable);
-unlink($filename_error);
-unlink($filename_in);
-unlink($filename_code);
+$del = $win_platform? "rem":"rm";
+exec($del." ".$executable);
+exec($del." ".$filename_code);
+exec($del." ".$filename_in);
+exec($del." ".$filename_error);

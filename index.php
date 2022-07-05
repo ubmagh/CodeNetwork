@@ -338,3 +338,7 @@ if (isset($_SESSION['username'])) {
 </body>
 
 </html>
+
+<?php
+mysqli_close($mysqli);
+?>
